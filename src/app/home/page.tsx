@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 import { HomeNav } from "@/components/home/nav";
 import { HomeHero } from "@/components/home/hero";
+import { BuildSequence } from "@/components/home/build-sequence";
 import { ServerConsole } from "@/components/home/server-console";
 import { Manifesto } from "@/components/home/manifesto";
 import { BlockPortfolio } from "@/components/home/block-portfolio";
@@ -37,6 +38,7 @@ export default function HomeRedesignPage() {
       <TechMarquee />
       <AboutSection />
       <ServicesAccordion />
+      <BuildSequence />
       <ServerConsole />
       <BlockPortfolio />
       <Manifesto />
