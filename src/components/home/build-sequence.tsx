@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 import { useInView } from "@/hooks/use-in-view";
 import { HOME_COPY } from "@/lib/home-copy";
@@ -87,60 +87,134 @@ const FACES = [
   { transform: `rotateY(-90deg) translateZ(${SIZE / 2}px)`, shade: "sideB" },
 ] as const;
 
-function IsoIsland({ placed }: { placed: number }) {
+function IsoIsland({
+  placed,
+  interactive = false,
+  materials,
+  dragHint,
+}: {
+  placed: number;
+  interactive?: boolean;
+  materials: Record<Material, string>;
+  dragHint: string;
+}) {
   const center = 2 * SIZE; // сетка 0..4, центр в 2
   const complete = placed >= TOTAL;
 
+  const [rot, setRot] = useState({ x: 56, z: 45 });
+  const [hovered, setHovered] = useState<Material | null>(null);
+  const [dragging, setDragging] = useState(false);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const lastPoint = useRef<{ x: number; y: number } | null>(null);
+
+  function handlePointerDown(e: React.PointerEvent) {
+    // Только мышь: на тач-устройстве перетаскивание отняло бы у пальца
+    // скролл, и страницу нельзя было бы пролистать мимо острова.
+    if (!interactive || e.pointerType !== "mouse") return;
+    lastPoint.current = { x: e.clientX, y: e.clientY };
+    setDragging(true);
+    boxRef.current?.setPointerCapture(e.pointerId);
+  }
+
+  function handlePointerMove(e: React.PointerEvent) {
+    const last = lastPoint.current;
+    if (!last) return;
+    const dx = e.clientX - last.x;
+    const dy = e.clientY - last.y;
+    lastPoint.current = { x: e.clientX, y: e.clientY };
+    setRot((r) => ({
+      x: Math.min(85, Math.max(20, r.x - dy * 0.4)),
+      z: r.z + dx * 0.4,
+    }));
+  }
+
+  function endDrag(e: React.PointerEvent) {
+    if (!lastPoint.current) return;
+    lastPoint.current = null;
+    setDragging(false);
+    boxRef.current?.releasePointerCapture(e.pointerId);
+  }
+
+  // Блоки пересобираются только при изменении числа поставленных. Иначе
+  // каждый кадр перетаскивания перерисовывал бы все 265 граней и заметно лагал.
+  const blocks = useMemo(
+    () =>
+      BLOCKS.map((b, i) => {
+        const isPlaced = i < placed;
+        const palette = MATERIALS[b.mat];
+        const x = b.x * SIZE - center;
+        const y = b.y * SIZE - center;
+        // -0.5 приподнимает остров так, чтобы он сел по центру контейнера
+        const z = (b.z - 0.5) * SIZE + (isPlaced ? 0 : DROP);
+
+        return (
+          <div
+            key={i}
+            className="absolute transition-all duration-500 ease-out"
+            onMouseEnter={interactive ? () => setHovered(b.mat) : undefined}
+            style={{
+              width: SIZE,
+              height: SIZE,
+              marginLeft: -SIZE / 2,
+              marginTop: -SIZE / 2,
+              transformStyle: "preserve-3d",
+              transform: `translate3d(${x}px, ${y}px, ${z}px)`,
+              opacity: isPlaced ? 1 : 0,
+            }}
+          >
+            {FACES.map((f, fi) => (
+              <div
+                key={fi}
+                className="absolute inset-0"
+                style={{
+                  transform: f.transform,
+                  background: palette[f.shade],
+                  boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.28)",
+                }}
+              />
+            ))}
+          </div>
+        );
+      }),
+    [placed, center, interactive],
+  );
+
   return (
-    <div className="relative flex h-[420px] items-center justify-center sm:h-[500px]">
+    <div>
       <div
-        className={`pointer-events-none absolute h-64 w-64 rounded-full blur-[90px] transition-opacity duration-1000 ${
-          complete ? "opacity-60" : "opacity-25"
+        ref={boxRef}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        onMouseLeave={() => setHovered(null)}
+        className={`relative flex h-[420px] items-center justify-center select-none sm:h-[500px] ${
+          interactive ? (dragging ? "cursor-grabbing" : "cursor-grab") : ""
         }`}
-        style={{ background: "radial-gradient(circle, #1797FF, transparent 70%)" }}
-      />
-
-      <div
-        className="relative"
-        style={{ transformStyle: "preserve-3d", transform: "rotateX(56deg) rotateZ(45deg)" }}
       >
-        {BLOCKS.map((b, i) => {
-          const isPlaced = i < placed;
-          const palette = MATERIALS[b.mat];
-          const x = b.x * SIZE - center;
-          const y = b.y * SIZE - center;
-          // -0.5 приподнимает остров так, чтобы он сел по центру контейнера
-          const z = (b.z - 0.5) * SIZE + (isPlaced ? 0 : DROP);
+        <div
+          className={`pointer-events-none absolute h-64 w-64 rounded-full blur-[90px] transition-opacity duration-1000 ${
+            complete ? "opacity-60" : "opacity-25"
+          }`}
+          style={{ background: "radial-gradient(circle, #1797FF, transparent 70%)" }}
+        />
 
-          return (
-            <div
-              key={i}
-              className="absolute transition-all duration-500 ease-out"
-              style={{
-                width: SIZE,
-                height: SIZE,
-                marginLeft: -SIZE / 2,
-                marginTop: -SIZE / 2,
-                transformStyle: "preserve-3d",
-                transform: `translate3d(${x}px, ${y}px, ${z}px)`,
-                opacity: isPlaced ? 1 : 0,
-              }}
-            >
-              {FACES.map((f, fi) => (
-                <div
-                  key={fi}
-                  className="absolute inset-0"
-                  style={{
-                    transform: f.transform,
-                    background: palette[f.shade],
-                    boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.28)",
-                  }}
-                />
-              ))}
-            </div>
-          );
-        })}
+        <div
+          className="relative"
+          style={{
+            transformStyle: "preserve-3d",
+            transform: `rotateX(${rot.x}deg) rotateZ(${rot.z}deg)`,
+          }}
+        >
+          {blocks}
+        </div>
       </div>
+
+      {interactive && (
+        <div className="mt-1 text-center font-mono text-xs text-text-dim">
+          {hovered ? <span className="text-accent">{materials[hovered]}</span> : dragHint}
+        </div>
+      )}
     </div>
   );
 }
@@ -193,6 +267,7 @@ function StepList({
 
 export function BuildSequence({ locale = "ru" }: { locale?: Locale }) {
   const t = HOME_COPY[locale].process;
+  const island = HOME_COPY[locale].island;
 
   // Десктоп: сборка привязана к скроллу внутри залипающего блока.
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -237,7 +312,12 @@ export function BuildSequence({ locale = "ru" }: { locale?: Locale }) {
               <StepList steps={t.steps} activeStage={stageOf(scrollPlaced)} />
             </div>
             <div className="relative">
-              <IsoIsland placed={scrollPlaced} />
+              <IsoIsland
+                placed={scrollPlaced}
+                interactive
+                materials={island.materials}
+                dragHint={island.dragHint}
+              />
               <div className="mt-2 text-center font-mono text-xs text-text-dim">
                 {String(Math.min(stageOf(scrollPlaced) + 1, t.steps.length)).padStart(2, "0")} /{" "}
                 {String(t.steps.length).padStart(2, "0")}
@@ -251,7 +331,7 @@ export function BuildSequence({ locale = "ru" }: { locale?: Locale }) {
       <div ref={mobileRef} className="px-6 py-24 md:hidden">
         <div className="mx-auto max-w-5xl">
           {header}
-          <IsoIsland placed={autoPlaced} />
+          <IsoIsland placed={autoPlaced} materials={island.materials} dragHint={island.dragHint} />
           <div className="mt-8">
             <StepList steps={t.steps} activeStage={stageOf(autoPlaced)} />
           </div>

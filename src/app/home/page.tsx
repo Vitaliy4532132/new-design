@@ -11,7 +11,7 @@ import { HomeFooter } from "@/components/home/footer";
 import { FaqJsonLd } from "@/components/faq-jsonld";
 import { OrganizationJsonLd } from "@/components/organization-jsonld";
 import { StatsBand } from "@/components/stats-band";
-import { TechMarquee } from "@/components/tech-marquee";
+import { TechInventory } from "@/components/home/inventory";
 import { AboutSection } from "@/components/about-section";
 import { ServicesAccordion } from "@/components/services-accordion";
 import { ReviewsCarousel } from "@/components/reviews-carousel";
@@ -35,7 +35,7 @@ export default function HomeRedesignPage() {
       <HomeNav />
       <HomeHero />
       <StatsBand />
-      <TechMarquee />
+      <TechInventory />
       <AboutSection />
       <ServicesAccordion />
       <BuildSequence />

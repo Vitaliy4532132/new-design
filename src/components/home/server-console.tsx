@@ -9,8 +9,8 @@ import type { Locale } from "@/lib/i18n";
 type Tone = "info" | "plugin" | "success";
 type LogLine = { time: string; text: string; tone: Tone };
 
-// Строки лога — буквальный вывод сервера, не переводятся (как и список
-// технологий в tech-marquee). Плагины только реальные: наши + LuckPerms.
+// Строки лога — буквальный вывод сервера, не переводятся (как и названия
+// технологий в инвентаре). Плагины только реальные: наши + LuckPerms.
 const LOG: LogLine[] = [
   { time: "12:04:01", text: "Starting minecraft server version 1.21.4", tone: "info" },
   { time: "12:04:01", text: "Loading libraries, please wait...", tone: "info" },

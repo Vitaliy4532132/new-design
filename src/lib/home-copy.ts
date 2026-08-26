@@ -81,6 +81,21 @@ export type HomeCopy = {
     eyebrow: string;
     text: string;
   };
+  stack: {
+    eyebrow: string;
+    title: string;
+  };
+  island: {
+    dragHint: string;
+    materials: {
+      grass: string;
+      dirt: string;
+      stone: string;
+      log: string;
+      leaf: string;
+      chest: string;
+    };
+  };
   portfolioGrid: {
     eyebrow: string;
     title: string;
@@ -259,6 +274,18 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       eyebrow: "манифест",
       text: "Мы не собираем сервера из чужих сборок. Каждый плагин пишем под задачу, каждую карту строим с нуля — поэтому проекты держат онлайн, а не разваливаются через месяц.",
     },
+    stack: { eyebrow: "стек", title: "Чем мы работаем." },
+    island: {
+      dragHint: "потяни, чтобы покрутить",
+      materials: {
+        grass: "Трава",
+        dirt: "Земля",
+        stone: "Камень",
+        log: "Дуб",
+        leaf: "Листва",
+        chest: "Сундук",
+      },
+    },
     portfolioGrid: { eyebrow: "портфолио", title: "Наши работы.", allLabel: "Все проекты" },
     carousel: { eyebrow: "портфолио", title: "Пролистай наши проекты." },
     testimonials: {
@@ -434,6 +461,18 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       eyebrow: "manifesto",
       text: "We don't assemble servers out of someone else's packs. Every plugin is written for the task, every map is built from scratch — that's why our projects hold their player count instead of falling apart in a month.",
     },
+    stack: { eyebrow: "stack", title: "What we build with." },
+    island: {
+      dragHint: "drag to rotate",
+      materials: {
+        grass: "Grass",
+        dirt: "Dirt",
+        stone: "Stone",
+        log: "Oak log",
+        leaf: "Leaves",
+        chest: "Chest",
+      },
+    },
     portfolioGrid: { eyebrow: "portfolio", title: "Our work.", allLabel: "All projects" },
     carousel: { eyebrow: "portfolio", title: "Browse our projects." },
     testimonials: {
@@ -608,6 +647,18 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
     manifesto: {
       eyebrow: "маніфест",
       text: "Ми не збираємо сервери з чужих збірок. Кожен плагін пишемо під задачу, кожну карту будуємо з нуля — тому проєкти тримають онлайн, а не розвалюються через місяць.",
+    },
+    stack: { eyebrow: "стек", title: "Чим ми працюємо." },
+    island: {
+      dragHint: "потягни, щоб покрутити",
+      materials: {
+        grass: "Трава",
+        dirt: "Земля",
+        stone: "Камінь",
+        log: "Дуб",
+        leaf: "Листя",
+        chest: "Скриня",
+      },
     },
     portfolioGrid: { eyebrow: "портфоліо", title: "Наші роботи.", allLabel: "Усі проєкти" },
     carousel: { eyebrow: "портфоліо", title: "Погортай наші проєкти." },
