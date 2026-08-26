@@ -15,6 +15,7 @@ type NavCopy = {
   servicesHref: string;
   serviceLinks: ServiceLink[];
   navLinks: NavLink[];
+  ctaLabel: string;
 };
 
 export const NAV_COPY: Record<Locale, NavCopy> = {
@@ -35,6 +36,7 @@ export const NAV_COPY: Record<Locale, NavCopy> = {
       { href: "/#faq", label: "FAQ" },
       { href: "/blog", label: "Блог" },
     ],
+    ctaLabel: "Сделать заказ",
   },
   en: {
     homeHref: "/en",
@@ -53,6 +55,7 @@ export const NAV_COPY: Record<Locale, NavCopy> = {
       { href: "/en/#faq", label: "FAQ" },
       { href: "/en/blog", label: "Blog" },
     ],
+    ctaLabel: "Get a quote",
   },
   uk: {
     homeHref: "/uk",
@@ -71,6 +74,7 @@ export const NAV_COPY: Record<Locale, NavCopy> = {
       { href: "/uk/#faq", label: "FAQ" },
       { href: "/uk/blog", label: "Блог" },
     ],
+    ctaLabel: "Залишити заявку",
   },
 };
 
@@ -125,6 +129,10 @@ type FooterCopy = {
   companyLinks: NavLink[];
   copyrightSuffix: string;
   socialLabels: { telegram: string; discord: string; youtube: string };
+  ctaTitle: string;
+  ctaText: string;
+  ctaLabel: string;
+  mojangDisclaimer: string;
 };
 
 export const FOOTER_COPY: Record<Locale, FooterCopy> = {
@@ -141,6 +149,10 @@ export const FOOTER_COPY: Record<Locale, FooterCopy> = {
     ],
     copyrightSuffix: "TheFurryDev. Все права защищены.",
     socialLabels: { telegram: "Telegram", discord: "Discord", youtube: "YouTube" },
+    ctaTitle: "Готовы начать?",
+    ctaText: "Опишите задачу в Telegram — ответим и посчитаем стоимость.",
+    ctaLabel: "Написать нам",
+    mojangDisclaimer: "Сайт не является официальным продуктом Minecraft и не связан с Mojang или Microsoft.",
   },
   en: {
     description:
@@ -155,6 +167,10 @@ export const FOOTER_COPY: Record<Locale, FooterCopy> = {
     ],
     copyrightSuffix: "TheFurryDev. All rights reserved.",
     socialLabels: { telegram: "Telegram", discord: "Discord", youtube: "YouTube" },
+    ctaTitle: "Ready to start?",
+    ctaText: "Describe your task on Telegram — we'll reply and work out the cost.",
+    ctaLabel: "Message us",
+    mojangDisclaimer: "This site is not an official Minecraft product and is not associated with Mojang or Microsoft.",
   },
   uk: {
     description:
@@ -169,5 +185,9 @@ export const FOOTER_COPY: Record<Locale, FooterCopy> = {
     ],
     copyrightSuffix: "TheFurryDev. Усі права захищені.",
     socialLabels: { telegram: "Telegram", discord: "Discord", youtube: "YouTube" },
+    ctaTitle: "Готові почати?",
+    ctaText: "Опишіть задачу в Telegram — відповімо і порахуємо вартість.",
+    ctaLabel: "Написати нам",
+    mojangDisclaimer: "Сайт не є офіційним продуктом Minecraft і не пов'язаний з Mojang чи Microsoft.",
   },
 };

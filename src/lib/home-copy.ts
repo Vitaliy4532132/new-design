@@ -6,7 +6,9 @@ export type HomeCopy = {
     word: string;
     after: string;
     hook: string;
+    subtitles: string[];
     ctaLabel: string;
+    secondaryCtaLabel: string;
     scrollBefore: string;
     scrollAfter: string;
   };
@@ -31,11 +33,17 @@ export type HomeCopy = {
     title: string;
     moreLabel: string;
     note: string;
+    configureLabel: string;
+    estimateLabel: string;
+    ctaLabel: string;
     items: {
       title: string;
       description: string;
       tags: string[];
       href: string;
+      priceLabel: string;
+      features: string[];
+      tiers?: { label: string; price: string; description: string }[];
     }[];
   };
   products: {
@@ -65,6 +73,7 @@ export type HomeCopy = {
   portfolioGrid: {
     eyebrow: string;
     title: string;
+    allLabel: string;
   };
   carousel: {
     eyebrow: string;
@@ -74,6 +83,9 @@ export type HomeCopy = {
     eyebrow: string;
     title: string;
     reviews: { name: string; role: string; text: string }[];
+    ratingLabel: string;
+    countLabel: string;
+    readMoreLabel: string;
   };
   homeFaq: {
     eyebrow: string;
@@ -83,6 +95,7 @@ export type HomeCopy = {
     title: string;
     subtitle: string;
     ctaLabel: string;
+    secondaryLabel: string;
   };
   categoryLabels: { build: string; map: string; server: string };
 };
@@ -94,7 +107,14 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       word: "майнкрафт",
       after: "-сервер.",
       hook: "Хочешь сервер как FunTime, HolyWorld или AresMine? Пиши — сделаем не хуже.",
+      subtitles: [
+        "Хочешь сервер как FunTime, HolyWorld или AresMine? Пиши — сделаем не хуже.",
+        "Крутая сборка — от 3000₽, готова от 7 дней.",
+        "Плагины, сайты, карты — всё в одной команде.",
+        "На связи 24/7, даже после сдачи проекта.",
+      ],
       ctaLabel: "Оставить заявку",
+      secondaryCtaLabel: "Наши услуги",
       scrollBefore: "Прокрути вниз",
       scrollAfter: "чтобы увидеть проекты",
     },
@@ -119,36 +139,62 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       title: "Сервис под любую задачу.",
       moreLabel: "Подробнее",
       note: "Это не весь список — мы беремся за любые задачи, связанные с майнкрафтом: ресурс-паки, GUI-меню для серверов, модовые сервера на Forge/Fabric и многое другое. Не нашли нужную услугу — просто напишите.",
+      configureLabel: "Выберите вариант",
+      estimateLabel: "Стоимость",
+      ctaLabel: "Оставить заявку",
       items: [
         {
           title: "Крутые сборки",
           description: "SkyBlock, Survival, Anarchy, BoxPvP — от 3000₽, готовы от 7 дней, под версии 1.16–1.21.x.",
           tags: ["SkyBlock", "Survival", "Anarchy", "BoxPvP"],
           href: "/builds",
+          priceLabel: "от 3000₽",
+          features: ["SkyBlock, Survival, Anarchy, BoxPvP", "Версии 1.16–1.21.x", "Готова от 7 дней", "Экономика и баланс настроены"],
+          tiers: [
+            { label: "Мини", price: "от 3000₽", description: "Один игровой режим, базовый набор плагинов, готовая карта без уникального дизайна." },
+            { label: "Стандарт", price: "от 5000₽", description: "Расширенный набор плагинов, кастомная экономика и баланс, доработка карты под ваш стиль." },
+            { label: "Большая", price: "от 15000₽", description: "Уникальные механики под заказ, индивидуальный дизайн карты, донат-система." },
+          ],
         },
         {
           title: "Сайты для серверов",
           description: "Донат-магазин, голосование, личный кабинет игрока.",
           tags: ["Next.js", "Donate"],
           href: "/sites",
+          priceLabel: "от 1000₽",
+          features: ["Лендинг сервера", "Донат-магазин", "Личный кабинет игрока", "Голосование"],
         },
         {
           title: "Сервер с нуля",
           description: "Proxy Velocity/BungeeCord, экономика, оптимизация TPS.",
           tags: ["Velocity", "TPS"],
           href: "/server-setup",
+          priceLabel: "от 500₽",
+          features: ["Proxy Velocity/BungeeCord", "Лобби и переходы", "Экономика и права", "Кастомные режимы"],
+          tiers: [
+            { label: "Оптимизация", price: "от 500₽", description: "Ускоряем существующий сервер: ядро, конфиги, плагины оптимизации." },
+            { label: "С нуля под ключ", price: "от 6000₽", description: "Прокси, лобби, экономика и кастомные режимы — полный проект." },
+          ],
         },
         {
           title: "Плагины на заказ",
           description: "Кастомные механики на Java и Kotlin под любые задачи.",
           tags: ["Java", "Spigot"],
           href: "/plugins",
+          priceLabel: "от 200₽",
+          features: ["Экономика и магазины", "Античит", "Миниигры (Bedwars, Skywars)", "Чат и AI-модерация", "Кланы и гильдии"],
+          tiers: [
+            { label: "Утилита", price: "от 200₽", description: "Простая механика, минимум настроек — готова от 3 дней." },
+            { label: "Сложная система", price: "до 1800₽", description: "Экономика, база данных, комплексная логика под ваш сервер." },
+          ],
         },
         {
           title: "Построение карты",
           description: "Лобби, арены, данжи, города — любой стиль и масштаб.",
           tags: ["Build", "World"],
           href: "/map-building",
+          priceLabel: "от 1500₽",
+          features: ["Лобби и спавн", "PvP-арены", "Данжи", "Города"],
         },
       ],
     },
@@ -185,7 +231,7 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
         { title: "На связи 24/7", text: "Отвечаем быстро на этапе разработки и остаёмся на связи после сдачи проекта." },
       ],
     },
-    portfolioGrid: { eyebrow: "портфолио", title: "Наши работы." },
+    portfolioGrid: { eyebrow: "портфолио", title: "Наши работы.", allLabel: "Все проекты" },
     carousel: { eyebrow: "портфолио", title: "Пролистай наши проекты." },
     testimonials: {
       eyebrow: "отзывы",
@@ -200,12 +246,16 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
         { name: "Влад", role: "Сборка мини-игр", text: "Заказывал мини-игры (BedWars, SkyWars), сделали быстро и качественно. Онлайн поднялся буквально за пару дней." },
         { name: "Егор", role: "Сайт для сервера", text: "Заказал сайт под сервер, сделали быстро. Донат подключили, дизайн нормальный, не колхоз. Уже есть покупки, так что окупается." },
       ],
+      ratingLabel: "средняя оценка",
+      countLabel: "отзывов",
+      readMoreLabel: "Читать полностью",
     },
     homeFaq: { eyebrow: "faq", title: "Частые вопросы." },
     cta: {
       title: "Готовы создать свой идеальный сервер?",
       subtitle: "Оставь заявку в Telegram — обсудим идею, посчитаем стоимость и сроки.",
       ctaLabel: "Оставить заявку",
+      secondaryLabel: "Наш Discord",
     },
     categoryLabels: { build: "Сборка", map: "Карта", server: "Сервер" },
   },
@@ -215,7 +265,14 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       word: "Minecraft",
       after: " server.",
       hook: "Want a server like FunTime, HolyWorld or AresMine? Message us — we'll make it just as good.",
+      subtitles: [
+        "Want a server like FunTime, HolyWorld or AresMine? Message us — we'll make it just as good.",
+        "A great server build — from $39, ready in 7 days.",
+        "Plugins, websites, maps — all under one roof.",
+        "On call 24/7, even after the project ships.",
+      ],
       ctaLabel: "Get a quote",
+      secondaryCtaLabel: "Our services",
       scrollBefore: "Scroll down",
       scrollAfter: "to see the projects",
     },
@@ -240,36 +297,62 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       title: "A service for any task.",
       moreLabel: "Learn more",
       note: "This isn't the full list — we take on anything Minecraft-related: resource packs, GUI menus for servers, modded servers on Forge/Fabric and much more. Didn't find what you need? Just message us.",
+      configureLabel: "Choose an option",
+      estimateLabel: "Price",
+      ctaLabel: "Get a quote",
       items: [
         {
           title: "Server builds",
           description: "SkyBlock, Survival, Anarchy, BoxPvP — from $39 (≈3000₽), ready in 7 days, for versions 1.16–1.21.x.",
           tags: ["SkyBlock", "Survival", "Anarchy", "BoxPvP"],
           href: "/builds",
+          priceLabel: "from $39",
+          features: ["SkyBlock, Survival, Anarchy, BoxPvP", "Versions 1.16–1.21.x", "Ready in 7 days", "Economy and balance configured"],
+          tiers: [
+            { label: "Mini", price: "from $39", description: "One game mode, a basic set of plugins, a ready map without a custom design." },
+            { label: "Standard", price: "from $65", description: "An expanded plugin set, custom economy and balance, map reworked to match your style." },
+            { label: "Large", price: "from $195", description: "Custom mechanics built to order, individual map design, a donation system." },
+          ],
         },
         {
           title: "Server websites",
           description: "Donation store, voting, player dashboard.",
           tags: ["Next.js", "Donate"],
           href: "/sites",
+          priceLabel: "from $13",
+          features: ["Server landing page", "Donation store", "Player dashboard", "Voting"],
         },
         {
           title: "Server from scratch",
           description: "Velocity/BungeeCord proxy, economy, TPS optimization.",
           tags: ["Velocity", "TPS"],
           href: "/server-setup",
+          priceLabel: "from $6",
+          features: ["Velocity/BungeeCord proxy", "Lobby and transitions", "Economy and permissions", "Custom game modes"],
+          tiers: [
+            { label: "Optimization", price: "from $6", description: "We speed up your existing server: core, configs, optimization plugins." },
+            { label: "From scratch, turnkey", price: "from $78", description: "Proxy, lobby, economy and custom modes — a full project." },
+          ],
         },
         {
           title: "Plugins on commission",
           description: "Custom mechanics in Java and Kotlin for any task.",
           tags: ["Java", "Spigot"],
           href: "/plugins",
+          priceLabel: "from $3",
+          features: ["Economy and shops", "Anticheat", "Minigames (Bedwars, Skywars)", "Chat and AI moderation", "Clans and guilds"],
+          tiers: [
+            { label: "Utility", price: "from $3", description: "Simple mechanic, minimal configuration — ready in 3 days." },
+            { label: "Complex system", price: "up to $23", description: "Economy, database, complex logic for your server." },
+          ],
         },
         {
           title: "Map building",
           description: "Lobbies, arenas, dungeons, cities — any style, any scale.",
           tags: ["Build", "World"],
           href: "/map-building",
+          priceLabel: "from $19",
+          features: ["Lobby and spawn", "PvP arenas", "Dungeons", "Cities"],
         },
       ],
     },
@@ -306,7 +389,7 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
         { title: "On call 24/7", text: "We respond quickly during development and stay reachable after the project ships." },
       ],
     },
-    portfolioGrid: { eyebrow: "portfolio", title: "Our work." },
+    portfolioGrid: { eyebrow: "portfolio", title: "Our work.", allLabel: "All projects" },
     carousel: { eyebrow: "portfolio", title: "Browse our projects." },
     testimonials: {
       eyebrow: "reviews",
@@ -321,12 +404,16 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
         { name: "Vlad", role: "Minigames pack", text: "Ordered minigames (BedWars, SkyWars), built fast and well. Player count went up within a couple of days." },
         { name: "Egor", role: "Server website", text: "Ordered a website for my server, built fast. Donation store connected, clean design, nothing cheap-looking. Already getting sales, so it's paying for itself." },
       ],
+      ratingLabel: "average rating",
+      countLabel: "reviews",
+      readMoreLabel: "Read full review",
     },
     homeFaq: { eyebrow: "faq", title: "Frequently asked questions." },
     cta: {
       title: "Ready to build your perfect server?",
       subtitle: "Message us on Telegram — we'll discuss your idea and work out the cost and timeline.",
       ctaLabel: "Get a quote",
+      secondaryLabel: "Join our Discord",
     },
     categoryLabels: { build: "Build", map: "Map", server: "Server" },
   },
@@ -336,7 +423,14 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       word: "майнкрафт",
       after: "-сервер.",
       hook: "Хочеш сервер як FunTime, HolyWorld чи AresMine? Пиши — зробимо не гірше.",
+      subtitles: [
+        "Хочеш сервер як FunTime, HolyWorld чи AresMine? Пиши — зробимо не гірше.",
+        "Крута збірка — від ₴1744, готова від 7 днів.",
+        "Плагіни, сайти, карти — все в одній команді.",
+        "На зв'язку 24/7, навіть після здачі проєкту.",
+      ],
       ctaLabel: "Залишити заявку",
+      secondaryCtaLabel: "Наші послуги",
       scrollBefore: "Прокрути вниз",
       scrollAfter: "щоб побачити проєкти",
     },
@@ -361,36 +455,62 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       title: "Сервіс під будь-яку задачу.",
       moreLabel: "Детальніше",
       note: "Це не весь список — ми беремося за будь-які задачі, пов'язані з майнкрафтом: ресурс-паки, GUI-меню для серверів, модові сервери на Forge/Fabric і багато іншого. Не знайшли потрібну послугу — просто напишіть.",
+      configureLabel: "Оберіть варіант",
+      estimateLabel: "Вартість",
+      ctaLabel: "Залишити заявку",
       items: [
         {
           title: "Круті збірки",
           description: "SkyBlock, Survival, Anarchy, BoxPvP — від ₴1744 (≈3000₽), готові від 7 днів, під версії 1.16–1.21.x.",
           tags: ["SkyBlock", "Survival", "Anarchy", "BoxPvP"],
           href: "/builds",
+          priceLabel: "від ₴1744",
+          features: ["SkyBlock, Survival, Anarchy, BoxPvP", "Версії 1.16–1.21.x", "Готова від 7 днів", "Економіка і баланс налаштовані"],
+          tiers: [
+            { label: "Міні", price: "від ₴1744", description: "Один ігровий режим, базовий набір плагінів, готова карта без унікального дизайну." },
+            { label: "Стандарт", price: "від ₴2907", description: "Розширений набір плагінів, кастомна економіка та баланс, доопрацювання карти під ваш стиль." },
+            { label: "Велика", price: "від ₴8721", description: "Унікальні механіки на замовлення, індивідуальний дизайн карти, донат-система." },
+          ],
         },
         {
           title: "Сайти для серверів",
           description: "Донат-магазин, голосування, особистий кабінет гравця.",
           tags: ["Next.js", "Donate"],
           href: "/sites",
+          priceLabel: "від ₴581",
+          features: ["Лендінг сервера", "Донат-магазин", "Особистий кабінет гравця", "Голосування"],
         },
         {
           title: "Сервер з нуля",
           description: "Proxy Velocity/BungeeCord, економіка, оптимізація TPS.",
           tags: ["Velocity", "TPS"],
           href: "/server-setup",
+          priceLabel: "від ₴291",
+          features: ["Proxy Velocity/BungeeCord", "Лобі та переходи", "Економіка і права", "Кастомні режими"],
+          tiers: [
+            { label: "Оптимізація", price: "від ₴291", description: "Прискорюємо наявний сервер: ядро, конфіги, плагіни оптимізації." },
+            { label: "З нуля під ключ", price: "від ₴3488", description: "Проксі, лобі, економіка і кастомні режими — повний проєкт." },
+          ],
         },
         {
           title: "Плагіни на замовлення",
           description: "Кастомні механіки на Java і Kotlin під будь-які задачі.",
           tags: ["Java", "Spigot"],
           href: "/plugins",
+          priceLabel: "від ₴116",
+          features: ["Економіка і магазини", "Античит", "Мініігри (Bedwars, Skywars)", "Чат і AI-модерація", "Клани та гільдії"],
+          tiers: [
+            { label: "Утиліта", price: "від ₴116", description: "Проста механіка, мінімум налаштувань — готова від 3 днів." },
+            { label: "Складна система", price: "до ₴1047", description: "Економіка, база даних, комплексна логіка під ваш сервер." },
+          ],
         },
         {
           title: "Побудова карти",
           description: "Лобі, арени, данжі, міста — будь-який стиль і масштаб.",
           tags: ["Build", "World"],
           href: "/map-building",
+          priceLabel: "від ₴872",
+          features: ["Лобі та спавн", "PvP-арени", "Данжі", "Міста"],
         },
       ],
     },
@@ -427,7 +547,7 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
         { title: "На зв'язку 24/7", text: "Відповідаємо швидко на етапі розробки і залишаємося на зв'язку після здачі проєкту." },
       ],
     },
-    portfolioGrid: { eyebrow: "портфоліо", title: "Наші роботи." },
+    portfolioGrid: { eyebrow: "портфоліо", title: "Наші роботи.", allLabel: "Усі проєкти" },
     carousel: { eyebrow: "портфоліо", title: "Погортай наші проєкти." },
     testimonials: {
       eyebrow: "відгуки",
@@ -442,12 +562,16 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
         { name: "Влад", role: "Збірка міні-ігор", text: "Замовляв міні-ігри (BedWars, SkyWars), зробили швидко і якісно. Онлайн піднявся буквально за пару днів." },
         { name: "Єгор", role: "Сайт для сервера", text: "Замовив сайт під сервер, зробили швидко. Донат підключили, дизайн нормальний, не колхоз. Вже є покупки, тож окупається." },
       ],
+      ratingLabel: "середня оцінка",
+      countLabel: "відгуків",
+      readMoreLabel: "Читати повністю",
     },
     homeFaq: { eyebrow: "faq", title: "Часті питання." },
     cta: {
       title: "Готові створити свій ідеальний сервер?",
       subtitle: "Залиш заявку в Telegram — обговоримо ідею, порахуємо вартість і терміни.",
       ctaLabel: "Залишити заявку",
+      secondaryLabel: "Наш Discord",
     },
     categoryLabels: { build: "Збірка", map: "Карта", server: "Сервер" },
   },

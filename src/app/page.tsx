@@ -3,16 +3,12 @@ import { SiteNav } from "@/components/site-nav";
 import { Hero } from "@/components/hero";
 import { FaqJsonLd } from "@/components/faq-jsonld";
 import { OrganizationJsonLd } from "@/components/organization-jsonld";
-import { CircleTicker } from "@/components/circle-ticker";
 import { StatsBand } from "@/components/stats-band";
-import { HorizontalScrollGallery } from "@/components/horizontal-scroll-gallery";
-import { ServicesBento } from "@/components/services-bento";
-import { ProcessTimeline } from "@/components/process-timeline";
-import { ProductsShelf } from "@/components/products-shelf";
-import { WhyUsStack } from "@/components/why-us-stack";
-import { PortfolioGrid } from "@/components/portfolio-grid";
-import { PortfolioCarousel } from "@/components/portfolio-carousel";
-import { Testimonials } from "@/components/testimonials";
+import { TechMarquee } from "@/components/tech-marquee";
+import { AboutSection } from "@/components/about-section";
+import { ServicesAccordion } from "@/components/services-accordion";
+import { PortfolioPreview } from "@/components/portfolio-preview";
+import { ReviewsCarousel } from "@/components/reviews-carousel";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { CtaSection } from "@/components/cta-section";
 import { SiteFooter } from "@/components/site-footer";
@@ -33,17 +29,12 @@ export default function Home() {
       <OrganizationJsonLd locale="ru" />
       <SiteNav />
       <Hero />
-      <div className="h-[120px] bg-background" />
-      <CircleTicker />
       <StatsBand />
-      <HorizontalScrollGallery />
-      <ServicesBento />
-      <ProductsShelf />
-      <ProcessTimeline />
-      <WhyUsStack />
-      <PortfolioGrid />
-      <PortfolioCarousel />
-      <Testimonials />
+      <TechMarquee />
+      <AboutSection />
+      <ServicesAccordion />
+      <PortfolioPreview />
+      <ReviewsCarousel />
       <FaqAccordion items={HOME_FAQ} eyebrow="faq" title="Частые вопросы." />
       <CtaSection />
       <SiteFooter />
