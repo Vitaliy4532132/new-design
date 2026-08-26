@@ -274,7 +274,7 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       eyebrow: "манифест",
       text: "Мы не собираем сервера из чужих сборок. Каждый плагин пишем под задачу, каждую карту строим с нуля — поэтому проекты держат онлайн, а не разваливаются через месяц.",
     },
-    stack: { eyebrow: "стек", title: "Чем мы работаем." },
+    stack: { eyebrow: "стек", title: "Из чего собираются проекты." },
     island: {
       dragHint: "потяни, чтобы покрутить",
       materials: {
@@ -461,7 +461,7 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       eyebrow: "manifesto",
       text: "We don't assemble servers out of someone else's packs. Every plugin is written for the task, every map is built from scratch — that's why our projects hold their player count instead of falling apart in a month.",
     },
-    stack: { eyebrow: "stack", title: "What we build with." },
+    stack: { eyebrow: "stack", title: "What our projects are made of." },
     island: {
       dragHint: "drag to rotate",
       materials: {
@@ -648,7 +648,7 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       eyebrow: "маніфест",
       text: "Ми не збираємо сервери з чужих збірок. Кожен плагін пишемо під задачу, кожну карту будуємо з нуля — тому проєкти тримають онлайн, а не розвалюються через місяць.",
     },
-    stack: { eyebrow: "стек", title: "Чим ми працюємо." },
+    stack: { eyebrow: "стек", title: "З чого збираються проєкти." },
     island: {
       dragHint: "потягни, щоб покрутити",
       materials: {

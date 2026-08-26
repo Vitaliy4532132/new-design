@@ -36,6 +36,7 @@
   --animate-gradient-text: gradientText 6s ease infinite;
   --animate-particle-float: particleFloat 7s ease-in-out infinite;
   --animate-caret-blink: caretBlink 1s step-end infinite;
+  --animate-cube-spin: cubeSpin 14s linear infinite;
 }
 
 html {
@@ -141,5 +142,14 @@ body {
   }
   50% {
     opacity: 0;
+  }
+}
+
+@keyframes cubeSpin {
+  from {
+    transform: rotateX(58deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(58deg) rotateZ(360deg);
   }
 }
