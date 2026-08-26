@@ -70,6 +70,17 @@ export type HomeCopy = {
     title: string;
     reasons: { title: string; text: string }[];
   };
+  serverConsole: {
+    eyebrow: string;
+    title: string;
+    lead: string;
+    steps: string[];
+    statusLabel: string;
+  };
+  manifesto: {
+    eyebrow: string;
+    text: string;
+  };
   portfolioGrid: {
     eyebrow: string;
     title: string;
@@ -231,6 +242,23 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
         { title: "На связи 24/7", text: "Отвечаем быстро на этапе разработки и остаёмся на связи после сдачи проекта." },
       ],
     },
+    serverConsole: {
+      eyebrow: "под капотом",
+      title: "Сервер, который стартует за секунды.",
+      lead: "Paper вместо ванильного Spigot, настроенные конфиги и плагины профилирования — вместо лагов и таймаутов на входе.",
+      steps: [
+        "Ядро Paper или Purpur",
+        "view-distance под реальную нагрузку",
+        "Spark для профилирования, Clumps от лагов",
+        "Лимиты мобов и редстоун-тиков",
+        "MySQL вместо встроенного SQLite",
+      ],
+      statusLabel: "сервер запущен",
+    },
+    manifesto: {
+      eyebrow: "манифест",
+      text: "Мы не собираем сервера из чужих сборок. Каждый плагин пишем под задачу, каждую карту строим с нуля — поэтому проекты держат онлайн, а не разваливаются через месяц.",
+    },
     portfolioGrid: { eyebrow: "портфолио", title: "Наши работы.", allLabel: "Все проекты" },
     carousel: { eyebrow: "портфолио", title: "Пролистай наши проекты." },
     testimonials: {
@@ -389,6 +417,23 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
         { title: "On call 24/7", text: "We respond quickly during development and stay reachable after the project ships." },
       ],
     },
+    serverConsole: {
+      eyebrow: "under the hood",
+      title: "A server that boots in seconds.",
+      lead: "Paper instead of vanilla Spigot, tuned configs and profiling plugins — instead of lag and login timeouts.",
+      steps: [
+        "Paper or Purpur core",
+        "view-distance tuned for actual load",
+        "Spark for profiling, Clumps against lag",
+        "Mob and redstone tick limits",
+        "MySQL instead of built-in SQLite",
+      ],
+      statusLabel: "server is up",
+    },
+    manifesto: {
+      eyebrow: "manifesto",
+      text: "We don't assemble servers out of someone else's packs. Every plugin is written for the task, every map is built from scratch — that's why our projects hold their player count instead of falling apart in a month.",
+    },
     portfolioGrid: { eyebrow: "portfolio", title: "Our work.", allLabel: "All projects" },
     carousel: { eyebrow: "portfolio", title: "Browse our projects." },
     testimonials: {
@@ -546,6 +591,23 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
         { title: "Прозорий кошторис", text: "Ціна фіксується до старту робіт. Жодних доплат за те, що не обговорювали заздалегідь." },
         { title: "На зв'язку 24/7", text: "Відповідаємо швидко на етапі розробки і залишаємося на зв'язку після здачі проєкту." },
       ],
+    },
+    serverConsole: {
+      eyebrow: "під капотом",
+      title: "Сервер, який стартує за секунди.",
+      lead: "Paper замість ванільного Spigot, налаштовані конфіги та плагіни профілювання — замість лагів і таймаутів на вході.",
+      steps: [
+        "Ядро Paper або Purpur",
+        "view-distance під реальне навантаження",
+        "Spark для профілювання, Clumps від лагів",
+        "Ліміти мобів і редстоун-тіків",
+        "MySQL замість вбудованого SQLite",
+      ],
+      statusLabel: "сервер запущено",
+    },
+    manifesto: {
+      eyebrow: "маніфест",
+      text: "Ми не збираємо сервери з чужих збірок. Кожен плагін пишемо під задачу, кожну карту будуємо з нуля — тому проєкти тримають онлайн, а не розвалюються через місяць.",
     },
     portfolioGrid: { eyebrow: "портфоліо", title: "Наші роботи.", allLabel: "Усі проєкти" },
     carousel: { eyebrow: "портфоліо", title: "Погортай наші проєкти." },
