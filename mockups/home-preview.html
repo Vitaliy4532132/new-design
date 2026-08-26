@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>TheFurryDev — превью 3 секций главной</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0c11;
+    --surface:#12151c;
+    --surface-hover:#181c26;
+    --border:#1f2430;
+    --border-light:#2a3040;
+    --accent-blue:#4F8EFF;
+    --accent-purple:#7B5FFF;
+    --accent-gradient:linear-gradient(135deg,#4F8EFF,#7B5FFF);
+    --text:#E8EAED;
+    --text-muted:#8B92A5;
+    --text-dim:#5C6470;
+    --green:#22C55E;
+    --yellow:#F59E0B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:-0.02em;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+  .grad-text{background:var(--accent-gradient);-webkit-background-clip:text;background-clip:text;color:transparent;}
+
+  /* ===== HERO ===== */
+  .hero{padding:120px 0 90px;position:relative;overflow:hidden;}
+  .hero::before{
+    content:"";position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+    width:900px;height:500px;background:radial-gradient(closest-side,rgba(79,142,255,0.16),transparent);
+    pointer-events:none;
+  }
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent-blue);
+    background:rgba(79,142,255,0.08);border:1px solid rgba(79,142,255,0.25);
+    padding:6px 14px;border-radius:100px;margin-bottom:24px;
+  }
+  .badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);}
+  .hero h1{font-size:56px;line-height:1.08;max-width:760px;position:relative;}
+  .hero p.lead{
+    font-size:18px;line-height:1.6;color:var(--text-muted);
+    max-width:620px;margin:24px 0 40px;position:relative;
+  }
+  .hero-ctas{display:flex;gap:14px;margin-bottom:56px;position:relative;}
+  .btn-primary{
+    background:var(--accent-gradient);color:#fff;border:none;
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;
+    padding:15px 28px;border-radius:10px;cursor:pointer;
+    box-shadow:0 8px 24px rgba(79,142,255,0.25);
+    transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(79,142,255,0.35);}
+  .btn-secondary{
+    background:transparent;color:var(--text);border:1px solid var(--border-light);
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;
+    padding:15px 28px;border-radius:10px;cursor:pointer;
+    transition:border-color .15s ease,background .15s ease;
+  }
+  .btn-secondary:hover{border-color:var(--accent-blue);background:rgba(79,142,255,0.06);}
+  .hook{
+    font-family:'Inter',sans-serif;font-size:14px;color:var(--text-dim);
+    margin-bottom:56px;position:relative;
+  }
+  .hook b{color:var(--text-muted);font-weight:500;}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;position:relative;}
+  .stat{background:var(--surface);padding:24px 20px;}
+  .stat .num{font-family:'Manrope',sans-serif;font-weight:800;font-size:32px;}
+  .stat .lbl{font-size:13px;color:var(--text-muted);margin-top:4px;}
+  .marquee-wrap{margin-top:48px;overflow:hidden;border-top:1px solid var(--border);padding-top:28px;position:relative;}
+  .marquee{display:flex;gap:36px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-dim);white-space:nowrap;}
+  .marquee span{display:flex;align-items:center;gap:36px;}
+  .marquee i{width:4px;height:4px;background:var(--text-dim);border-radius:50%;}
+
+  /* ===== SERVICES ===== */
+  .section{padding:90px 0;}
+  .section-tag{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent-purple);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
+  .section h2{font-size:34px;margin-bottom:16px;}
+  .section .desc{color:var(--text-muted);font-size:16px;max-width:560px;margin-bottom:48px;}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:16px;
+    padding:28px;transition:border-color .2s ease,transform .2s ease,background .2s ease;
+    position:relative;
+  }
+  .card:hover{border-color:var(--accent-blue);transform:translateY(-3px);background:var(--surface-hover);}
+  .card .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim);margin-bottom:18px;}
+  .card h3{font-size:19px;margin-bottom:10px;}
+  .card p{font-size:14px;color:var(--text-muted);line-height:1.6;margin-bottom:20px;}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+  .tag{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);
+    background:rgba(255,255,255,0.04);border:1px solid var(--border-light);
+    padding:4px 10px;border-radius:6px;
+  }
+  .card a{
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:14px;color:var(--accent-blue);
+    text-decoration:none;display:inline-flex;align-items:center;gap:6px;
+  }
+  .card.wide{grid-column:span 1;}
+  .card.feat{border-color:rgba(123,95,255,0.4);background:linear-gradient(180deg,rgba(123,95,255,0.06),transparent);}
+
+  /* ===== PRODUCTS ===== */
+  .products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .product{
+    background:var(--surface);border:1px solid var(--border);border-radius:14px;
+    padding:22px;transition:border-color .2s ease,transform .2s ease;
+  }
+  .product:hover{border-color:var(--accent-purple);transform:translateY(-3px);}
+  .product .ptype{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;}
+  .product h3{font-size:16px;margin-bottom:6px;}
+  .product p{font-size:13px;color:var(--text-muted);line-height:1.5;margin-bottom:18px;min-height:40px;}
+  .product-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:14px;}
+  .price{font-family:'Manrope',sans-serif;font-weight:800;font-size:18px;}
+  .buy{
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;color:var(--bg);
+    background:var(--text);padding:8px 14px;border-radius:8px;text-decoration:none;
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="badge"><span class="dot"></span> На связи 24/7 · отвечаем в течение часа</div>
+    <h1>Студия разработки <span class="grad-text">майнкрафт</span>-серверов под ключ</h1>
+    <p class="lead">Кастомные плагины на Java/Kotlin, крутые сборки под любую версию, сайты для серверов и полноценные проекты с нуля — от готового решения за 24 часа до сервера со своей экономикой и сетью.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary">Оставить заявку →</button>
+      <button class="btn-secondary">Смотреть портфолио</button>
+    </div>
+    <p class="hook">Хочешь сервер как <b>FunTime</b>, <b>HolyWorld</b> или <b>RealityWorld</b>? Пиши нам — сделаем не хуже.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">80+</div><div class="lbl">проектов</div></div>
+      <div class="stat"><div class="num">65+</div><div class="lbl">плагинов</div></div>
+      <div class="stat"><div class="num">73+</div><div class="lbl">клиентов</div></div>
+      <div class="stat"><div class="num">24/7</div><div class="lbl">поддержка</div></div>
+    </div>
+    <div class="marquee-wrap">
+      <div class="marquee">
+        <span>Java<i></i>Kotlin<i></i>Spigot API<i></i>Paper API<i></i>Velocity<i></i>BungeeCord<i></i>MySQL<i></i>MongoDB<i></i>Redis<i></i>Docker</span>
+        <span>Java<i></i>Kotlin<i></i>Spigot API<i></i>Paper API<i></i>Velocity<i></i>BungeeCord<i></i>MySQL<i></i>MongoDB<i></i>Redis<i></i>Docker</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-tag">/ что мы создаём</div>
+    <h2>Сервис под любую задачу</h2>
+    <p class="desc">От готовой сборки за один день до полноценной сети серверов с нуля — выбирай уровень погружения.</p>
+    <div class="cards">
+      <div class="card feat">
+        <div class="num">01</div>
+        <h3>Крутые сборки</h3>
+        <p>SkyBlock, Survival, Anarchy, BoxPvP, RPG — готовы к запуску за 24 часа, под версии 1.16.5–1.21.</p>
+        <div class="tags"><span class="tag">SkyBlock</span><span class="tag">Survival</span><span class="tag">Anarchy</span><span class="tag">BoxPvP</span></div>
+        <a href="#">Подробнее →</a>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>Плагины на заказ</h3>
+        <p>Кастомные механики, экономика, античит, миниигры — любая сложность на Java или Kotlin.</p>
+        <div class="tags"><span class="tag">Java</span><span class="tag">Spigot</span><span class="tag">Paper</span></div>
+        <a href="#">Подробнее →</a>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>Сайты для серверов</h3>
+        <p>Донат-магазин, голосование, личный кабинет игрока — интеграция с базой вашего сервера.</p>
+        <div class="tags"><span class="tag">Next.js</span><span class="tag">Donate Shop</span></div>
+        <a href="#">Подробнее →</a>
+      </div>
+      <div class="card">
+        <div class="num">04</div>
+        <h3>Сервер с нуля</h3>
+        <p>Прокси Velocity/BungeeCord, лобби, экономика и права — полноценный проект под вашу идею.</p>
+        <div class="tags"><span class="tag">Velocity</span><span class="tag">BungeeCord</span></div>
+        <a href="#">Подробнее →</a>
+      </div>
+      <div class="card">
+        <div class="num">05</div>
+        <h3>Построение карты</h3>
+        <p>Лобби, арены, данжи, города — любой стиль и масштаб под ваш проект.</p>
+        <div class="tags"><span class="tag">Build</span><span class="tag">World Design</span></div>
+        <a href="#">Подробнее →</a>
+      </div>
+      <div class="card">
+        <div class="num">06</div>
+        <h3>Оптимизация и настройка</h3>
+        <p>Уберём лаги, поднимем TPS, настроим ядро под высокую нагрузку.</p>
+        <div class="tags"><span class="tag">TPS</span><span class="tag">Paper/Purpur</span></div>
+        <a href="#">Подробнее →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-tag">/ готовые решения</div>
+    <h2>Купить готовое — без разработки на заказ</h2>
+    <p class="desc">Проверенные плагины и сборки, которые можно поставить на сервер уже сегодня.</p>
+    <div class="products">
+      <div class="product">
+        <div class="ptype">плагин</div>
+        <h3>FurryNick</h3>
+        <p>Лучший плагин на команду /nick для смены ника.</p>
+        <div class="product-foot"><span class="price">299₽</span><a class="buy" href="#">Купить</a></div>
+      </div>
+      <div class="product">
+        <div class="ptype">плагин</div>
+        <h3>FurryChat</h3>
+        <p>Плагин на чат для майнкрафт сервера с AI-модерацией.</p>
+        <div class="product-foot"><span class="price">299₽</span><a class="buy" href="#">Купить</a></div>
+      </div>
+      <div class="product">
+        <div class="ptype">сборка</div>
+        <h3>SolarAnarchyV2</h3>
+        <p>Анархия, выдерживает 100+ игроков онлайн одновременно.</p>
+        <div class="product-foot"><span class="price">999₽</span><a class="buy" href="#">Купить</a></div>
+      </div>
+      <div class="product">
+        <div class="ptype">сборка</div>
+        <h3>SolarBox V2</h3>
+        <p>Готовый Box PvP сервер — настроен и готов к запуску.</p>
+        <div class="product-foot"><span class="price">299₽</span><a class="buy" href="#">Купить</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

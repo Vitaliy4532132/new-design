@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>TheFurryDev — превью v3 (реальные токены sparkstudios.dev)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000000;
+    --surface:#0c0c0e;
+    --surface-hover:#141416;
+    --border:#1c1c1f;
+    --border-light:#2a2a2e;
+    --blue-deep:#0A3FFF;
+    --blue-bright:#1797FF;
+    --accent-gradient:linear-gradient(180deg,#0A3FFF 0%,#1797FF 100%);
+    --accent-text:#198CFF;
+    --text:#FFFFFF;
+    --text-muted:#9A9AA3;
+    --text-dim:#5C5C63;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2{font-family:'Clash Display',sans-serif;font-weight:400;letter-spacing:-0.01em;}
+  .em{font-weight:500;}
+  .accent-text{color:var(--accent-text);font-weight:500;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:2;}
+
+  /* ===== NAV ===== */
+  nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:30px 40px;z-index:10;}
+  .logo{font-family:'DM Sans',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.01em;}
+  .logo span{color:var(--accent-text);}
+  .navlinks{display:flex;gap:34px;font-size:14px;color:var(--text-muted);font-weight:500;}
+
+  /* ===== HERO (swirl) ===== */
+  .hero{position:relative;height:100vh;min-height:680px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;}
+  .swirl{position:absolute;inset:0;z-index:0;}
+  .blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;mix-blend-mode:screen;}
+  .blob1{width:560px;height:560px;background:radial-gradient(circle,#1797FF,transparent 70%);top:-140px;left:-100px;animation:float1 15s ease-in-out infinite;}
+  .blob2{width:480px;height:480px;background:radial-gradient(circle,#0A3FFF,transparent 70%);bottom:-160px;right:-60px;animation:float2 17s ease-in-out infinite;}
+  .blob3{width:360px;height:360px;background:radial-gradient(circle,#3a8fff,transparent 70%);top:25%;right:20%;animation:float3 13s ease-in-out infinite;}
+  @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(70px,50px)}}
+  @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-60px,-40px)}}
+  @keyframes float3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-40px,60px) scale(1.18)}}
+  .vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,var(--bg) 85%);z-index:1;}
+  .hero-content{position:relative;z-index:2;}
+  .hero h1{font-size:76px;line-height:1.04;max-width:880px;}
+  .hero-ctas{display:flex;gap:12px;justify-content:center;margin-top:40px;}
+  .btn-primary{background:var(--accent-gradient);color:#fff;border:none;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;padding:14px 26px;border-radius:10px;cursor:pointer;box-shadow:0 6px 20px rgba(23,151,255,0.35);}
+  .btn-secondary{background:rgba(255,255,255,0.04);color:var(--text);border:1px solid var(--border-light);font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;padding:14px 26px;border-radius:10px;cursor:pointer;}
+  .scroll-hint{position:absolute;bottom:42px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:18px;font-size:13px;color:var(--text-dim);z-index:2;}
+  .mouse{width:21px;height:32px;border:1px solid var(--text-dim);border-radius:11px;display:flex;justify-content:center;padding-top:6px;}
+  .mouse i{width:3px;height:6px;background:var(--text-dim);border-radius:2px;animation:scrolldot 1.6s ease-in-out infinite;}
+  @keyframes scrolldot{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(9px)}}
+  .hint-line{width:70px;height:1px;background:var(--border-light);}
+
+  /* ===== CIRCLE TICKER (по реальной разметке sparkstudios.dev) ===== */
+  .circle-section{position:relative;height:680px;overflow:hidden;}
+  .circle-wheel{position:absolute;top:660px;left:50%;width:1px;height:1px;animation:spin 70s linear infinite;}
+  @keyframes spin{from{transform:translateX(-50%) rotate(0deg);}to{transform:translateX(-50%) rotate(360deg);}}
+  .tick-card{
+    position:absolute;top:0;left:0;width:100px;height:100px;margin:-50px 0 0 -50px;
+    border-radius:26px;background:#080808;border:1px solid rgba(255,255,255,0.05);
+    box-shadow:0 16px 30px rgba(0,0,0,0.5);overflow:hidden;
+  }
+  .tick-card .fill{position:absolute;inset:2px;border-radius:22px;}
+  .tick-card .bevel{position:absolute;inset:2px;border-radius:22px;border:0.5px solid rgba(255,255,255,0.2);background:linear-gradient(0deg,rgba(0,0,0,0.3) 0%,rgba(255,255,255,0.15) 100%);mix-blend-mode:overlay;}
+  .circle-fade-bottom{position:absolute;left:0;right:0;bottom:0;height:300px;background:linear-gradient(180deg,transparent,var(--bg) 75%);z-index:3;}
+  .circle-center{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:4;pointer-events:none;}
+  .circle-center>*{pointer-events:auto;}
+  .tick-pill{
+    position:relative;display:inline-flex;align-items:center;gap:10px;
+    background:linear-gradient(0deg,rgba(0,85,255,0.08) 0%,rgba(153,153,153,0.1) 100%);
+    border:1px solid rgba(255,255,255,0.05);border-radius:40px;padding:7px 18px 7px 7px;overflow:hidden;
+  }
+  .tick-pill::before{content:"";position:absolute;inset:0;background:conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,0.15) 0deg,rgba(255,255,255,0) 72deg,rgba(79,26,214,0.2) 172deg,rgba(255,255,255,0) 270deg,rgba(255,255,255,0.15) 360deg);opacity:0.25;}
+  .tick-icon{position:relative;width:26px;height:26px;border-radius:30px;background:linear-gradient(rgb(26,73,214) 0%,rgb(89,158,227) 100%);border:2px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:13px;}
+  .tick-pill span.label{position:relative;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;letter-spacing:-0.3px;background:linear-gradient(90deg,#fff 0%,rgba(153,153,153,0) 350%);-webkit-background-clip:text;background-clip:text;color:#fff;}
+  .tick-line{width:90px;height:1px;margin:14px auto 28px;background:linear-gradient(90deg,rgba(32,81,227,0) 0%,rgb(26,76,214) 52%,rgba(0,85,255,0) 100%);}
+  .circle-center h2{font-size:54px;letter-spacing:-1.9px;line-height:50px;font-weight:400;max-width:600px;}
+  .circle-center h2 .em{font-weight:500;}
+  .btn-ghost{
+    margin-top:30px;background:transparent;color:#fff;border:3px solid rgba(255,255,255,0.15);
+    font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;letter-spacing:-0.3px;
+    padding:13px 26px;border-radius:10px;cursor:pointer;box-shadow:0 0 0 0 rgba(79,26,214,0.3);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Furry<span>Dev</span></div>
+  <div class="navlinks"><span>Услуги</span><span>Портфолио</span><span>Отзывы</span><span>FAQ</span></div>
+</nav>
+
+<section class="hero">
+  <div class="swirl"><div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div></div>
+  <div class="vignette"></div>
+  <div class="hero-content">
+    <h1>Студия для тех, кто строит свой <span class="em accent-text">майнкрафт</span>-сервер.</h1>
+    <div class="hero-ctas">
+      <button class="btn-primary">Оставить заявку</button>
+      <button class="btn-secondary">Смотреть портфолио</button>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Прокрути вниз</span><div class="mouse"><i></i></div><span>чтобы увидеть проекты</span></div>
+</section>
+
+<section class="circle-section">
+  <div class="circle-wheel" id="wheel"></div>
+  <div class="circle-fade-bottom"></div>
+  <div class="circle-center">
+    <div class="tick-pill"><span class="tick-icon">⚡</span><span class="label">Наши работы</span></div>
+    <div class="tick-line"></div>
+    <h2><span class="em">Сборки</span> и сервера, которые впечатляют.</h2>
+    <button class="btn-ghost">Начать проект</button>
+  </div>
+</section>
+
+<script>
+  var colors = ['linear-gradient(135deg,#101013,#26262c)','linear-gradient(135deg,#06224a,#1797FF)','linear-gradient(135deg,#3a1c0e,#b3471e)','linear-gradient(135deg,#0e2e22,#1d9e75)','linear-gradient(135deg,#16161a,#3a3a42)','linear-gradient(135deg,#0A3FFF,#1797FF)','linear-gradient(135deg,#1c0e3a,#5a2fae)','linear-gradient(135deg,#06302e,#1d9e9e)','linear-gradient(135deg,#3a2c0e,#caa23f)','linear-gradient(135deg,#0e0e2e,#3a3aae)','linear-gradient(135deg,#2e0e0e,#a03030)','linear-gradient(135deg,#1c1c1c,#444)'];
+  var n = 20, radius = 480;
+  var wheel = document.getElementById('wheel');
+  for (var i = 0; i < n; i++) {
+    var angle = (360 / n) * i;
+    var card = document.createElement('div');
+    card.className = 'tick-card';
+    card.style.transform = 'rotate(' + angle + 'deg) translate(0,-' + radius + 'px)';
+    var fill = document.createElement('div');
+    fill.className = 'fill';
+    fill.style.background = colors[i % colors.length];
+    var bevel = document.createElement('div');
+    bevel.className = 'bevel';
+    card.appendChild(fill);
+    card.appendChild(bevel);
+    wheel.appendChild(card);
+  }
+</script>
+</body>
+</html>

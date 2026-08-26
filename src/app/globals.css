@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+:root {
+  --background: #000000;
+  --surface: #0c0c0e;
+  --border: #1c1c1f;
+  --border-light: #2a2a2e;
+  --blue-deep: #0a3fff;
+  --blue-bright: #1797ff;
+  --accent-text: #198cff;
+  --text: #ffffff;
+  --text-muted: #9a9aa3;
+  --text-dim: #5c5c63;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+  --color-blue-deep: var(--blue-deep);
+  --color-blue-bright: var(--blue-bright);
+  --color-accent: var(--accent-text);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
+  --font-display: var(--font-unbounded);
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-roboto-mono);
+  --animate-blob-1: blob1 15s ease-in-out infinite;
+  --animate-blob-2: blob2 17s ease-in-out infinite;
+  --animate-blob-3: blob3 13s ease-in-out infinite;
+  --animate-scroll-dot: scrollDot 1.6s ease-in-out infinite;
+  --animate-wheel-spin: wheelSpin 70s linear infinite;
+  --animate-marquee: marquee 40s linear infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+}
+
+@keyframes blob1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(70px, 50px);
+  }
+}
+
+@keyframes blob2 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-60px, -40px);
+  }
+}
+
+@keyframes blob3 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-40px, 60px) scale(1.18);
+  }
+}
+
+@keyframes scrollDot {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+}
+
+@keyframes wheelSpin {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
