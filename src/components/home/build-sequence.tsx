@@ -6,74 +6,111 @@ import { useInView } from "@/hooks/use-in-view";
 import { HOME_COPY } from "@/lib/home-copy";
 import type { Locale } from "@/lib/i18n";
 
-const SIZE = 28; // ребро блока, px
-const GRID = 4; // основание GRID × GRID
-const DROP = 90; // с какой высоты блок «падает» на место
+const SIZE = 26; // ребро блока, px
+const DROP = 45; // с какой высоты блок «падает» на место
 
-type Block = { x: number; y: number; z: number; stage: number };
+// Палитра под настоящие блоки майнкрафта: у травы верх зелёный, а бока
+// землистые — как в игре. sideA — грани по оси Y, sideB — по оси X, они
+// чуть темнее, за счёт этого куб читается объёмным.
+const MATERIALS = {
+  grass: { top: "#6CB33F", sideA: "#7C5A38", sideB: "#63472B" },
+  dirt: { top: "#7C5A38", sideA: "#6E4F31", sideB: "#5A4028" },
+  stone: { top: "#8E8E8E", sideA: "#7A7A7A", sideB: "#636363" },
+  log: { top: "#B08E5E", sideA: "#6F5336", sideB: "#5A432B" },
+  leaf: { top: "#5CAB3A", sideA: "#4A8F2E", sideB: "#3D7726" },
+  chest: { top: "#C6913F", sideA: "#9C6C2E", sideB: "#7F5724" },
+} as const;
 
-// Постройка собирается слоями, по одному слою на каждый этап работы:
-// пол → две стены → крыша.
-function buildBlocks(): Block[] {
+type Material = keyof typeof MATERIALS;
+type Cell = [number, number];
+type Block = { x: number; y: number; z: number; mat: Material; stage: number };
+
+// Остров 5×5 без углов — так он выглядит скруглённым, а не квадратным.
+const GRASS: Cell[] = [
+  [1, 0], [2, 0], [3, 0],
+  [0, 1], [1, 1], [2, 1], [3, 1], [4, 1],
+  [0, 2], [1, 2], [2, 2], [3, 2], [4, 2],
+  [0, 3], [1, 3], [2, 3], [3, 3], [4, 3],
+  [1, 4], [2, 4], [3, 4],
+];
+
+// Ниже остров сужается к точке — классический парящий скайблок.
+const DIRT: Cell[] = [
+  [1, 1], [2, 1], [3, 1],
+  [1, 2], [2, 2], [3, 2],
+  [1, 3], [2, 3], [3, 3],
+];
+const CORE: Cell[] = [[2, 1], [1, 2], [2, 2], [3, 2], [2, 3]];
+const TIP: Cell[] = [[2, 2]];
+
+const TREE: Cell = [1, 1]; // ствол стоит не по центру — так живее
+const CHEST: Cell = [3, 3];
+
+// Крона: нижний ярус кольцом вокруг ствола, верхний — крестом.
+const CANOPY_LOWER: Cell[] = [
+  [0, 0], [1, 0], [2, 0],
+  [0, 1], [2, 1],
+  [0, 2], [1, 2], [2, 2],
+];
+const CANOPY_TOP: Cell[] = [[1, 1], [0, 1], [2, 1], [1, 0], [1, 2]];
+
+function buildIsland(): Block[] {
   const blocks: Block[] = [];
-  const isEdge = (x: number, y: number) => x === 0 || y === 0 || x === GRID - 1 || y === GRID - 1;
+  const add = (cells: Cell[], z: number, mat: Material, stage: number) => {
+    for (const [x, y] of cells) blocks.push({ x, y, z, mat, stage });
+  };
 
-  for (let x = 0; x < GRID; x++) {
-    for (let y = 0; y < GRID; y++) blocks.push({ x, y, z: 0, stage: 0 });
-  }
-  for (const z of [1, 2]) {
-    for (let x = 0; x < GRID; x++) {
-      for (let y = 0; y < GRID; y++) {
-        if (isEdge(x, y)) blocks.push({ x, y, z, stage: z });
-      }
-    }
-  }
-  for (let x = 0; x < GRID; x++) {
-    for (let y = 0; y < GRID; y++) blocks.push({ x, y, z: 3, stage: 3 });
-  }
+  // Порядок в массиве = порядок сборки: снизу вверх, как строят по-настоящему.
+  add(TIP, -3, "stone", 0);
+  add(CORE, -2, "stone", 0);
+  add(DIRT, -1, "dirt", 0);
+  add(GRASS, 0, "grass", 1);
+
+  for (const z of [1, 2, 3]) add([TREE], z, "log", 2);
+  add(CANOPY_LOWER, 3, "leaf", 2);
+  add(CANOPY_TOP, 4, "leaf", 3);
+  add([CHEST], 1, "chest", 3);
 
   return blocks;
 }
 
-const BLOCKS = buildBlocks();
+const BLOCKS = buildIsland();
 const TOTAL = BLOCKS.length;
 
-// Грани куба. Рендерим все пять видимых сторон, а не две: так постройка
-// выглядит цельной при любом развороте изометрии. Противоположные грани
-// красим одинаково — тогда освещение читается одинаково с любого угла.
+// Пять видимых граней: верх и четыре бока. Низ не рисуем — при взгляде
+// сверху в изометрии он не виден ни у одного блока.
 const FACES = [
-  { transform: `translateZ(${SIZE / 2}px)`, bg: "#2AA0FF" },
-  { transform: `rotateX(90deg) translateZ(${SIZE / 2}px)`, bg: "#0A3FFF" },
-  { transform: `rotateX(-90deg) translateZ(${SIZE / 2}px)`, bg: "#0A3FFF" },
-  { transform: `rotateY(90deg) translateZ(${SIZE / 2}px)`, bg: "#07268f" },
-  { transform: `rotateY(-90deg) translateZ(${SIZE / 2}px)`, bg: "#07268f" },
-];
+  { transform: `translateZ(${SIZE / 2}px)`, shade: "top" },
+  { transform: `rotateX(90deg) translateZ(${SIZE / 2}px)`, shade: "sideA" },
+  { transform: `rotateX(-90deg) translateZ(${SIZE / 2}px)`, shade: "sideA" },
+  { transform: `rotateY(90deg) translateZ(${SIZE / 2}px)`, shade: "sideB" },
+  { transform: `rotateY(-90deg) translateZ(${SIZE / 2}px)`, shade: "sideB" },
+] as const;
 
-function IsoStructure({ placed }: { placed: number }) {
-  const center = ((GRID - 1) * SIZE) / 2;
+function IsoIsland({ placed }: { placed: number }) {
+  const center = 2 * SIZE; // сетка 0..4, центр в 2
   const complete = placed >= TOTAL;
 
   return (
-    <div className="relative flex h-[360px] items-center justify-center sm:h-[440px]">
+    <div className="relative flex h-[420px] items-center justify-center sm:h-[500px]">
       <div
-        className={`pointer-events-none absolute h-56 w-56 rounded-full blur-[80px] transition-opacity duration-1000 ${
-          complete ? "opacity-60" : "opacity-20"
+        className={`pointer-events-none absolute h-64 w-64 rounded-full blur-[90px] transition-opacity duration-1000 ${
+          complete ? "opacity-60" : "opacity-25"
         }`}
         style={{ background: "radial-gradient(circle, #1797FF, transparent 70%)" }}
       />
 
       <div
         className="relative"
-        style={{
-          transformStyle: "preserve-3d",
-          transform: "rotateX(56deg) rotateZ(45deg)",
-        }}
+        style={{ transformStyle: "preserve-3d", transform: "rotateX(56deg) rotateZ(45deg)" }}
       >
         {BLOCKS.map((b, i) => {
           const isPlaced = i < placed;
+          const palette = MATERIALS[b.mat];
           const x = b.x * SIZE - center;
           const y = b.y * SIZE - center;
-          const z = b.z * SIZE + (isPlaced ? 0 : DROP);
+          // -0.5 приподнимает остров так, чтобы он сел по центру контейнера
+          const z = (b.z - 0.5) * SIZE + (isPlaced ? 0 : DROP);
 
           return (
             <div
@@ -95,8 +132,8 @@ function IsoStructure({ placed }: { placed: number }) {
                   className="absolute inset-0"
                   style={{
                     transform: f.transform,
-                    background: f.bg,
-                    boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.35)",
+                    background: palette[f.shade],
+                    boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.28)",
                   }}
                 />
               ))}
@@ -180,8 +217,7 @@ export function BuildSequence({ locale = "ru" }: { locale?: Locale }) {
     return () => clearTimeout(id);
   }, [inView, autoPlaced]);
 
-  const stageOf = (placed: number) =>
-    placed <= 0 ? 0 : BLOCKS[Math.min(placed, TOTAL) - 1].stage;
+  const stageOf = (placed: number) => (placed <= 0 ? 0 : BLOCKS[Math.min(placed, TOTAL) - 1].stage);
 
   const header = (
     <div className="mb-10 max-w-lg">
@@ -201,9 +237,10 @@ export function BuildSequence({ locale = "ru" }: { locale?: Locale }) {
               <StepList steps={t.steps} activeStage={stageOf(scrollPlaced)} />
             </div>
             <div className="relative">
-              <IsoStructure placed={scrollPlaced} />
+              <IsoIsland placed={scrollPlaced} />
               <div className="mt-2 text-center font-mono text-xs text-text-dim">
-                {String(Math.min(stageOf(scrollPlaced) + 1, t.steps.length)).padStart(2, "0")} / {String(t.steps.length).padStart(2, "0")}
+                {String(Math.min(stageOf(scrollPlaced) + 1, t.steps.length)).padStart(2, "0")} /{" "}
+                {String(t.steps.length).padStart(2, "0")}
               </div>
             </div>
           </div>
@@ -214,7 +251,7 @@ export function BuildSequence({ locale = "ru" }: { locale?: Locale }) {
       <div ref={mobileRef} className="px-6 py-24 md:hidden">
         <div className="mx-auto max-w-5xl">
           {header}
-          <IsoStructure placed={autoPlaced} />
+          <IsoIsland placed={autoPlaced} />
           <div className="mt-8">
             <StepList steps={t.steps} activeStage={stageOf(autoPlaced)} />
           </div>
