@@ -3,6 +3,9 @@ import type { Locale } from "@/lib/i18n";
 // Футер нового дизайна. Отдельно от FOOTER_COPY: тот используют 18 страниц
 // старого сайта, правка там поехала бы по всему живому сайту.
 //
+// Ссылки здесь не дублируются — футер берёт их из NAV_V2, чтобы меню в шапке
+// и в подвале не разъехались со временем.
+//
 // Реквизиты — публичные данные продавца, их обязательно показывать при приёме
 // платежей. Ссылки на политику и условия ведут на страницы, которых пока нет.
 
@@ -10,8 +13,8 @@ export type FooterLink = { href: string; label: string };
 
 export type FooterV2Copy = {
   description: string;
+  servicesTitle: string;
   navTitle: string;
-  navLinks: FooterLink[];
   ctaTitle: string;
   ctaText: string;
   ctaLabel: string;
@@ -30,17 +33,10 @@ export const FOOTER_V2: Record<Locale, FooterV2Copy> = {
   ru: {
     description:
       "Профессиональная разработка для майнкрафт-серверов. Плагины, сборки, настройка и консультации.",
+    servicesTitle: "Услуги",
     navTitle: "Навигация",
-    navLinks: [
-      { href: "/home", label: "Главная" },
-      { href: "/home/shop", label: "Магазин" },
-      { href: "/home/jobs", label: "Вакансии" },
-      { href: "/home/plans", label: "Планы" },
-      { href: "/home#portfolio", label: "Портфолио" },
-      { href: "/blog", label: "Блог" },
-    ],
     ctaTitle: "Готовы начать?",
-    ctaText: "Свяжитесь с нами — поможем реализовать ваш проект.",
+    ctaText: "Опишите задачу — обсудим идею, посчитаем стоимость и сроки.",
     ctaLabel: "Сделать заказ",
     legalName: LEGAL_NAME,
     legalId: LEGAL_ID,
@@ -56,17 +52,10 @@ export const FOOTER_V2: Record<Locale, FooterV2Copy> = {
   en: {
     description:
       "Professional development for Minecraft servers. Plugins, server builds, setup and consulting.",
+    servicesTitle: "Services",
     navTitle: "Navigation",
-    navLinks: [
-      { href: "/home", label: "Home" },
-      { href: "/home/shop", label: "Shop" },
-      { href: "/home/jobs", label: "Jobs" },
-      { href: "/home/plans", label: "Plans" },
-      { href: "/home#portfolio", label: "Portfolio" },
-      { href: "/en/blog", label: "Blog" },
-    ],
     ctaTitle: "Ready to start?",
-    ctaText: "Get in touch — we will help you build your project.",
+    ctaText: "Tell us what you need — we will work out the scope, cost and timeline.",
     ctaLabel: "Get a quote",
     legalName: LEGAL_NAME,
     legalId: LEGAL_ID,
@@ -82,17 +71,10 @@ export const FOOTER_V2: Record<Locale, FooterV2Copy> = {
   uk: {
     description:
       "Професійна розробка для майнкрафт-серверів. Плагіни, збірки, налаштування та консультації.",
+    servicesTitle: "Послуги",
     navTitle: "Навігація",
-    navLinks: [
-      { href: "/home", label: "Головна" },
-      { href: "/home/shop", label: "Магазин" },
-      { href: "/home/jobs", label: "Вакансії" },
-      { href: "/home/plans", label: "Плани" },
-      { href: "/home#portfolio", label: "Портфоліо" },
-      { href: "/uk/blog", label: "Блог" },
-    ],
     ctaTitle: "Готові почати?",
-    ctaText: "Зв'яжіться з нами — допоможемо реалізувати ваш проєкт.",
+    ctaText: "Опишіть задачу — обговоримо ідею, порахуємо вартість і терміни.",
     ctaLabel: "Залишити заявку",
     legalName: LEGAL_NAME,
     legalId: LEGAL_ID,
