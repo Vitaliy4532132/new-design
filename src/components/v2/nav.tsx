@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, LogOut, Menu, Shield, User, X } from "lucide-react";
+import { ChevronDown, LogOut, Menu, Package, Shield, User, Wallet, X } from "lucide-react";
 import { LocaleSwitcher } from "@/components/locale-switcher";
+import { DEMO_USER } from "@/lib/profile-demo";
 import { NAV_V2 } from "@/lib/nav-v2";
 import type { Locale } from "@/lib/i18n";
 import { BASE_PATH } from "@/lib/base-path";
@@ -79,30 +80,28 @@ export function Nav({ locale = "ru" }: { locale?: Locale }) {
 
   const signedIn = auth !== "guest";
 
+  function closeMenus() {
+    setUserOpen(false);
+    setMobileOpen(false);
+  }
+
+  const ITEM = "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors";
+
   const userMenu = (
     <>
-      <Link
-        href="/home/profile"
-        onClick={() => {
-          setUserOpen(false);
-          setMobileOpen(false);
-        }}
-        className="flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm text-text-muted transition-colors hover:bg-white/5 hover:text-white"
-      >
-        <User size={15} />
+      <Link href="/home/profile" onClick={closeMenus} className={`${ITEM} text-text-muted hover:bg-white/5 hover:text-white`}>
+        <User size={15} className="text-text-dim" />
         {t.profileLabel}
       </Link>
 
+      <Link href="/home/profile" onClick={closeMenus} className={`${ITEM} text-text-muted hover:bg-white/5 hover:text-white`}>
+        <Package size={15} className="text-text-dim" />
+        Покупки
+      </Link>
+
       {auth === "admin" && (
-        <Link
-          href="/home/admin"
-          onClick={() => {
-            setUserOpen(false);
-            setMobileOpen(false);
-          }}
-          className="flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm text-text-muted transition-colors hover:bg-white/5 hover:text-white"
-        >
-          <Shield size={15} />
+        <Link href="/home/admin" onClick={closeMenus} className={`${ITEM} text-text-muted hover:bg-white/5 hover:text-white`}>
+          <Shield size={15} className="text-accent" />
           {t.adminLabel}
         </Link>
       )}
@@ -111,10 +110,11 @@ export function Nav({ locale = "ru" }: { locale?: Locale }) {
         type="button"
         onClick={() => {
           setAuth("guest");
-          setUserOpen(false);
-          setMobileOpen(false);
+          closeMenus();
         }}
-        className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-sm text-text-muted transition-colors hover:bg-white/5 hover:text-white"
+        // Выход отделён и краснеет на наведении: действие заметно отличается
+        // от остальных пунктов, промахнуться по нему не должно быть легко.
+        className={`${ITEM} w-full text-left text-text-muted hover:bg-red-500/10 hover:text-red-400`}
       >
         <LogOut size={15} />
         {t.logoutLabel}
@@ -205,14 +205,52 @@ export function Nav({ locale = "ru" }: { locale?: Locale }) {
                   onClick={() => setUserOpen((v) => !v)}
                   aria-expanded={userOpen}
                   aria-label={t.profileLabel}
-                  className="flex size-10 items-center justify-center rounded-full bg-[linear-gradient(180deg,#0A3FFF_0%,#1797FF_100%)] font-sans text-sm font-bold text-white"
+                  className={`flex items-center gap-1.5 rounded-full p-0.5 pr-2 ring-1 transition-colors ${
+                    userOpen ? "bg-white/5 ring-accent/50" : "ring-white/10 hover:bg-white/5 hover:ring-white/25"
+                  }`}
                 >
-                  И
+                  <span className="relative flex size-9 items-center justify-center rounded-full bg-[linear-gradient(180deg,#0A3FFF_0%,#1797FF_100%)] font-sans text-sm font-bold text-white">
+                    {DEMO_USER.name.charAt(0)}
+                    {/* Точка статуса: маленькая деталь, по которой аватар
+                        читается как «вы вошли», а не просто как картинка. */}
+                    <span className="absolute right-0 bottom-0 size-2.5 rounded-full bg-green-400 ring-2 ring-background" />
+                  </span>
+                  <ChevronDown
+                    size={14}
+                    className={`text-text-dim transition-transform duration-200 ${userOpen ? "rotate-180" : ""}`}
+                  />
                 </button>
 
                 {userOpen && (
-                  <div className="absolute top-full right-0 mt-2 flex w-52 flex-col gap-1 rounded-2xl border border-white/10 bg-surface p-2 shadow-[0_16px_30px_rgba(0,0,0,0.5)]">
-                    {userMenu}
+                  <div className="absolute top-full right-0 mt-3 w-64 origin-top-right animate-menu-in overflow-hidden rounded-2xl border border-white/10 bg-surface shadow-[0_24px_50px_rgba(0,0,0,0.55)]">
+                    {/* Кто вошёл */}
+                    <div className="flex items-center gap-3 border-b border-white/10 bg-white/[0.03] px-4 py-4">
+                      <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(180deg,#0A3FFF_0%,#1797FF_100%)] font-sans text-sm font-bold text-white">
+                        {DEMO_USER.name.charAt(0)}
+                      </span>
+                      <div className="min-w-0">
+                        <div className="truncate text-sm font-medium">{DEMO_USER.name}</div>
+                        <div className="truncate font-mono text-[11px] text-text-dim">@{DEMO_USER.username}</div>
+                      </div>
+                      {auth === "admin" && (
+                        <span className="ml-auto shrink-0 rounded-md border border-accent/40 px-2 py-0.5 font-mono text-[10px] tracking-wide text-accent uppercase">
+                          админ
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Баланс на виду: чаще всего в меню заходят из-за него */}
+                    <Link
+                      href="/home/profile"
+                      onClick={closeMenus}
+                      className="flex items-center gap-3 border-b border-white/10 px-4 py-3.5 transition-colors hover:bg-white/5"
+                    >
+                      <Wallet size={15} className="text-accent" />
+                      <span className="text-sm text-text-muted">Баланс</span>
+                      <span className="ml-auto font-display text-base font-medium">{DEMO_USER.balance}</span>
+                    </Link>
+
+                    <div className="flex flex-col gap-0.5 p-2">{userMenu}</div>
                   </div>
                 )}
               </div>
