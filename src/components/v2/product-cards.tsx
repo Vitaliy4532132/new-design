@@ -104,11 +104,11 @@ function BuyButton({ label }: { label: string }) {
 
 function Body({ p, bordered = true }: { p: CardProduct; bordered?: boolean }) {
   return (
-    <div className="flex flex-1 flex-col p-5">
+    <div className="flex flex-1 flex-col p-5 sm:p-6">
       <div className="mb-2">
         <TypeLabel p={p} />
       </div>
-      <h3 className="mb-2 font-display text-lg font-medium">{p.title}</h3>
+      <h3 className="mb-2 font-display text-lg font-medium sm:text-xl">{p.title}</h3>
       <p className="mb-5 flex-1 text-sm leading-relaxed text-text-muted">{p.description}</p>
       <div className={`flex items-center justify-between ${bordered ? "border-t border-white/10 pt-4" : ""}`}>
         <span className="font-display text-lg font-medium">{p.price}</span>
@@ -122,12 +122,12 @@ function Body({ p, bordered = true }: { p: CardProduct; bordered?: boolean }) {
 export function CardCover({ p }: { p: CardProduct }) {
   return (
     <CardShell href={p.href} className={SHELL}>
-      <div className="relative aspect-[16/10] overflow-hidden">
+      <div className="relative aspect-[3/2] overflow-hidden">
         <Image
           src={`${BASE_PATH}${p.image}`}
           alt={p.alt}
           fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          sizes="(min-width: 640px) 50vw, 100vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
@@ -268,12 +268,15 @@ export function CardBlocks({ p }: { p: CardProduct }) {
 
   return (
     <CardShell href={p.href} className={SHELL}>
-      <div ref={ref} className="relative aspect-[16/10] overflow-hidden">
+      {/* Карточка теперь идёт по две в ряд, поэтому и пропорция выше,
+          и sizes честно говорит про половину экрана — иначе браузер грузил бы
+          файл под треть ширины и на крупной обложке он был бы мыльным. */}
+      <div ref={ref} className="relative aspect-[3/2] overflow-hidden">
         <Image
           src={`${BASE_PATH}${p.image}`}
           alt={p.alt}
           fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          sizes="(min-width: 640px) 50vw, 100vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         {p.support && <SupportBadge support={p.support} />}
