@@ -66,6 +66,60 @@ body {
   color: var(--text);
 }
 
+/* Системная полоса прокрутки светлая и на тёмном фоне режет глаз.
+   scrollbar-* понимают Firefox и свежий Chrome, ::-webkit-scrollbar —
+   остальные webkit-браузеры. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-light) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f48;
+  background-clip: content-box;
+}
+
+/* Автозаполнение Chrome заливает поле белым и перекрашивает текст.
+   Убрать фон напрямую нельзя, поэтому подменяем его внутренней тенью. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill {
+  -webkit-text-fill-color: var(--text);
+  -webkit-box-shadow: 0 0 0 1000px var(--surface) inset;
+  caret-color: var(--text);
+  /* Задержка на срок, до которого дело не дойдёт: иначе Chrome возвращает
+     свой фон анимацией сразу после подстановки. */
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Стрелки у числового поля рисуются системой и в тёмную форму не вписываются */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: textfield;
+}
+
 @keyframes blob1 {
   0%,
   100% {
