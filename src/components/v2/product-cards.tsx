@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingBag } from "lucide-react";
+import { Headset, Package, ShoppingBag } from "lucide-react";
 import { useInView } from "@/hooks/use-in-view";
 import { IsoCube } from "@/components/v2/iso-cube";
 import { BASE_PATH } from "@/lib/base-path";
@@ -19,6 +19,8 @@ export type CardProduct = {
   alt: string;
   /** Внутренний путь открывается через Link, внешний — в новой вкладке. */
   href: string;
+  /** Показывает на карточке, идёт ли с товаром поддержка. */
+  support?: { included: boolean; note: string };
 };
 
 const KIND_COLOR: Record<"plugin" | "build", string> = {
@@ -58,6 +60,35 @@ function TypeLabel({ p }: { p: CardProduct }) {
   return (
     <div className="font-mono text-[10px] tracking-widest uppercase" style={{ color: KIND_COLOR[p.kind] }}>
       {p.typeLabel}
+    </div>
+  );
+}
+
+// Бейдж поверх обложки: сразу видно, идёт ли с товаром поддержка.
+// Подробности всплывают по наведению — на тач-экране ховера нет, поэтому
+// то же самое повторено текстом на самой странице товара.
+function SupportBadge({ support }: { support: { included: boolean; note: string } }) {
+  return (
+    <div className="group/badge absolute top-3 right-3 z-10">
+      <span
+        className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[10px] tracking-wide uppercase backdrop-blur-sm ${
+          support.included
+            ? "bg-green-400/15 text-green-300 ring-1 ring-green-400/40"
+            : "bg-black/50 text-text-dim ring-1 ring-white/15"
+        }`}
+      >
+        {support.included ? <Headset size={11} /> : <Package size={11} />}
+        {support.included ? "с поддержкой" : "без поддержки"}
+      </span>
+
+      <div className="pointer-events-none absolute top-full right-0 z-20 mt-2 hidden w-44 opacity-0 transition-opacity duration-150 group-hover/badge:opacity-100 md:block">
+        <div
+          className="rounded-[2px] bg-[#100010]/95 px-3 py-2"
+          style={{ boxShadow: "0 0 0 1px #4B2A9E, 0 0 0 3px #16062E" }}
+        >
+          <span className="font-mono text-[11px] leading-relaxed text-white">{support.note}</span>
+        </div>
+      </div>
     </div>
   );
 }
@@ -245,6 +276,7 @@ export function CardBlocks({ p }: { p: CardProduct }) {
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
+        {p.support && <SupportBadge support={p.support} />}
         <div
           className="pointer-events-none absolute inset-0 grid"
           style={{ gridTemplateColumns: `repeat(${COLS},1fr)`, gridTemplateRows: `repeat(${ROWS},1fr)` }}

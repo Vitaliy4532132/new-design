@@ -6,6 +6,8 @@ import { ChevronRight, ShoppingBag } from "lucide-react";
 import { buildMetadata } from "@/lib/seo";
 import { Nav } from "@/components/v2/nav";
 import { ProductDetailView } from "@/components/v2/product-detail";
+import { ProductAbout, ProductDependencies } from "@/components/v2/product-info";
+import { ProductChangelog } from "@/components/v2/product-changelog";
 import { ProductReviews } from "@/components/v2/product-reviews";
 import { Cta } from "@/components/v2/cta";
 import { Footer } from "@/components/v2/footer";
@@ -64,6 +66,8 @@ export default async function ProductDraftPage({ params }: { params: Promise<{ s
         reviewCount={reviewCount}
       />
 
+      <ProductAbout paragraphs={detail.about} />
+
       {/* Характеристики */}
       <section className="border-t border-white/10 px-5 py-20 sm:px-6">
         <div className="mx-auto max-w-5xl">
@@ -85,6 +89,10 @@ export default async function ProductDraftPage({ params }: { params: Promise<{ s
           </div>
         </div>
       </section>
+
+      <ProductDependencies dependencies={detail.dependencies} support={detail.support} />
+
+      <ProductChangelog entries={detail.changelog} />
 
       <ProductReviews authors={detail.reviewAuthors} locale={LOCALE} />
 

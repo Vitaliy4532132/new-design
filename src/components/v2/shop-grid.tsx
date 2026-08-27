@@ -116,6 +116,7 @@ export function ShopGrid({ locale = "ru" }: { locale?: Locale }) {
                     image: PRODUCT_DETAILS[p.slug].images[0],
                     alt: p.title,
                     href: `/home/shop/${p.slug}`,
+                    support: PRODUCT_DETAILS[p.slug].support,
                   };
                   return <CardBlocks key={p.slug} p={card} />;
                 })}
