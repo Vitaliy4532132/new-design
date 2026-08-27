@@ -27,11 +27,12 @@ import {
   REVIEW_STATUS,
 } from "@/lib/profile-demo";
 
-type TabId = "orders" | "purchases" | "balance" | "reviews" | "settings";
+type TabId = "orders" | "purchases" | "licenses" | "balance" | "reviews" | "settings";
 
 const TABS: { id: TabId; label: string; icon: React.ElementType }[] = [
   { id: "orders", label: "Заказы", icon: ShoppingBag },
   { id: "purchases", label: "Покупки", icon: Package },
+  { id: "licenses", label: "Лицензии", icon: KeyRound },
   { id: "balance", label: "Баланс", icon: Wallet },
   { id: "reviews", label: "Отзывы", icon: MessageSquare },
   { id: "settings", label: "Настройки", icon: Settings },
@@ -256,6 +257,64 @@ export function ProfileView() {
                     </div>
                   </Link>
                 ))}
+              </div>
+            )}
+
+            {tab === "licenses" && (
+              <div className="flex flex-col gap-4">
+                {DEMO_PURCHASES.map((p) => {
+                  const used = p.license.servers.length;
+                  const active = p.license.status === "active";
+
+                  return (
+                    <div key={p.slug} className={`${CARD} p-6`}>
+                      <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                          <h3 className="mb-1 font-display text-lg font-medium">{p.title}</h3>
+                          <div className="font-mono text-[11px] text-text-dim">
+                            выдана {formatDate(p.license.issued)}
+                          </div>
+                        </div>
+                        <Badge
+                          label={active ? "активна" : "заблокирована"}
+                          className={active ? "border-green-400/40 text-green-400" : "border-red-500/40 text-red-400"}
+                        />
+                      </div>
+
+                      <div className="mb-4 flex flex-wrap items-center gap-3 rounded-2xl border border-white/10 bg-background/60 px-4 py-3">
+                        <KeyRound size={15} className="shrink-0 text-accent" />
+                        {/* Полный ключ показывается только на странице покупки */}
+                        <code className="min-w-0 font-mono text-xs break-all text-text-muted">
+                          {p.license.key.slice(0, 4)}-••••-••••-••••
+                        </code>
+                        <span className="ml-auto shrink-0 font-mono text-[11px] text-text-dim">
+                          {used} из {p.license.maxActivations} серверов
+                        </span>
+                      </div>
+
+                      {used > 0 && (
+                        <div className="mb-4 flex flex-wrap gap-2">
+                          {p.license.servers.map((s) => (
+                            <span
+                              key={s.ip}
+                              className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[11px] text-text-muted"
+                            >
+                              {s.ip}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                      <Link
+                        href={`/home/profile/purchases/${p.slug}`}
+                        className="group flex w-fit items-center gap-1.5 text-sm font-medium text-accent"
+                      >
+                        Управлять ключом
+                        <ChevronRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+                      </Link>
+                    </div>
+                  );
+                })}
               </div>
             )}
 
