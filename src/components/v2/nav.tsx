@@ -150,7 +150,7 @@ export function Nav({ locale = "ru" }: { locale?: Locale }) {
         </Link>
 
         {/* Меню */}
-        <div className="hidden items-center gap-7 text-sm font-medium text-text-muted lg:flex">
+        <div className="hidden items-center gap-5 text-sm font-medium text-text-muted lg:flex xl:gap-7">
           <div className="group relative">
             <button className="flex items-center gap-1 py-2 transition-colors group-hover:text-white">
               {t.servicesLabel}

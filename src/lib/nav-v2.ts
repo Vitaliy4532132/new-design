@@ -34,6 +34,7 @@ export const NAV_V2: Record<Locale, NavV2Copy> = {
     ],
     links: [
       { href: "/home/shop", label: "Магазин" },
+      { href: "/home/plans", label: "Планы" },
       { href: "/home/jobs", label: "Вакансии" },
       { href: "/home#portfolio", label: "Портфолио" },
       { href: "/blog", label: "Блог" },
@@ -57,6 +58,7 @@ export const NAV_V2: Record<Locale, NavV2Copy> = {
     ],
     links: [
       { href: "/home/shop", label: "Shop" },
+      { href: "/home/plans", label: "Plans" },
       { href: "/home/jobs", label: "Jobs" },
       { href: "/home#portfolio", label: "Portfolio" },
       { href: "/en/blog", label: "Blog" },
@@ -80,6 +82,7 @@ export const NAV_V2: Record<Locale, NavV2Copy> = {
     ],
     links: [
       { href: "/home/shop", label: "Магазин" },
+      { href: "/home/plans", label: "Плани" },
       { href: "/home/jobs", label: "Вакансії" },
       { href: "/home#portfolio", label: "Портфоліо" },
       { href: "/uk/blog", label: "Блог" },
