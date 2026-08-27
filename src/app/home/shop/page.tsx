@@ -3,10 +3,13 @@ import { buildMetadata } from "@/lib/seo";
 import { Nav } from "@/components/v2/nav";
 import { PageHero } from "@/components/v2/page-hero";
 import { ShopGrid } from "@/components/v2/shop-grid";
+import { FaqAccordion } from "@/components/faq-accordion";
+import { FaqJsonLd } from "@/components/faq-jsonld";
 import { Cta } from "@/components/v2/cta";
 import { Footer } from "@/components/v2/footer";
 import { SHOP_PAGE } from "@/lib/page-copy";
 import { HOME_COPY } from "@/lib/home-copy";
+import { HOME_FAQ } from "@/lib/faq-data";
 
 const LOCALE = "ru" as const;
 
@@ -28,6 +31,7 @@ export default function ShopDraftPage() {
 
   return (
     <main>
+      <FaqJsonLd items={HOME_FAQ} />
       <Nav locale={LOCALE} />
       <PageHero
         eyebrow={t.eyebrow}
@@ -43,6 +47,7 @@ export default function ShopDraftPage() {
         ]}
       />
       <ShopGrid locale={LOCALE} />
+      <FaqAccordion items={HOME_FAQ} eyebrow="faq" title={t.faqTitle} />
       <Cta locale={LOCALE} />
       <Footer locale={LOCALE} />
     </main>

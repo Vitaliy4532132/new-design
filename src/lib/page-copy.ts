@@ -10,6 +10,10 @@ export type ShopPageCopy = {
   allLabel: string;
   note: string;
   emptyLabel: string;
+  tabProducts: string;
+  tabServices: string;
+  servicesNote: string;
+  faqTitle: string;
 };
 
 export const SHOP_PAGE: Record<Locale, ShopPageCopy> = {
@@ -21,6 +25,10 @@ export const SHOP_PAGE: Record<Locale, ShopPageCopy> = {
     allLabel: "Все",
     note: "Нужно что-то под свою задачу? Плагины и сборки делаем на заказ — напишите, обсудим.",
     emptyLabel: "В этой категории пока пусто.",
+    tabProducts: "Готовые товары",
+    tabServices: "Услуги на заказ",
+    servicesNote: "Берёмся и за то, чего нет в списке: ресурс-паки, GUI-меню, сервера на Forge и Fabric.",
+    faqTitle: "Частые вопросы.",
   },
   en: {
     eyebrow: "shop",
@@ -30,6 +38,10 @@ export const SHOP_PAGE: Record<Locale, ShopPageCopy> = {
     allLabel: "All",
     note: "Need something built for your own case? We make custom plugins and packs — just message us.",
     emptyLabel: "Nothing in this category yet.",
+    tabProducts: "Ready-made",
+    tabServices: "Custom work",
+    servicesNote: "We also take on what is not listed here: resource packs, GUI menus, Forge and Fabric servers.",
+    faqTitle: "Frequently asked questions.",
   },
   uk: {
     eyebrow: "магазин",
@@ -39,5 +51,9 @@ export const SHOP_PAGE: Record<Locale, ShopPageCopy> = {
     allLabel: "Всі",
     note: "Потрібно щось під свою задачу? Плагіни та збірки робимо на замовлення — напишіть, обговоримо.",
     emptyLabel: "У цій категорії поки порожньо.",
+    tabProducts: "Готові товари",
+    tabServices: "Послуги на замовлення",
+    servicesNote: "Беремося і за те, чого немає у списку: ресурс-паки, GUI-меню, сервери на Forge і Fabric.",
+    faqTitle: "Часті питання.",
   },
 };
