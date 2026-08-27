@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useScroll, useMotionValueEvent } from "framer-motion";
-import { useInView } from "@/hooks/use-in-view";
 import { HOME_COPY } from "@/lib/home-copy";
 import type { Locale } from "@/lib/i18n";
 
@@ -76,6 +75,14 @@ function buildIsland(): Block[] {
 
 const BLOCKS = buildIsland();
 const TOTAL = BLOCKS.length;
+
+// У скрытой ветки (display:none) высота нулевая и прогресс приходит NaN.
+// Без проверки сравнение prev === n всегда ложно и состояние дёргалось бы
+// на каждом событии скролла впустую.
+function placedFrom(progress: number) {
+  if (!Number.isFinite(progress)) return 0;
+  return Math.round(Math.min(Math.max(progress, 0), 1) * TOTAL);
+}
 
 // Пять видимых граней: верх и четыре бока. Низ не рисуем — при взгляде
 // сверху в изометрии он не виден ни у одного блока.
@@ -278,19 +285,24 @@ export function BuildSequence({ locale = "ru" }: { locale?: Locale }) {
   const [scrollPlaced, setScrollPlaced] = useState(0);
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const n = Math.round(Math.min(Math.max(v, 0), 1) * TOTAL);
+    const n = placedFrom(v);
     setScrollPlaced((prev) => (prev === n ? prev : n));
   });
 
-  // Мобильный: без перехвата скролла — собираем по таймеру, когда блок виден.
-  const { ref: mobileRef, inView } = useInView<HTMLDivElement>(0.25);
+  // Мобильный: тоже по скроллу, но без залипания. Секция прокручивается как
+  // обычная, а остров собирается, пока она въезжает в экран, и разбирается
+  // обратно при скролле вверх.
+  const mobileRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: mobileProgress } = useScroll({
+    target: mobileRef,
+    offset: ["start end", "center center"],
+  });
   const [autoPlaced, setAutoPlaced] = useState(0);
 
-  useEffect(() => {
-    if (!inView || autoPlaced >= TOTAL) return;
-    const id = setTimeout(() => setAutoPlaced((n) => n + 1), autoPlaced === 0 ? 250 : 45);
-    return () => clearTimeout(id);
-  }, [inView, autoPlaced]);
+  useMotionValueEvent(mobileProgress, "change", (v) => {
+    const n = placedFrom(v);
+    setAutoPlaced((prev) => (prev === n ? prev : n));
+  });
 
   const stageOf = (placed: number) => (placed <= 0 ? 0 : BLOCKS[Math.min(placed, TOTAL) - 1].stage);
 

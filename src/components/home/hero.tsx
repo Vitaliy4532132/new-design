@@ -88,8 +88,10 @@ export function HomeHero({ locale = "ru" }: { locale?: Locale }) {
         ))}
       </div>
 
-      <div className="relative z-[2] px-6">
-        <h1 className="max-w-4xl font-display text-[32px] leading-[1.08] font-normal min-[420px]:text-[40px] sm:text-6xl sm:leading-[1.04] lg:text-[76px]">
+      <div className="relative z-[2] mx-auto w-full max-w-4xl px-5 sm:px-6">
+        {/* break-words обязателен: «майнкрафт-сервер» в Unbounded шире узкого
+            экрана и без переноса срезался бы об overflow-hidden секции. */}
+        <h1 className="mx-auto font-display text-[28px] leading-[1.12] font-normal break-words min-[380px]:text-[32px] min-[480px]:text-[40px] sm:text-6xl sm:leading-[1.04] lg:text-[76px]">
           {t.before}
           <span
             className="animate-gradient-text bg-[linear-gradient(135deg,#0A3FFF,#1797FF,#5db4ff,#1797FF,#0A3FFF)] bg-[length:200%_auto] bg-clip-text font-medium text-transparent"
@@ -100,8 +102,8 @@ export function HomeHero({ locale = "ru" }: { locale?: Locale }) {
           {t.after}
         </h1>
 
-        <div className="mt-5 flex min-h-[3.5rem] items-center justify-center px-4">
-          <p className="max-w-xl text-sm text-text-muted sm:text-base">
+        <div className="mt-5 flex min-h-[4.5rem] items-center justify-center sm:min-h-[3.5rem]">
+          <p className="mx-auto max-w-xl text-sm text-text-muted sm:text-base">
             {typed}
             <span className="ml-0.5 inline-block h-[1em] w-[2px] translate-y-[2px] animate-caret-blink bg-accent align-middle" />
           </p>
