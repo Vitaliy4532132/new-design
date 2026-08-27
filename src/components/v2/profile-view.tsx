@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import {
-  Copy,
+  ChevronRight,
   KeyRound,
   MessageSquare,
   Package,
@@ -226,7 +227,11 @@ export function ProfileView() {
             {tab === "purchases" && (
               <div className="flex flex-col gap-4">
                 {DEMO_PURCHASES.map((p) => (
-                  <div key={p.slug} className={`${CARD} p-6`}>
+                  <Link
+                    key={p.slug}
+                    href={`/home/profile/purchases/${p.slug}`}
+                    className={`${CARD} group p-6 transition-colors hover:border-accent/40`}
+                  >
                     <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
                       <div>
                         <h3 className="mb-1 font-display text-lg font-medium">{p.title}</h3>
@@ -239,16 +244,16 @@ export function ProfileView() {
 
                     <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-white/10 bg-background/60 px-4 py-3">
                       <KeyRound size={15} className="shrink-0 text-accent" />
-                      <code className="min-w-0 font-mono text-xs break-all text-text-muted">{p.licenseKey}</code>
-                      <button
-                        type="button"
-                        className="ml-auto flex shrink-0 items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:border-white/25"
-                      >
-                        <Copy size={12} />
-                        Копировать
-                      </button>
+                      {/* Ключ здесь скрыт: полный показывается на странице покупки */}
+                      <code className="min-w-0 font-mono text-xs break-all text-text-muted">
+                        {p.licenseKey.slice(0, 4)}-••••-••••-••••
+                      </code>
+                      <span className="ml-auto flex shrink-0 items-center gap-1.5 text-xs font-medium text-accent">
+                        Открыть
+                        <ChevronRight size={13} className="transition-transform group-hover:translate-x-0.5" />
+                      </span>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             )}

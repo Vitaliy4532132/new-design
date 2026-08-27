@@ -33,6 +33,24 @@ export type DemoOrder = {
   log: { date: string; text: string }[];
 };
 
+export type DemoDownload = {
+  version: string;
+  date: string;
+  size: string;
+  /** Свежая версия помечается и стоит первой. */
+  latest: boolean;
+};
+
+export type DemoLicense = {
+  key: string;
+  status: "active" | "blocked";
+  /** Привязка к машине. null — ещё ни разу не активирован. */
+  hwid: string | null;
+  activations: number;
+  maxActivations: number;
+  issued: string;
+};
+
 export type DemoPurchase = {
   slug: string;
   title: string;
@@ -40,6 +58,10 @@ export type DemoPurchase = {
   price: string;
   version: string;
   licenseKey: string;
+  license: DemoLicense;
+  downloads: DemoDownload[];
+  /** id отзыва из DEMO_REVIEWS, если покупатель уже его оставил. */
+  reviewId?: string;
 };
 
 export type DemoTransaction = {
@@ -112,6 +134,20 @@ export const DEMO_PURCHASES: DemoPurchase[] = [
     price: "299₽",
     version: "2.1.0",
     licenseKey: "FCHT-0000-0000-0000",
+    license: {
+      key: "FCHT-0000-0000-0000",
+      status: "active",
+      hwid: "0000000000000000",
+      activations: 1,
+      maxActivations: 3,
+      issued: "2026-07-02",
+    },
+    downloads: [
+      { version: "2.1.0", date: "2026-07-08", size: "1.4 МБ", latest: true },
+      { version: "2.0.0", date: "2026-04-11", size: "1.2 МБ", latest: false },
+      { version: "1.0.0", date: "2025-12-05", size: "0.9 МБ", latest: false },
+    ],
+    reviewId: "r3",
   },
   {
     slug: "furrynick",
@@ -120,6 +156,19 @@ export const DEMO_PURCHASES: DemoPurchase[] = [
     price: "299₽",
     version: "1.2.0",
     licenseKey: "FNCK-0000-0000-0000",
+    license: {
+      key: "FNCK-0000-0000-0000",
+      status: "active",
+      hwid: null,
+      activations: 0,
+      maxActivations: 3,
+      issued: "2026-05-19",
+    },
+    downloads: [
+      { version: "1.2.0", date: "2026-06-14", size: "0.6 МБ", latest: true },
+      { version: "1.1.0", date: "2026-03-02", size: "0.5 МБ", latest: false },
+      { version: "1.0.0", date: "2026-01-20", size: "0.4 МБ", latest: false },
+    ],
   },
 ];
 
