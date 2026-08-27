@@ -9,7 +9,7 @@ import { LocaleSwitcher } from "@/components/locale-switcher";
 import { BASE_PATH } from "@/lib/base-path";
 import { TELEGRAM_URL } from "@/lib/links";
 
-export function HomeNav({ locale = "ru" }: { locale?: Locale }) {
+export function Nav({ locale = "ru" }: { locale?: Locale }) {
   const { homeHref, servicesLabel, servicesHref, serviceLinks, navLinks, ctaLabel } = NAV_COPY[locale];
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);

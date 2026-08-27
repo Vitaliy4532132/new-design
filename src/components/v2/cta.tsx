@@ -4,7 +4,7 @@ import { HOME_COPY } from "@/lib/home-copy";
 import { BASE_PATH } from "@/lib/base-path";
 import type { Locale } from "@/lib/i18n";
 
-export function HomeCta({ locale = "ru" }: { locale?: Locale }) {
+export function Cta({ locale = "ru" }: { locale?: Locale }) {
   const t = HOME_COPY[locale].cta;
 
   return (

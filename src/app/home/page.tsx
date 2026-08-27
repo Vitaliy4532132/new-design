@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
-import { HomeNav } from "@/components/home/nav";
-import { HomeHero } from "@/components/home/hero";
-import { BuildSequence } from "@/components/home/build-sequence";
-import { ServerConsole } from "@/components/home/server-console";
-import { Manifesto } from "@/components/home/manifesto";
-import { BlockPortfolio } from "@/components/home/block-portfolio";
-import { HomeCta } from "@/components/home/cta";
-import { HomeFooter } from "@/components/home/footer";
+import { Nav } from "@/components/v2/nav";
+import { HomeHero } from "@/components/v2/hero";
+import { BuildSequence } from "@/components/v2/build-sequence";
+import { ServerConsole } from "@/components/v2/server-console";
+import { Manifesto } from "@/components/v2/manifesto";
+import { BlockPortfolio } from "@/components/v2/block-portfolio";
+import { Cta } from "@/components/v2/cta";
+import { Footer } from "@/components/v2/footer";
 import { FaqJsonLd } from "@/components/faq-jsonld";
 import { OrganizationJsonLd } from "@/components/organization-jsonld";
 import { StatsBand } from "@/components/stats-band";
-import { CraftingTable } from "@/components/home/crafting";
+import { CraftingTable } from "@/components/v2/crafting";
 import { AboutSection } from "@/components/about-section";
 import { ServicesAccordion } from "@/components/services-accordion";
 import { ReviewsCarousel } from "@/components/reviews-carousel";
@@ -32,7 +32,7 @@ export default function HomeRedesignPage() {
     <main>
       <FaqJsonLd items={HOME_FAQ} />
       <OrganizationJsonLd locale="ru" />
-      <HomeNav />
+      <Nav />
       <HomeHero />
       <StatsBand />
       <CraftingTable />
@@ -44,8 +44,8 @@ export default function HomeRedesignPage() {
       <Manifesto />
       <ReviewsCarousel />
       <FaqAccordion items={HOME_FAQ} eyebrow="faq" title="Частые вопросы." />
-      <HomeCta />
-      <HomeFooter />
+      <Cta />
+      <Footer />
     </main>
   );
 }

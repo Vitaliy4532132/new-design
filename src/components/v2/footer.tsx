@@ -5,7 +5,7 @@ import { TELEGRAM_URL, DISCORD_URL, YOUTUBE_URL } from "@/lib/links";
 import { NAV_COPY, FOOTER_COPY, type Locale } from "@/lib/i18n";
 import { BASE_PATH } from "@/lib/base-path";
 
-export function HomeFooter({ locale = "ru" }: { locale?: Locale }) {
+export function Footer({ locale = "ru" }: { locale?: Locale }) {
   const { serviceLinks } = NAV_COPY[locale];
   const {
     description,
