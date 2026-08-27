@@ -110,11 +110,9 @@ export function ShopGrid({ locale = "ru" }: { locale?: Locale }) {
             ) : (
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {items.map((p) => (
-                  <a
+                  <Link
                     key={p.slug}
-                    href={`https://www.thefurry.store/shop/${p.slug}?utm_source=landing&utm_medium=cta`}
-                    target="_blank"
-                    rel="noopener"
+                    href={`/home/shop/${p.slug}`}
                     className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-surface p-6 transition-colors hover:border-accent/40"
                   >
                     <div>
@@ -140,7 +138,7 @@ export function ShopGrid({ locale = "ru" }: { locale?: Locale }) {
                         {products.buyLabel}
                       </span>
                     </div>
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
