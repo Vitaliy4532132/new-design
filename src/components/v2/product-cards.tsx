@@ -64,32 +64,21 @@ function TypeLabel({ p }: { p: CardProduct }) {
   );
 }
 
-// Бейдж поверх обложки: сразу видно, идёт ли с товаром поддержка.
-// Подробности всплывают по наведению — на тач-экране ховера нет, поэтому
-// то же самое повторено текстом на самой странице товара.
+// Бейдж поддержки живёт в теле карточки, а не поверх обложки: на картинке он
+// перекрывал кадр и требовал подложки, а здесь читается сам по себе.
 function SupportBadge({ support }: { support: { included: boolean; note: string } }) {
   return (
-    <div className="group/badge absolute top-3 right-3 z-10">
-      <span
-        className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[10px] tracking-wide uppercase backdrop-blur-sm ${
-          support.included
-            ? "bg-green-400/15 text-green-300 ring-1 ring-green-400/40"
-            : "bg-black/50 text-text-dim ring-1 ring-white/15"
-        }`}
-      >
-        {support.included ? <Headset size={11} /> : <Package size={11} />}
-        {support.included ? "с поддержкой" : "без поддержки"}
-      </span>
-
-      <div className="pointer-events-none absolute top-full right-0 z-20 mt-2 hidden w-44 opacity-0 transition-opacity duration-150 group-hover/badge:opacity-100 md:block">
-        <div
-          className="rounded-[2px] bg-[#100010]/95 px-3 py-2"
-          style={{ boxShadow: "0 0 0 1px #4B2A9E, 0 0 0 3px #16062E" }}
-        >
-          <span className="font-mono text-[11px] leading-relaxed text-white">{support.note}</span>
-        </div>
-      </div>
-    </div>
+    <span
+      title={support.note}
+      className={`inline-flex w-fit items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-[10px] tracking-wide uppercase ${
+        support.included
+          ? "border-green-400/30 bg-green-400/10 text-green-400"
+          : "border-white/10 bg-white/5 text-text-dim"
+      }`}
+    >
+      {support.included ? <Headset size={11} /> : <Package size={11} />}
+      {support.included ? "с поддержкой" : "без поддержки"}
+    </span>
   );
 }
 
@@ -104,12 +93,19 @@ function BuyButton({ label }: { label: string }) {
 
 function Body({ p, bordered = true }: { p: CardProduct; bordered?: boolean }) {
   return (
-    <div className="flex flex-1 flex-col p-5 sm:p-6">
+    <div className="flex flex-1 flex-col p-5">
       <div className="mb-2">
         <TypeLabel p={p} />
       </div>
-      <h3 className="mb-2 font-display text-lg font-medium sm:text-xl">{p.title}</h3>
-      <p className="mb-5 flex-1 text-sm leading-relaxed text-text-muted">{p.description}</p>
+      <h3 className="mb-2 font-display text-lg font-medium">{p.title}</h3>
+      <p className="mb-4 flex-1 text-sm leading-relaxed text-text-muted">{p.description}</p>
+
+      {p.support && (
+        <div className="mb-4">
+          <SupportBadge support={p.support} />
+        </div>
+      )}
+
       <div className={`flex items-center justify-between ${bordered ? "border-t border-white/10 pt-4" : ""}`}>
         <span className="font-display text-lg font-medium">{p.price}</span>
         <BuyButton label={p.buyLabel} />
@@ -122,7 +118,7 @@ function Body({ p, bordered = true }: { p: CardProduct; bordered?: boolean }) {
 export function CardCover({ p }: { p: CardProduct }) {
   return (
     <CardShell href={p.href} className={SHELL}>
-      <div className="relative aspect-[3/2] overflow-hidden">
+      <div className="relative aspect-[16/10] overflow-hidden">
         <Image
           src={`${BASE_PATH}${p.image}`}
           alt={p.alt}
@@ -271,7 +267,7 @@ export function CardBlocks({ p }: { p: CardProduct }) {
       {/* Карточка теперь идёт по две в ряд, поэтому и пропорция выше,
           и sizes честно говорит про половину экрана — иначе браузер грузил бы
           файл под треть ширины и на крупной обложке он был бы мыльным. */}
-      <div ref={ref} className="relative aspect-[3/2] overflow-hidden">
+      <div ref={ref} className="relative aspect-[16/10] overflow-hidden">
         <Image
           src={`${BASE_PATH}${p.image}`}
           alt={p.alt}
@@ -279,7 +275,6 @@ export function CardBlocks({ p }: { p: CardProduct }) {
           sizes="(min-width: 640px) 50vw, 100vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        {p.support && <SupportBadge support={p.support} />}
         <div
           className="pointer-events-none absolute inset-0 grid"
           style={{ gridTemplateColumns: `repeat(${COLS},1fr)`, gridTemplateRows: `repeat(${ROWS},1fr)` }}
