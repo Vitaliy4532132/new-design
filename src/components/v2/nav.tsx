@@ -257,13 +257,12 @@ export function Nav({ locale = "ru" }: { locale?: Locale }) {
             </>
           ) : (
             <>
-              <button
-                type="button"
-                onClick={() => setAuth("user")}
+              <Link
+                href="/home/auth/login"
                 className="text-sm font-medium text-text-muted transition-colors hover:text-white"
               >
                 {t.loginLabel}
-              </button>
+              </Link>
               <a href={TELEGRAM_URL} target="_blank" rel="noopener" className={CTA_CLASS}>
                 {t.ctaLabel}
               </a>
@@ -334,16 +333,13 @@ export function Nav({ locale = "ru" }: { locale?: Locale }) {
 
           <div className="mt-4 flex flex-col gap-3">
             {!signedIn && (
-              <button
-                type="button"
-                onClick={() => {
-                  setAuth("user");
-                  setMobileOpen(false);
-                }}
-                className="rounded-[10px] border border-white/15 bg-white/5 px-5 py-3 text-sm font-medium text-white"
+              <Link
+                href="/home/auth/login"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-[10px] border border-white/15 bg-white/5 px-5 py-3 text-center text-sm font-medium text-white"
               >
                 {t.loginLabel} / {t.registerLabel}
-              </button>
+              </Link>
             )}
             <a
               href={TELEGRAM_URL}
