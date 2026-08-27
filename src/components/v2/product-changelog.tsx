@@ -2,20 +2,8 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { formatDate } from "@/lib/format";
 import type { ChangelogEntry } from "@/lib/product-data";
-
-const MONTHS = [
-  "января", "февраля", "марта", "апреля", "мая", "июня",
-  "июля", "августа", "сентября", "октября", "ноября", "декабря",
-];
-
-// Разбираем дату сами, а не через toLocaleDateString: у сервера и браузера
-// могут отличаться локаль и часовой пояс, и React сообщил бы о рассинхроне.
-function formatDate(iso: string) {
-  const [y, m, d] = iso.split("-").map(Number);
-  if (!y || !m || !d) return iso;
-  return `${d} ${MONTHS[m - 1]} ${y}`;
-}
 
 export function ProductChangelog({ entries }: { entries: ChangelogEntry[] }) {
   // Свежая версия раскрыта: чаще всего смотрят именно её.
