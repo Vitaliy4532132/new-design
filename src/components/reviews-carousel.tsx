@@ -8,6 +8,7 @@ import type { Locale } from "@/lib/i18n";
 
 const AUTOPLAY_MS = 4000;
 const TEXT_LIMIT = 160;
+const SWIPE_THRESHOLD = 50; // px, ниже этого считаем движение вертикальным скроллом
 
 function Counter({ target, decimals = 0, inView }: { target: number; decimals?: number; inView: boolean }) {
   const [value, setValue] = useState(0);
@@ -51,6 +52,7 @@ export function ReviewsCarousel({ locale = "ru" }: { locale?: Locale }) {
   const [openReview, setOpenReview] = useState<number | null>(null);
   const { ref, inView } = useInView<HTMLDivElement>(0.4);
   const trackRef = useRef<HTMLDivElement>(null);
+  const swipeStart = useRef<number | null>(null);
 
   useEffect(() => {
     if (paused || openReview !== null) return;
@@ -85,8 +87,20 @@ export function ReviewsCarousel({ locale = "ru" }: { locale?: Locale }) {
           className="relative"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
-          onTouchStart={() => setPaused(true)}
-          onTouchEnd={() => setPaused(false)}
+          onTouchStart={(e) => {
+            setPaused(true);
+            swipeStart.current = e.touches[0].clientX;
+          }}
+          onTouchEnd={(e) => {
+            setPaused(false);
+            const start = swipeStart.current;
+            swipeStart.current = null;
+            if (start === null) return;
+            const dx = e.changedTouches[0].clientX - start;
+            // Короткие движения — это скролл страницы, а не листание.
+            if (Math.abs(dx) < SWIPE_THRESHOLD) return;
+            goTo(dx < 0 ? index + 1 : index - 1);
+          }}
         >
           <div className="overflow-hidden">
             <div

@@ -188,7 +188,7 @@ function IsoIsland({
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
         onMouseLeave={() => setHovered(null)}
-        className={`relative flex h-[420px] items-center justify-center select-none sm:h-[500px] ${
+        className={`relative flex h-[320px] items-center justify-center select-none sm:h-[440px] lg:h-[500px] ${
           interactive ? (dragging ? "cursor-grabbing" : "cursor-grab") : ""
         }`}
       >
@@ -327,8 +327,9 @@ export function BuildSequence({ locale = "ru" }: { locale?: Locale }) {
         </div>
       </div>
 
-      {/* Мобильный: обычная вертикальная секция */}
-      <div ref={mobileRef} className="px-6 py-24 md:hidden">
+      {/* Мобильный: обычная вертикальная секция. overflow-hidden только здесь —
+          на секцию его вешать нельзя, он сломал бы sticky в десктопной ветке. */}
+      <div ref={mobileRef} className="overflow-hidden px-6 py-20 md:hidden">
         <div className="mx-auto max-w-5xl">
           {header}
           <IsoIsland placed={autoPlaced} materials={island.materials} dragHint={island.dragHint} />

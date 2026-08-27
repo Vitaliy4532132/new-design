@@ -84,6 +84,8 @@ export type HomeCopy = {
   stack: {
     eyebrow: string;
     title: string;
+    pickHint: string;
+    craftedNote: string;
   };
   island: {
     dragHint: string;
@@ -274,7 +276,12 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       eyebrow: "манифест",
       text: "Мы не собираем сервера из чужих сборок. Каждый плагин пишем под задачу, каждую карту строим с нуля — поэтому проекты держат онлайн, а не разваливаются через месяц.",
     },
-    stack: { eyebrow: "стек", title: "Из чего собираются проекты." },
+    stack: {
+      eyebrow: "стек",
+      title: "Из чего собираются проекты.",
+      pickHint: "нажми на блок",
+      craftedNote: "Каждый проект пишем вручную — чистый код, без чужих шаблонов.",
+    },
     island: {
       dragHint: "потяни, чтобы покрутить",
       materials: {
@@ -461,7 +468,12 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       eyebrow: "manifesto",
       text: "We don't assemble servers out of someone else's packs. Every plugin is written for the task, every map is built from scratch — that's why our projects hold their player count instead of falling apart in a month.",
     },
-    stack: { eyebrow: "stack", title: "What our projects are made of." },
+    stack: {
+      eyebrow: "stack",
+      title: "What our projects are made of.",
+      pickHint: "tap a block",
+      craftedNote: "Every project is written by hand — clean code, no borrowed templates.",
+    },
     island: {
       dragHint: "drag to rotate",
       materials: {
@@ -648,7 +660,12 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       eyebrow: "маніфест",
       text: "Ми не збираємо сервери з чужих збірок. Кожен плагін пишемо під задачу, кожну карту будуємо з нуля — тому проєкти тримають онлайн, а не розвалюються через місяць.",
     },
-    stack: { eyebrow: "стек", title: "З чого збираються проєкти." },
+    stack: {
+      eyebrow: "стек",
+      title: "З чого збираються проєкти.",
+      pickHint: "натисни на блок",
+      craftedNote: "Кожен проєкт пишемо вручну — чистий код, без чужих шаблонів.",
+    },
     island: {
       dragHint: "потягни, щоб покрутити",
       materials: {

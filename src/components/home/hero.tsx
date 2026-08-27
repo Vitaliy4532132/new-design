@@ -54,7 +54,7 @@ export function HomeHero({ locale = "ru" }: { locale?: Locale }) {
   const typed = useTypewriter(t.subtitles);
 
   return (
-    <section className="relative flex h-screen min-h-[680px] flex-col items-center justify-center overflow-hidden text-center">
+    <section className="relative flex h-dvh min-h-[560px] flex-col items-center justify-center overflow-hidden text-center">
       <video
         className="absolute inset-0 z-0 h-full w-full object-cover"
         src={`${BASE_PATH}/video/hero-bg.mp4`}
@@ -89,7 +89,7 @@ export function HomeHero({ locale = "ru" }: { locale?: Locale }) {
       </div>
 
       <div className="relative z-[2] px-6">
-        <h1 className="max-w-4xl font-display text-5xl leading-[1.04] font-normal sm:text-6xl lg:text-[76px]">
+        <h1 className="max-w-4xl font-display text-[32px] leading-[1.08] font-normal min-[420px]:text-[40px] sm:text-6xl sm:leading-[1.04] lg:text-[76px]">
           {t.before}
           <span
             className="animate-gradient-text bg-[linear-gradient(135deg,#0A3FFF,#1797FF,#5db4ff,#1797FF,#0A3FFF)] bg-[length:200%_auto] bg-clip-text font-medium text-transparent"
@@ -125,12 +125,13 @@ export function HomeHero({ locale = "ru" }: { locale?: Locale }) {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 z-[2] flex -translate-x-1/2 items-center gap-[18px] text-[13px] text-text-dim">
+      <div className="absolute bottom-8 left-1/2 z-[2] flex w-full -translate-x-1/2 items-center justify-center gap-3 px-4 text-[12px] text-text-dim sm:bottom-10 sm:gap-[18px] sm:text-[13px]">
         <span>{t.scrollBefore}</span>
-        <div className="flex h-8 w-[22px] justify-center rounded-full border border-text-dim pt-1.5">
+        <div className="flex h-8 w-[22px] shrink-0 justify-center rounded-full border border-text-dim pt-1.5">
           <i className="h-1.5 w-[3px] animate-scroll-dot rounded-full bg-text-dim" />
         </div>
-        <span>{t.scrollAfter}</span>
+        {/* На узких экранах вторая половина подписи не помещается рядом с иконкой */}
+        <span className="hidden sm:inline">{t.scrollAfter}</span>
       </div>
     </section>
   );

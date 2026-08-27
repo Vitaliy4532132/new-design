@@ -61,11 +61,16 @@ export function ServerConsole({ locale = "ru" }: { locale?: Locale }) {
             <span className="ml-2 font-mono text-[11px] text-text-dim">server console</span>
           </div>
 
-          <div className="min-h-[260px] px-4 py-4 sm:px-5">
+          {/* Строки не переносим, а скроллим по горизонтали внутри консоли:
+              так это выглядит настоящим терминалом и не растягивает страницу. */}
+          <div className="min-h-[220px] overflow-x-auto px-4 py-4 sm:min-h-[260px] sm:px-5">
             {LOG.slice(0, shown).map((line, i) => (
-              <div key={i} className="flex gap-2 py-[3px] font-mono text-[11px] leading-relaxed sm:text-xs">
+              <div
+                key={i}
+                className="flex gap-2 py-[3px] font-mono text-[11px] leading-relaxed whitespace-nowrap sm:text-xs"
+              >
                 <span className="shrink-0 text-text-dim">[{line.time}]</span>
-                <span className={`min-w-0 ${TONE_CLASS[line.tone]}`}>{line.text}</span>
+                <span className={TONE_CLASS[line.tone]}>{line.text}</span>
               </div>
             ))}
             {!done && (

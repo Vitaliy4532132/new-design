@@ -34,7 +34,7 @@ export function Manifesto({ locale = "ru" }: { locale?: Locale }) {
   const words = t.text.split(" ");
 
   return (
-    <section className="relative overflow-hidden bg-background px-6 py-32">
+    <section className="relative overflow-hidden bg-background px-6 py-20 sm:py-32">
       <div
         className="pointer-events-none absolute top-1/2 left-1/2 hidden h-[420px] w-[720px] -translate-x-1/2 -translate-y-1/2 opacity-20 blur-[130px] md:block"
         style={{ background: "radial-gradient(circle, #0A3FFF, transparent 70%)" }}
@@ -42,7 +42,7 @@ export function Manifesto({ locale = "ru" }: { locale?: Locale }) {
 
       <div ref={ref} className="relative mx-auto max-w-4xl">
         <div className="mb-8 font-mono text-xs tracking-widest text-accent uppercase">{t.eyebrow}</div>
-        <p className="flex flex-wrap font-display text-2xl leading-[1.45] font-normal sm:text-3xl lg:text-[38px]">
+        <p className="flex flex-wrap font-display text-xl leading-[1.5] font-normal sm:text-3xl sm:leading-[1.45] lg:text-[38px]">
           {words.map((word, i) => {
             const start = i / words.length;
             const end = start + 1 / words.length;

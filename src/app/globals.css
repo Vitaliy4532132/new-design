@@ -47,6 +47,17 @@ html {
   html {
     scroll-behavior: auto;
   }
+
+  /* Если человек попросил систему убрать анимации, всё декоративное движение
+     схлопывается в конечное состояние: контент виден сразу, ничего не ползёт. */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 body {
