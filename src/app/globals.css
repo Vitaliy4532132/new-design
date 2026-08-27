@@ -38,6 +38,10 @@
   --animate-caret-blink: caretBlink 1s step-end infinite;
   --animate-cube-spin: cubeSpin 14s linear infinite;
   --animate-menu-in: menuIn 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-toast-in: toastIn 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-toast-out: toastOut 180ms ease-in forwards;
+  --animate-toast-timer: toastTimer linear forwards;
+  --animate-banner-in: bannerIn 320ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html {
@@ -219,6 +223,48 @@ input[type="number"] {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes toastOut {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(16px) scale(0.97);
+  }
+}
+
+@keyframes toastTimer {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+@keyframes bannerIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
