@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useInView } from "@/hooks/use-in-view";
 import { PORTFOLIO_ITEMS, type PortfolioCategory } from "@/lib/portfolio-data";
 import { portfolioAlt } from "@/lib/portfolio-alt";
@@ -152,8 +153,9 @@ export function PortfolioGallery() {
                 const label = labels[work.category];
 
                 return (
-                  <div
+                  <Link
                     key={work.slug}
+                    href={`/home/portfolio/${work.slug}`}
                     className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface transition-colors hover:border-accent/40"
                   >
                     <div className="relative aspect-[16/10] overflow-hidden">
@@ -177,7 +179,7 @@ export function PortfolioGallery() {
                         </>
                       )}
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
