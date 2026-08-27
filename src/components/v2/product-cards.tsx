@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ShoppingBag } from "lucide-react";
 import { useInView } from "@/hooks/use-in-view";
 import { IsoCube } from "@/components/v2/iso-cube";
@@ -16,6 +17,7 @@ export type CardProduct = {
   buyLabel: string;
   image: string;
   alt: string;
+  /** Внутренний путь открывается через Link, внешний — в новой вкладке. */
   href: string;
 };
 
@@ -26,6 +28,31 @@ const KIND_COLOR: Record<"plugin" | "build", string> = {
 
 const SHELL =
   "group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface transition-colors hover:border-accent/40";
+
+// Карточка может вести и на свою страницу товара, и сразу в магазин,
+// поэтому тип ссылки выбирается по самому href.
+function CardShell({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className: string;
+  children: React.ReactNode;
+}) {
+  if (href.startsWith("http")) {
+    return (
+      <a href={href} target="_blank" rel="noopener" className={className}>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={className}>
+      {children}
+    </Link>
+  );
+}
 
 function TypeLabel({ p }: { p: CardProduct }) {
   return (
@@ -44,10 +71,26 @@ function BuyButton({ label }: { label: string }) {
   );
 }
 
+function Body({ p, bordered = true }: { p: CardProduct; bordered?: boolean }) {
+  return (
+    <div className="flex flex-1 flex-col p-5">
+      <div className="mb-2">
+        <TypeLabel p={p} />
+      </div>
+      <h3 className="mb-2 font-display text-lg font-medium">{p.title}</h3>
+      <p className="mb-5 flex-1 text-sm leading-relaxed text-text-muted">{p.description}</p>
+      <div className={`flex items-center justify-between ${bordered ? "border-t border-white/10 pt-4" : ""}`}>
+        <span className="font-display text-lg font-medium">{p.price}</span>
+        <BuyButton label={p.buyLabel} />
+      </div>
+    </div>
+  );
+}
+
 /* 1. Обложка сверху — самый привычный формат, картинка не спорит с текстом. */
 export function CardCover({ p }: { p: CardProduct }) {
   return (
-    <a href={p.href} target="_blank" rel="noopener" className={SHELL}>
+    <CardShell href={p.href} className={SHELL}>
       <div className="relative aspect-[16/10] overflow-hidden">
         <Image
           src={`${BASE_PATH}${p.image}`}
@@ -57,25 +100,15 @@ export function CardCover({ p }: { p: CardProduct }) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
-      <div className="flex flex-1 flex-col p-5">
-        <div className="mb-2">
-          <TypeLabel p={p} />
-        </div>
-        <h3 className="mb-2 font-display text-lg font-medium">{p.title}</h3>
-        <p className="mb-5 flex-1 text-sm leading-relaxed text-text-muted">{p.description}</p>
-        <div className="flex items-center justify-between border-t border-white/10 pt-4">
-          <span className="font-display text-lg font-medium">{p.price}</span>
-          <BuyButton label={p.buyLabel} />
-        </div>
-      </div>
-    </a>
+      <Body p={p} />
+    </CardShell>
   );
 }
 
 /* 2. Во всю карточку — картинка работает фоном, текст лежит поверх. */
 export function CardPoster({ p }: { p: CardProduct }) {
   return (
-    <a href={p.href} target="_blank" rel="noopener" className={`${SHELL} relative aspect-[4/5]`}>
+    <CardShell href={p.href} className={`${SHELL} relative aspect-[4/5]`}>
       <Image
         src={`${BASE_PATH}${p.image}`}
         alt={p.alt}
@@ -95,14 +128,14 @@ export function CardPoster({ p }: { p: CardProduct }) {
           <BuyButton label={p.buyLabel} />
         </div>
       </div>
-    </a>
+    </CardShell>
   );
 }
 
 /* 3. Горизонтальная — картинка слева. Хорошо читается в списке. */
 export function CardSplit({ p }: { p: CardProduct }) {
   return (
-    <a href={p.href} target="_blank" rel="noopener" className={`${SHELL} sm:flex-row`}>
+    <CardShell href={p.href} className={`${SHELL} sm:flex-row`}>
       <div className="relative aspect-[16/10] shrink-0 overflow-hidden sm:aspect-auto sm:w-44">
         <Image
           src={`${BASE_PATH}${p.image}`}
@@ -112,26 +145,16 @@ export function CardSplit({ p }: { p: CardProduct }) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
-      <div className="flex flex-1 flex-col p-5">
-        <div className="mb-2">
-          <TypeLabel p={p} />
-        </div>
-        <h3 className="mb-2 font-display text-lg font-medium">{p.title}</h3>
-        <p className="mb-5 flex-1 text-sm leading-relaxed text-text-muted">{p.description}</p>
-        <div className="flex items-center justify-between">
-          <span className="font-display text-lg font-medium">{p.price}</span>
-          <BuyButton label={p.buyLabel} />
-        </div>
-      </div>
-    </a>
+      <Body p={p} bordered={false} />
+    </CardShell>
   );
 }
 
-/* 4. С раскрытием — на карточке только название, описание выезжает при наведении.
-   На тач-устройствах ховера нет, поэтому там текст показан сразу. */
+/* 4. С раскрытием — описание выезжает при наведении. На тач-устройствах
+   ховера нет, поэтому там текст показан сразу. */
 export function CardReveal({ p }: { p: CardProduct }) {
   return (
-    <a href={p.href} target="_blank" rel="noopener" className={`${SHELL} relative aspect-[4/5]`}>
+    <CardShell href={p.href} className={`${SHELL} relative aspect-[4/5]`}>
       <Image
         src={`${BASE_PATH}${p.image}`}
         alt={p.alt}
@@ -140,38 +163,31 @@ export function CardReveal({ p }: { p: CardProduct }) {
         className="object-cover brightness-75 transition-all duration-500 group-hover:scale-110 group-hover:brightness-100"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-
       <div className="relative mt-auto p-5">
         <div className="mb-2">
           <TypeLabel p={p} />
         </div>
         <h3 className="font-display text-xl font-medium">{p.title}</h3>
-
         <div className="grid grid-rows-[1fr] transition-all duration-500 ease-out md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr]">
           <div className="overflow-hidden">
             <p className="pt-2 text-sm leading-relaxed text-text-muted">{p.description}</p>
           </div>
         </div>
-
         <div className="mt-4 flex items-center justify-between">
           <span className="font-display text-lg font-medium">{p.price}</span>
           <BuyButton label={p.buyLabel} />
         </div>
       </div>
-    </a>
+    </CardShell>
   );
 }
 
-/* 5. В рамке-слоте — картинка вставлена в утопленный слот, как предмет
-   в инвентаре. Держит один язык с верстаком и островом. */
+/* 5. В рамке-слоте — картинка утоплена в слот, как предмет в инвентаре. */
 export function CardSlot({ p }: { p: CardProduct }) {
   return (
-    <a
+    <CardShell
       href={p.href}
-      target="_blank"
-      rel="noopener"
       className="group flex flex-col rounded-lg bg-[#15151a] p-3 transition-colors hover:bg-[#1b1b22]"
-      style={{ boxShadow: "inset 2px 2px 0 rgba(255,255,255,0.06), inset -2px -2px 0 rgba(0,0,0,0.6)" }}
     >
       <div
         className="relative mb-4 aspect-[16/10] overflow-hidden rounded-[3px] bg-[#0d0d11]"
@@ -188,7 +204,6 @@ export function CardSlot({ p }: { p: CardProduct }) {
           <IsoCube color={KIND_COLOR[p.kind]} size={18} />
         </div>
       </div>
-
       <div className="px-2 pb-2">
         <div className="mb-2">
           <TypeLabel p={p} />
@@ -200,7 +215,7 @@ export function CardSlot({ p }: { p: CardProduct }) {
           <BuyButton label={p.buyLabel} />
         </div>
       </div>
-    </a>
+    </CardShell>
   );
 }
 
@@ -216,11 +231,13 @@ function blockDelay(i: number) {
 }
 
 export function CardBlocks({ p }: { p: CardProduct }) {
-  const { ref, inView } = useInView<HTMLAnchorElement>(0.25);
+  // Наблюдаем за самой картинкой, а не за карточкой: так сборка начинается
+  // ровно тогда, когда изображение попало в экран.
+  const { ref, inView } = useInView<HTMLDivElement>(0.25);
 
   return (
-    <a href={p.href} target="_blank" rel="noopener" ref={ref} className={SHELL}>
-      <div className="relative aspect-[16/10] overflow-hidden">
+    <CardShell href={p.href} className={SHELL}>
+      <div ref={ref} className="relative aspect-[16/10] overflow-hidden">
         <Image
           src={`${BASE_PATH}${p.image}`}
           alt={p.alt}
@@ -242,18 +259,7 @@ export function CardBlocks({ p }: { p: CardProduct }) {
           ))}
         </div>
       </div>
-
-      <div className="flex flex-1 flex-col p-5">
-        <div className="mb-2">
-          <TypeLabel p={p} />
-        </div>
-        <h3 className="mb-2 font-display text-lg font-medium">{p.title}</h3>
-        <p className="mb-5 flex-1 text-sm leading-relaxed text-text-muted">{p.description}</p>
-        <div className="flex items-center justify-between border-t border-white/10 pt-4">
-          <span className="font-display text-lg font-medium">{p.price}</span>
-          <BuyButton label={p.buyLabel} />
-        </div>
-      </div>
-    </a>
+      <Body p={p} />
+    </CardShell>
   );
 }

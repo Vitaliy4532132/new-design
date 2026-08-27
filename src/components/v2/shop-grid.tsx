@@ -2,18 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, ShoppingBag } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { IsoCube } from "@/components/v2/iso-cube";
+import { CardBlocks, type CardProduct } from "@/components/v2/product-cards";
 import { HOME_COPY } from "@/lib/home-copy";
+import { PRODUCT_DETAILS } from "@/lib/product-data";
 import { SHOP_PAGE } from "@/lib/page-copy";
 import type { Locale } from "@/lib/i18n";
-
-// Цвет блока по типу: зелёный — как трава на острове, фиолетовый — как Kotlin
-// в верстаке. Общий язык с остальными секциями сайта.
-const KIND_COLOR: Record<"plugin" | "build", string> = {
-  plugin: "#7F52FF",
-  build: "#6CB33F",
-};
 
 // Порядок совпадает с services.items в home-copy.
 const SERVICE_COLORS = ["#6CB33F", "#3178C6", "#1BA0E0", "#E76F00", "#7F52FF"];
@@ -109,37 +104,21 @@ export function ShopGrid({ locale = "ru" }: { locale?: Locale }) {
               <p className="py-16 text-center text-sm text-text-muted">{t.emptyLabel}</p>
             ) : (
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {items.map((p) => (
-                  <Link
-                    key={p.slug}
-                    href={`/home/shop/${p.slug}`}
-                    className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-surface p-6 transition-colors hover:border-accent/40"
-                  >
-                    <div>
-                      <div className="mb-5 flex h-12 items-center">
-                        <div className="transition-transform duration-300 group-hover:scale-110">
-                          <IsoCube color={KIND_COLOR[p.kind]} size={26} />
-                        </div>
-                      </div>
-                      <div
-                        className="mb-3 font-mono text-[10px] tracking-widest uppercase"
-                        style={{ color: KIND_COLOR[p.kind] }}
-                      >
-                        {products.typeLabels[p.kind]}
-                      </div>
-                      <h3 className="mb-2 font-display text-lg font-medium">{p.title}</h3>
-                      <p className="mb-6 text-sm leading-relaxed text-text-muted">{p.description}</p>
-                    </div>
-
-                    <div className="flex items-center justify-between border-t border-white/10 pt-4">
-                      <span className="font-display text-lg font-medium">{p.price}</span>
-                      <span className="flex items-center gap-1.5 rounded-lg bg-white px-3 py-2 font-sans text-[13px] font-bold text-background transition-transform group-hover:scale-105">
-                        <ShoppingBag size={14} />
-                        {products.buyLabel}
-                      </span>
-                    </div>
-                  </Link>
-                ))}
+                {items.map((p) => {
+                  const card: CardProduct = {
+                    slug: p.slug,
+                    title: p.title,
+                    description: p.description,
+                    price: p.price,
+                    kind: p.kind,
+                    typeLabel: products.typeLabels[p.kind],
+                    buyLabel: products.buyLabel,
+                    image: PRODUCT_DETAILS[p.slug].images[0],
+                    alt: p.title,
+                    href: `/home/shop/${p.slug}`,
+                  };
+                  return <CardBlocks key={p.slug} p={card} />;
+                })}
               </div>
             )}
 
