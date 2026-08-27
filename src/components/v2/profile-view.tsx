@@ -15,6 +15,7 @@ import {
   Wallet,
   X,
 } from "lucide-react";
+import { ReviewBlock } from "@/components/v2/purchase-view";
 import { formatAmount, formatDate } from "@/lib/format";
 import {
   DEMO_ORDERS,
@@ -292,6 +293,11 @@ export function ProfileView() {
 
             {tab === "reviews" && (
               <div className="flex flex-col gap-4">
+                {/* Сначала то, что ждёт действия: купленное без отзыва */}
+                {DEMO_PURCHASES.filter((p) => !p.reviewId).map((p) => (
+                  <ReviewBlock key={p.slug} purchase={p} />
+                ))}
+
                 {DEMO_REVIEWS.map((r) => {
                   const status = REVIEW_STATUS[r.status];
                   return (

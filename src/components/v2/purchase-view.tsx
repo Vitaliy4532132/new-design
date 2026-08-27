@@ -10,11 +10,13 @@ import {
   Eye,
   EyeOff,
   KeyRound,
-  RefreshCw,
+  Server,
   Star,
+  Unplug,
   X,
 } from "lucide-react";
 import { formatDate } from "@/lib/format";
+import { PRODUCT_DETAILS } from "@/lib/product-data";
 import {
   DEMO_REVIEWS,
   REVIEW_STATUS,
@@ -64,10 +66,11 @@ function LicenseBlock({ license }: { license: DemoLicense }) {
   const [visible, setVisible] = useState(false);
   const [copied, setCopied] = useState(false);
   const [regenOpen, setRegenOpen] = useState(false);
-  const [hwidOpen, setHwidOpen] = useState(false);
+  const [unbindIp, setUnbindIp] = useState<string | null>(null);
 
-  // Ключ по умолчанию скрыт: страницу могут открыть в стриме или на созвоне.
+  // Ключ скрыт по умолчанию — на случай, если экран видит кто-то ещё.
   const masked = `${current.key.slice(0, 4)}-••••-••••-••••`;
+  const used = current.servers.length;
 
   async function copyKey() {
     try {
@@ -75,8 +78,8 @@ function LicenseBlock({ license }: { license: DemoLicense }) {
       setCopied(true);
       setTimeout(() => setCopied(false), 1600);
     } catch {
-      // Буфер недоступен вне защищённого соединения — тогда ключ
-      // просто открываем, чтобы его можно было выделить руками.
+      // Буфер доступен только по защищённому соединению — иначе просто
+      // раскрываем ключ, чтобы его можно было выделить руками.
       setVisible(true);
     }
   }
@@ -88,9 +91,7 @@ function LicenseBlock({ license }: { license: DemoLicense }) {
         <h2 className="font-display text-lg font-medium">Лицензия</h2>
         <span
           className={`ml-auto rounded-md border px-2 py-0.5 font-mono text-[10px] tracking-wide uppercase ${
-            current.status === "active"
-              ? "border-green-400/40 text-green-400"
-              : "border-red-500/40 text-red-400"
+            current.status === "active" ? "border-green-400/40 text-green-400" : "border-red-500/40 text-red-400"
           }`}
         >
           {current.status === "active" ? "активна" : "заблокирована"}
@@ -119,33 +120,49 @@ function LicenseBlock({ license }: { license: DemoLicense }) {
         </button>
       </div>
 
-      <div className="mb-5 grid grid-cols-2 gap-4 sm:grid-cols-3">
-        <div>
-          <div className="mb-1 font-mono text-[11px] tracking-widest text-text-dim uppercase">Активаций</div>
-          <div className="text-sm">
-            {current.activations} из {current.maxActivations}
-          </div>
+      {/* Активные серверы */}
+      <div className="mb-5">
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <span className="font-mono text-[11px] tracking-widest text-text-dim uppercase">Активные серверы</span>
+          <span className="font-mono text-[11px] text-text-dim">
+            {used} из {current.maxActivations}
+          </span>
         </div>
-        <div>
-          <div className="mb-1 font-mono text-[11px] tracking-widest text-text-dim uppercase">Выдана</div>
-          <div className="text-sm">{formatDate(current.issued)}</div>
-        </div>
-        <div className="col-span-2 sm:col-span-1">
-          <div className="mb-1 font-mono text-[11px] tracking-widest text-text-dim uppercase">Привязка</div>
-          <div className="font-mono text-sm break-all">{current.hwid ?? "нет"}</div>
-        </div>
+
+        {used === 0 ? (
+          <p className="rounded-2xl border border-white/10 bg-background/60 px-4 py-4 text-sm text-text-muted">
+            Ключ ещё не запускался ни на одном сервере. Он привяжется сам при первом старте.
+          </p>
+        ) : (
+          <ul className="overflow-hidden rounded-2xl border border-white/10">
+            {current.servers.map((s, i) => (
+              <li
+                key={s.ip}
+                className={`flex flex-wrap items-center gap-3 bg-background/60 px-4 py-3 ${
+                  i > 0 ? "border-t border-white/10" : ""
+                }`}
+              >
+                <Server size={15} className="shrink-0 text-accent" />
+                <div className="min-w-0">
+                  <code className="font-mono text-sm break-all text-white">{s.ip}</code>
+                  <div className="font-mono text-[11px] text-text-dim">был на связи {formatDate(s.lastSeen)}</div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setUnbindIp(s.ip)}
+                  className="ml-auto flex shrink-0 items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:border-white/25"
+                >
+                  <Unplug size={12} />
+                  Отвязать
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
-      <div className="flex flex-wrap gap-3 border-t border-white/10 pt-5">
-        <button
-          type="button"
-          onClick={() => setHwidOpen(true)}
-          disabled={!current.hwid}
-          className="flex items-center gap-2 rounded-[10px] border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:border-white/25 disabled:cursor-not-allowed disabled:opacity-40"
-        >
-          <RefreshCw size={14} />
-          Сбросить привязку
-        </button>
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-5">
+        <span className="font-mono text-[11px] text-text-dim">Выдана {formatDate(current.issued)}</span>
         <button
           type="button"
           onClick={() => setRegenOpen(true)}
@@ -156,27 +173,27 @@ function LicenseBlock({ license }: { license: DemoLicense }) {
         </button>
       </div>
 
-      {hwidOpen && (
-        <Modal title="Сбросить привязку?" onClose={() => setHwidOpen(false)}>
+      {unbindIp && (
+        <Modal title="Отвязать сервер?" onClose={() => setUnbindIp(null)}>
           <p className="mb-6 text-sm leading-relaxed text-text-muted">
-            Ключ отвяжется от текущей машины, и его можно будет активировать заново.
+            Ключ перестанет работать на <code className="font-mono text-white">{unbindIp}</code> и освободит слот.
             Пригодится при переезде на другой хостинг.
           </p>
           <div className="flex justify-end gap-3">
             <button
-              onClick={() => setHwidOpen(false)}
+              onClick={() => setUnbindIp(null)}
               className="rounded-[10px] px-5 py-2.5 text-sm font-medium text-text-muted transition-colors hover:text-white"
             >
               Отмена
             </button>
             <button
               onClick={() => {
-                setCurrent((c) => ({ ...c, hwid: null, activations: 0 }));
-                setHwidOpen(false);
+                setCurrent((c) => ({ ...c, servers: c.servers.filter((s) => s.ip !== unbindIp) }));
+                setUnbindIp(null);
               }}
               className="rounded-[10px] bg-[linear-gradient(180deg,#0A3FFF_0%,#1797FF_100%)] px-5 py-2.5 text-sm font-bold text-white shadow-[0_6px_20px_rgba(23,151,255,0.35)]"
             >
-              Сбросить
+              Отвязать
             </button>
           </div>
         </Modal>
@@ -185,8 +202,8 @@ function LicenseBlock({ license }: { license: DemoLicense }) {
       {regenOpen && (
         <Modal title="Перевыпустить ключ?" onClose={() => setRegenOpen(false)}>
           <p className="mb-6 text-sm leading-relaxed text-text-muted">
-            Старый ключ перестанет работать сразу. Делайте это, только если он
-            попал к посторонним.
+            Старый ключ перестанет работать сразу, и все серверы отвяжутся.
+            Делайте это, только если он попал к посторонним.
           </p>
           <div className="flex justify-end gap-3">
             <button
@@ -198,7 +215,7 @@ function LicenseBlock({ license }: { license: DemoLicense }) {
             <button
               onClick={() => {
                 const prefix = current.key.slice(0, 4);
-                setCurrent((c) => ({ ...c, key: `${prefix}-0000-0000-0001`, hwid: null, activations: 0 }));
+                setCurrent((c) => ({ ...c, key: `${prefix}-0000-0000-0001`, servers: [] }));
                 setVisible(true);
                 setRegenOpen(false);
               }}
@@ -213,7 +230,7 @@ function LicenseBlock({ license }: { license: DemoLicense }) {
   );
 }
 
-function ReviewBlock({ purchase }: { purchase: DemoPurchase }) {
+export function ReviewBlock({ purchase }: { purchase: DemoPurchase }) {
   const existing = DEMO_REVIEWS.find((r) => r.id === purchase.reviewId);
   const [rating, setRating] = useState(5);
   const [hovered, setHovered] = useState(0);
@@ -226,9 +243,7 @@ function ReviewBlock({ purchase }: { purchase: DemoPurchase }) {
       <div className={`${CARD} p-6`}>
         <div className="mb-4 flex flex-wrap items-center gap-3">
           <h2 className="font-display text-lg font-medium">Ваш отзыв</h2>
-          <span
-            className={`rounded-md border px-2 py-0.5 font-mono text-[10px] tracking-wide uppercase ${status.className}`}
-          >
+          <span className={`rounded-md border px-2 py-0.5 font-mono text-[10px] tracking-wide uppercase ${status.className}`}>
             {status.label}
           </span>
           <span className="ml-auto font-mono text-[11px] text-text-dim">{formatDate(existing.date)}</span>
@@ -255,8 +270,10 @@ function ReviewBlock({ purchase }: { purchase: DemoPurchase }) {
 
   return (
     <div className={`${CARD} p-6`}>
-      <h2 className="mb-2 font-display text-lg font-medium">Оставить отзыв</h2>
-      <p className="mb-5 text-sm text-text-muted">Расскажите, как товар показал себя на вашем сервере.</p>
+      <h2 className="mb-1 font-display text-lg font-medium">Оставить отзыв</h2>
+      <p className="mb-5 text-sm text-text-muted">
+        {purchase.title} — расскажите, как показал себя на вашем сервере.
+      </p>
 
       <div className="mb-5 flex gap-1" onMouseLeave={() => setHovered(0)}>
         {Array.from({ length: 5 }).map((_, i) => {
@@ -298,6 +315,10 @@ function ReviewBlock({ purchase }: { purchase: DemoPurchase }) {
 }
 
 export function PurchaseView({ purchase }: { purchase: DemoPurchase }) {
+  const latest = purchase.downloads.find((d) => d.latest) ?? purchase.downloads[0];
+  const older = purchase.downloads.filter((d) => d !== latest);
+  const changelog = PRODUCT_DETAILS[purchase.slug]?.changelog ?? [];
+
   return (
     <section className="px-5 pt-28 pb-20 sm:px-6 sm:pt-36">
       <div className="mx-auto max-w-3xl">
@@ -319,47 +340,73 @@ export function PurchaseView({ purchase }: { purchase: DemoPurchase }) {
         <div className="flex flex-col gap-4">
           <LicenseBlock license={purchase.license} />
 
-          {/* Загрузки */}
-          <div className={CARD}>
-            <div className="border-b border-white/10 px-6 py-5">
-              <h2 className="mb-1 font-display text-lg font-medium">Загрузки</h2>
-              <p className="text-sm text-text-muted">Все версии доступны без доплаты.</p>
+          {/* Загрузка. Качается только свежая версия — старые остаются
+              в списке, чтобы было видно, что менялось. */}
+          <div className={`${CARD} p-6`}>
+            <h2 className="mb-5 font-display text-lg font-medium">Загрузка</h2>
+
+            <div className="mb-5 flex flex-wrap items-center gap-4 rounded-2xl border border-accent/30 bg-accent/5 px-5 py-4">
+              <div className="min-w-0">
+                <div className="flex items-center gap-2.5">
+                  <span className="font-mono text-sm text-white">v{latest.version}</span>
+                  <span className="rounded-md border border-green-400/40 px-2 py-0.5 font-mono text-[10px] tracking-wide text-green-400 uppercase">
+                    свежая
+                  </span>
+                </div>
+                <div className="mt-0.5 font-mono text-[11px] text-text-dim">
+                  {formatDate(latest.date)} · {latest.size}
+                </div>
+              </div>
+              <button
+                type="button"
+                className="ml-auto flex shrink-0 items-center gap-2 rounded-[10px] bg-[linear-gradient(180deg,#0A3FFF_0%,#1797FF_100%)] px-5 py-2.5 text-[13px] font-bold text-white shadow-[0_6px_20px_rgba(23,151,255,0.35)] transition-transform hover:-translate-y-0.5"
+              >
+                <Download size={14} />
+                Скачать
+              </button>
             </div>
-            <ul>
-              {purchase.downloads.map((d, i) => (
-                <li
-                  key={d.version}
-                  className={`flex flex-wrap items-center gap-4 px-6 py-4 ${i > 0 ? "border-t border-white/10" : ""}`}
-                >
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2.5">
-                      <span className="font-mono text-sm text-white">v{d.version}</span>
-                      {d.latest && (
+
+            {older.length > 0 && (
+              <p className="text-xs leading-relaxed text-text-dim">
+                Скачать можно только свежую версию — в ней все прошлые правки.
+                Предыдущих {older.length} перечислены ниже в истории обновлений.
+              </p>
+            )}
+          </div>
+
+          {/* История обновлений */}
+          {changelog.length > 0 && (
+            <div className={CARD}>
+              <div className="border-b border-white/10 px-6 py-5">
+                <h2 className="mb-1 font-display text-lg font-medium">Обновления</h2>
+                <p className="text-sm text-text-muted">Все версии входят в покупку, доплачивать не нужно.</p>
+              </div>
+
+              <ul>
+                {changelog.map((e, i) => (
+                  <li key={e.version} className={`px-6 py-5 ${i > 0 ? "border-t border-white/10" : ""}`}>
+                    <div className="mb-3 flex flex-wrap items-center gap-3">
+                      <span className="font-mono text-sm text-accent">v{e.version}</span>
+                      {i === 0 && (
                         <span className="rounded-md border border-green-400/40 px-2 py-0.5 font-mono text-[10px] tracking-wide text-green-400 uppercase">
                           свежая
                         </span>
                       )}
+                      <span className="ml-auto font-mono text-[11px] text-text-dim">{formatDate(e.date)}</span>
                     </div>
-                    <div className="mt-0.5 font-mono text-[11px] text-text-dim">
-                      {formatDate(d.date)} · {d.size}
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    className={`ml-auto flex shrink-0 items-center gap-2 rounded-[10px] px-4 py-2.5 text-[13px] font-bold transition-transform hover:-translate-y-0.5 ${
-                      d.latest
-                        ? "bg-[linear-gradient(180deg,#0A3FFF_0%,#1797FF_100%)] text-white shadow-[0_6px_20px_rgba(23,151,255,0.35)]"
-                        : "border border-white/15 bg-white/5 font-medium text-white"
-                    }`}
-                  >
-                    <Download size={14} />
-                    Скачать
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+                    <ul className="flex flex-col gap-2">
+                      {e.changes.map((c) => (
+                        <li key={c} className="flex items-start gap-3 text-sm text-text-muted">
+                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent" />
+                          {c}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <ReviewBlock purchase={purchase} />
         </div>

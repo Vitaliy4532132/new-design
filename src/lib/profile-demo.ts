@@ -41,12 +41,16 @@ export type DemoDownload = {
   latest: boolean;
 };
 
+export type LicenseServer = {
+  ip: string;
+  lastSeen: string;
+};
+
 export type DemoLicense = {
   key: string;
   status: "active" | "blocked";
-  /** Привязка к машине. null — ещё ни разу не активирован. */
-  hwid: string | null;
-  activations: number;
+  /** Серверы, где ключ сейчас активирован. Пусто — ни разу не запускался. */
+  servers: LicenseServer[];
   maxActivations: number;
   issued: string;
 };
@@ -137,8 +141,12 @@ export const DEMO_PURCHASES: DemoPurchase[] = [
     license: {
       key: "FCHT-0000-0000-0000",
       status: "active",
-      hwid: "0000000000000000",
-      activations: 1,
+      // Диапазоны из RFC 5737 — они зарезервированы под примеры и не ведут
+      // ни на чей настоящий сервер.
+      servers: [
+        { ip: "192.0.2.14", lastSeen: "2026-08-25" },
+        { ip: "198.51.100.7", lastSeen: "2026-08-19" },
+      ],
       maxActivations: 3,
       issued: "2026-07-02",
     },
@@ -159,8 +167,7 @@ export const DEMO_PURCHASES: DemoPurchase[] = [
     license: {
       key: "FNCK-0000-0000-0000",
       status: "active",
-      hwid: null,
-      activations: 0,
+      servers: [],
       maxActivations: 3,
       issued: "2026-05-19",
     },
