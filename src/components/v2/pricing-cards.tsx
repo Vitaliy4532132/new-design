@@ -42,12 +42,22 @@ function PlanCard({ plan, inView }: { plan: Plan; inView: boolean }) {
     <div
       className={`relative flex flex-col rounded-2xl border p-6 sm:p-7 ${
         plan.popular
-          ? "border-accent/40 bg-[linear-gradient(180deg,rgba(10,63,255,0.10),transparent)]"
+          ? "border-accent/50 bg-[linear-gradient(180deg,rgba(10,63,255,0.16),rgba(12,12,14,0.9))] shadow-[0_0_50px_rgba(23,151,255,0.18)] md:-my-3 md:py-10"
           : "border-white/10 bg-surface"
       }`}
     >
+      {/* Свечение под популярным тарифом: без него он отличался от соседей
+          только оттенком фона и в глаза не бросался. */}
       {plan.popular && (
-        <span className="absolute -top-3 left-6 rounded-full bg-[linear-gradient(180deg,#0A3FFF_0%,#1797FF_100%)] px-3 py-1 font-mono text-[10px] tracking-wide text-white uppercase shadow-[0_4px_14px_rgba(23,151,255,0.4)]">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-x-6 -bottom-10 h-40 opacity-40 blur-[70px]"
+          style={{ background: "radial-gradient(circle, #0A3FFF, transparent 70%)" }}
+        />
+      )}
+
+      {plan.popular && (
+        <span className="absolute -top-3 left-6 z-10 rounded-full bg-[linear-gradient(180deg,#0A3FFF_0%,#1797FF_100%)] px-3 py-1 font-mono text-[10px] tracking-wide text-white uppercase shadow-[0_4px_14px_rgba(23,151,255,0.4)]">
           чаще берут
         </span>
       )}

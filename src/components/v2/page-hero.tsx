@@ -1,4 +1,5 @@
 import { TELEGRAM_URL } from "@/lib/links";
+import { Backdrop } from "@/components/v2/backdrop";
 
 type Stat = { value: string; label: string };
 
@@ -23,9 +24,16 @@ export function PageHero({
 }) {
   return (
     <section className="relative overflow-hidden px-5 pt-32 pb-16 text-center sm:px-6 sm:pt-40 sm:pb-20">
+      <Backdrop variant="grid" />
+      <Backdrop variant="glow" className="opacity-30" />
+      {/* Линия внизу вместо резкой границы: шапка перетекает в контент */}
       <div
-        className="pointer-events-none absolute top-0 left-1/2 h-[420px] w-[760px] max-w-[140vw] -translate-x-1/2 opacity-30 blur-[110px]"
-        style={{ background: "radial-gradient(circle, #0A3FFF, transparent 70%)" }}
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(23,151,255,0.35) 50%, transparent)",
+        }}
       />
 
       <div className="relative mx-auto w-full max-w-3xl">

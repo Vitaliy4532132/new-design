@@ -4,6 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 import { Nav } from "@/components/v2/nav";
 import { PageHero } from "@/components/v2/page-hero";
 import { PricingCards } from "@/components/v2/pricing-cards";
+import { Backdrop } from "@/components/v2/backdrop";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { Footer } from "@/components/v2/footer";
 import { PLANS_FAQ, PLANS_PAGE } from "@/lib/plans-copy";
@@ -39,8 +40,10 @@ export default function PlansDraftPage() {
           где сомнение и возникает. */}
       <section className="px-5 pb-20 sm:px-6">
         <div className="mx-auto max-w-5xl">
-          <div className="flex flex-col items-start gap-5 rounded-2xl border border-white/10 bg-surface p-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-start gap-3">
+          <div className="relative flex flex-col items-start gap-5 overflow-hidden rounded-2xl border border-accent/25 bg-[linear-gradient(180deg,rgba(10,63,255,0.08),transparent)] p-6 sm:flex-row sm:items-center sm:justify-between">
+            <Backdrop variant="dots" />
+
+            <div className="relative flex items-start gap-3">
               <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-accent/30 bg-accent/10">
                 <MessageCircle size={16} className="text-accent" />
               </span>
@@ -54,7 +57,7 @@ export default function PlansDraftPage() {
               href={TELEGRAM_URL}
               target="_blank"
               rel="noopener"
-              className="shrink-0 rounded-[10px] border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-accent/40"
+              className="relative shrink-0 rounded-[10px] border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-accent/40"
             >
               {PLANS_PAGE.choiceButton}
             </a>

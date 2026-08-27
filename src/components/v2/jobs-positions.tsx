@@ -1,4 +1,5 @@
 import { IsoCube } from "@/components/v2/iso-cube";
+import { Backdrop } from "@/components/v2/backdrop";
 import { JOBS_PAGE, POSITIONS } from "@/lib/jobs-copy";
 
 // Цвета по кругу — просто чтобы сетка не была одноцветной. Порядок совпадает
@@ -17,8 +18,10 @@ const COLORS = [
 
 export function JobsPositions() {
   return (
-    <section className="border-t border-white/10 px-5 py-20 sm:px-6">
-      <div className="mx-auto max-w-5xl">
+    <section className="relative overflow-hidden border-t border-white/10 px-5 py-20 sm:px-6">
+      <Backdrop variant="grid" />
+
+      <div className="relative mx-auto max-w-5xl">
         <div className="mb-10 max-w-lg">
           <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">
             {JOBS_PAGE.positionsEyebrow}
