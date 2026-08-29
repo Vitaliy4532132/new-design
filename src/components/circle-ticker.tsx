@@ -17,7 +17,11 @@ const WORK_IMAGES = [
   { src: "/work/sakura-island-4.png", alt: "Сакура-остров, крыши" },
 ];
 
-const CARD_COUNT = 20;
+// Карточки стоят по кругу длиной ~4147px. Шаг между ними — это длина,
+// делённая на количество, поэтому просвет сокращается двумя способами сразу:
+// карточек стало больше, а сами они крупнее.
+const CARD_COUNT = 22;
+const CARD_SIZE = 124;
 const RADIUS = 660;
 
 const cards = Array.from({ length: CARD_COUNT }, (_, i) => {
@@ -39,22 +43,27 @@ export function CircleTicker({ locale = "ru" }: { locale?: Locale }) {
         {cards.map((card, i) => (
           <div
             key={i}
-            className="absolute top-0 left-0 -mt-[50px] -ml-[50px] h-[100px] w-[100px] overflow-hidden rounded-[26px] border border-white/5 bg-[#080808] shadow-[0_16px_30px_rgba(0,0,0,0.5)]"
+            className="absolute top-0 left-0 overflow-hidden rounded-[30px] border border-white/5 bg-[#080808] shadow-[0_16px_30px_rgba(0,0,0,0.5)]"
             style={{
+              width: CARD_SIZE,
+              height: CARD_SIZE,
+              // Смещаем на половину размера, чтобы центр карточки лёг на окружность
+              marginTop: -CARD_SIZE / 2,
+              marginLeft: -CARD_SIZE / 2,
               transform: `rotate(${card.angle}deg) translate(0,-${RADIUS}px)`,
             }}
           >
-            <div className="absolute inset-[2px] overflow-hidden rounded-[22px]">
+            <div className="absolute inset-[2px] overflow-hidden rounded-[26px]">
               <Image
                 src={card.image.src}
                 alt={card.image.alt}
                 fill
-                sizes="100px"
+                sizes={`${CARD_SIZE}px`}
                 className="object-cover"
               />
             </div>
             <div
-              className="absolute inset-[2px] rounded-[22px] border-[0.5px] border-white/20 mix-blend-overlay"
+              className="absolute inset-[2px] rounded-[26px] border-[0.5px] border-white/20 mix-blend-overlay"
               style={{
                 background:
                   "linear-gradient(0deg, rgba(0,0,0,0.3) 0%, rgba(255,255,255,0.15) 100%)",
