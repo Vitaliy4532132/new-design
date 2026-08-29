@@ -62,13 +62,13 @@ export function CookieBanner() {
       <div className="pointer-events-auto relative w-full max-w-3xl animate-banner-in rounded-2xl border border-white/10 bg-surface/95 p-5 shadow-[0_24px_50px_rgba(0,0,0,0.55)] backdrop-blur-md sm:p-6">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
           <div className="flex min-w-0 items-start gap-3.5">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-accent/30 bg-accent/10">
-              <Cookie size={16} className="text-accent" />
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-brand/30 bg-brand/10">
+              <Cookie size={16} className="text-brand" />
             </span>
             <p className="min-w-0 text-sm leading-relaxed text-text-muted">
               Мы используем куки, чтобы сайт работал и чтобы понимать, какие страницы
               полезны. Без вашего согласия включаем только необходимые.{" "}
-              <Link href="/home/privacy" className="text-accent transition-colors hover:text-white">
+              <Link href="/home/privacy" className="text-brand transition-colors hover:text-white">
                 Подробнее
               </Link>
             </p>

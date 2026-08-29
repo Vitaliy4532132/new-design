@@ -17,7 +17,7 @@ const LIFETIME = 4500;
 const KIND = {
   success: { Icon: Check, ring: "ring-green-400/30", tint: "text-green-400", bar: "bg-green-400" },
   error: { Icon: TriangleAlert, ring: "ring-red-500/30", tint: "text-red-400", bar: "bg-red-400" },
-  info: { Icon: Info, ring: "ring-accent/30", tint: "text-accent", bar: "bg-accent" },
+  info: { Icon: Info, ring: "ring-brand/30", tint: "text-brand", bar: "bg-brand" },
 } as const;
 
 type ToastFn = (kind: ToastKind, title: string, text?: string) => void;

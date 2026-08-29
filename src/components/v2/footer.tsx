@@ -59,7 +59,7 @@ export function Footer({ locale = "ru" }: { locale?: Locale }) {
                 className="h-9 w-auto"
               />
               <span>
-                TheFurry<span className="text-accent">Dev</span>
+                TheFurry<span className="text-brand">Dev</span>
               </span>
             </div>
 
@@ -73,7 +73,7 @@ export function Footer({ locale = "ru" }: { locale?: Locale }) {
                   target="_blank"
                   rel="noopener"
                   aria-label={label}
-                  className="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-text-muted transition-colors hover:border-accent/40 hover:text-accent"
+                  className="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-text-muted transition-colors hover:border-brand/40 hover:text-brand"
                 >
                   <Icon size={15} />
                 </a>

@@ -23,7 +23,7 @@ export function JobsPositions() {
 
       <div className="relative mx-auto max-w-5xl">
         <div className="mb-10 max-w-lg">
-          <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">
+          <div className="mb-4 font-mono text-xs tracking-widest text-brand uppercase">
             {JOBS_PAGE.positionsEyebrow}
           </div>
           <h2 className="font-display text-3xl font-medium sm:text-4xl">{JOBS_PAGE.positionsTitle}</h2>
@@ -33,7 +33,7 @@ export function JobsPositions() {
           {POSITIONS.map((p, i) => (
             <div
               key={p.title}
-              className="group rounded-2xl border border-white/10 bg-surface p-5 transition-colors hover:border-accent/40"
+              className="group rounded-2xl border border-white/10 bg-surface p-5 transition-colors hover:border-brand/40"
             >
               <div className="mb-4 flex h-7 items-center">
                 <div className="transition-transform duration-300 group-hover:scale-110">

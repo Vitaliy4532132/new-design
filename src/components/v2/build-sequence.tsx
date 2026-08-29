@@ -219,7 +219,7 @@ function IsoIsland({
 
       {interactive && (
         <div className="mt-1 text-center font-mono text-xs text-text-dim">
-          {hovered ? <span className="text-accent">{materials[hovered]}</span> : dragHint}
+          {hovered ? <span className="text-brand">{materials[hovered]}</span> : dragHint}
         </div>
       )}
     </div>
@@ -249,7 +249,7 @@ function StepList({
                 active
                   ? "border-transparent bg-[linear-gradient(180deg,#0A3FFF_0%,#1797FF_100%)] text-white shadow-[0_0_18px_rgba(23,151,255,0.5)]"
                   : done
-                    ? "border-accent/40 text-accent"
+                    ? "border-brand/40 text-brand"
                     : "border-white/15 text-text-dim"
               }`}
             >
@@ -308,7 +308,7 @@ export function BuildSequence({ locale = "ru" }: { locale?: Locale }) {
 
   const header = (
     <div className="mb-10 max-w-lg">
-      <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">{t.eyebrow}</div>
+      <div className="mb-4 font-mono text-xs tracking-widest text-brand uppercase">{t.eyebrow}</div>
       <h2 className="font-display text-4xl font-medium sm:text-[44px]">{t.title}</h2>
     </div>
   );

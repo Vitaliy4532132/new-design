@@ -29,7 +29,7 @@ const COPY: Record<AuthMode, { title: string; lead: string; submit: string }> = 
 };
 
 const INPUT =
-  "w-full rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-text-dim focus:border-accent";
+  "w-full rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-text-dim focus:border-brand";
 const LABEL = "mb-2 block font-mono text-[11px] tracking-widest text-text-dim uppercase";
 
 // Знаки Discord и Google не перерисовываем — берём подпись и фирменный цвет
@@ -74,7 +74,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
               className="h-9 w-auto"
             />
             <span>
-              TheFurry<span className="text-accent">Dev</span>
+              TheFurry<span className="text-brand">Dev</span>
             </span>
           </Link>
 
@@ -141,7 +141,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
                     Пароль
                   </label>
                   {mode === "login" && (
-                    <Link href="/home/auth/reset" className="text-xs text-accent transition-colors hover:text-white">
+                    <Link href="/home/auth/reset" className="text-xs text-brand transition-colors hover:text-white">
                       Забыли?
                     </Link>
                   )}
@@ -182,11 +182,11 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
           {mode === "register" && (
             <p className="mt-5 text-xs leading-relaxed text-text-dim">
               Регистрируясь, вы соглашаетесь с{" "}
-              <Link href="/home/terms" className="text-accent transition-colors hover:text-white">
+              <Link href="/home/terms" className="text-brand transition-colors hover:text-white">
                 условиями
               </Link>{" "}
               и{" "}
-              <Link href="/home/privacy" className="text-accent transition-colors hover:text-white">
+              <Link href="/home/privacy" className="text-brand transition-colors hover:text-white">
                 политикой конфиденциальности
               </Link>
               .
@@ -197,7 +197,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
             {mode === "login" && (
               <>
                 Нет аккаунта?{" "}
-                <Link href="/home/auth/register" className="font-medium text-accent transition-colors hover:text-white">
+                <Link href="/home/auth/register" className="font-medium text-brand transition-colors hover:text-white">
                   Зарегистрироваться
                 </Link>
               </>
@@ -205,7 +205,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
             {mode === "register" && (
               <>
                 Уже есть аккаунт?{" "}
-                <Link href="/home/auth/login" className="font-medium text-accent transition-colors hover:text-white">
+                <Link href="/home/auth/login" className="font-medium text-brand transition-colors hover:text-white">
                   Войти
                 </Link>
               </>
@@ -213,7 +213,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
             {mode === "reset" && (
               <Link
                 href="/home/auth/login"
-                className="inline-flex items-center gap-2 font-medium text-accent transition-colors hover:text-white"
+                className="inline-flex items-center gap-2 font-medium text-brand transition-colors hover:text-white"
               >
                 <ArrowLeft size={14} />
                 Вернуться ко входу
@@ -236,7 +236,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
 
         <div className="absolute right-0 bottom-0 left-0 p-10">
-          <div className="mb-2 font-mono text-[10px] tracking-widest text-accent uppercase">из портфолио</div>
+          <div className="mb-2 font-mono text-[10px] tracking-widest text-brand uppercase">из портфолио</div>
           <h2 className="mb-2 font-display text-2xl font-medium">Сакура-остров</h2>
           <p className="max-w-sm text-sm leading-relaxed text-text-muted">
             Спавн в японском стиле — один из проектов, собранных с нуля под конкретный сервер.

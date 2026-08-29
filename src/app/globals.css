@@ -21,6 +21,9 @@
   --color-blue-deep: var(--blue-deep);
   --color-blue-bright: var(--blue-bright);
   --color-accent: var(--accent-text);
+  /* Имя brand — для компонентов нового дизайна. В боевом проекте accent уже
+     занят фиолетовым, и общее имя перекрасило бы там рабочие страницы. */
+  --color-brand: var(--accent-text);
   --color-text: var(--text);
   --color-text-muted: var(--text-muted);
   --color-text-dim: var(--text-dim);

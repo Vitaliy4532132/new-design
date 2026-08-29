@@ -101,7 +101,7 @@ export function Nav({ locale = "ru" }: { locale?: Locale }) {
 
       {auth === "admin" && (
         <Link href="/home/admin" onClick={closeMenus} className={`${ITEM} text-text-muted hover:bg-white/5 hover:text-white`}>
-          <Shield size={15} className="text-accent" />
+          <Shield size={15} className="text-brand" />
           {t.adminLabel}
         </Link>
       )}
@@ -145,7 +145,7 @@ export function Nav({ locale = "ru" }: { locale?: Locale }) {
             priority
           />
           <span>
-            TheFurry<span className="text-accent">Dev</span>
+            TheFurry<span className="text-brand">Dev</span>
           </span>
         </Link>
 
@@ -206,7 +206,7 @@ export function Nav({ locale = "ru" }: { locale?: Locale }) {
                   aria-expanded={userOpen}
                   aria-label={t.profileLabel}
                   className={`flex items-center gap-1.5 rounded-full p-0.5 pr-2 ring-1 transition-colors ${
-                    userOpen ? "bg-white/5 ring-accent/50" : "ring-white/10 hover:bg-white/5 hover:ring-white/25"
+                    userOpen ? "bg-white/5 ring-brand/50" : "ring-white/10 hover:bg-white/5 hover:ring-white/25"
                   }`}
                 >
                   <span className="relative flex size-9 items-center justify-center rounded-full bg-[linear-gradient(180deg,#0A3FFF_0%,#1797FF_100%)] font-sans text-sm font-bold text-white">
@@ -233,7 +233,7 @@ export function Nav({ locale = "ru" }: { locale?: Locale }) {
                         <div className="truncate font-mono text-[11px] text-text-dim">@{DEMO_USER.username}</div>
                       </div>
                       {auth === "admin" && (
-                        <span className="ml-auto shrink-0 rounded-md border border-accent/40 px-2 py-0.5 font-mono text-[10px] tracking-wide text-accent uppercase">
+                        <span className="ml-auto shrink-0 rounded-md border border-brand/40 px-2 py-0.5 font-mono text-[10px] tracking-wide text-brand uppercase">
                           админ
                         </span>
                       )}
@@ -245,7 +245,7 @@ export function Nav({ locale = "ru" }: { locale?: Locale }) {
                       onClick={closeMenus}
                       className="flex items-center gap-3 border-b border-white/10 px-4 py-3.5 transition-colors hover:bg-white/5"
                     >
-                      <Wallet size={15} className="text-accent" />
+                      <Wallet size={15} className="text-brand" />
                       <span className="text-sm text-text-muted">Баланс</span>
                       <span className="ml-auto font-display text-base font-medium">{DEMO_USER.balance}</span>
                     </Link>

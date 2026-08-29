@@ -38,7 +38,7 @@ export default function JobsDraftPage() {
       <section className="border-t border-white/10 px-5 py-20 sm:px-6">
         <div className="mx-auto max-w-3xl">
           <div className="mb-10">
-            <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">
+            <div className="mb-4 font-mono text-xs tracking-widest text-brand uppercase">
               {JOBS_PAGE.formEyebrow}
             </div>
             <h2 className="font-display text-3xl font-medium sm:text-4xl">{JOBS_PAGE.formTitle}</h2>

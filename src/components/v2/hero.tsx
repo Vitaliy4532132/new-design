@@ -82,7 +82,7 @@ export function HomeHero({ locale = "ru" }: { locale?: Locale }) {
         {PARTICLES.map((p, i) => (
           <span
             key={i}
-            className="absolute animate-particle-float rounded-full bg-accent/70 shadow-[0_0_10px_rgba(23,151,255,0.8)]"
+            className="absolute animate-particle-float rounded-full bg-brand/70 shadow-[0_0_10px_rgba(23,151,255,0.8)]"
             style={{ top: p.top, left: p.left, width: p.size, height: p.size, animationDelay: p.delay }}
           />
         ))}
@@ -105,7 +105,7 @@ export function HomeHero({ locale = "ru" }: { locale?: Locale }) {
         <div className="mt-5 flex min-h-[4.5rem] items-center justify-center sm:min-h-[3.5rem]">
           <p className="mx-auto max-w-xl text-sm text-text-muted sm:text-base">
             {typed}
-            <span className="ml-0.5 inline-block h-[1em] w-[2px] translate-y-[2px] animate-caret-blink bg-accent align-middle" />
+            <span className="ml-0.5 inline-block h-[1em] w-[2px] translate-y-[2px] animate-caret-blink bg-brand align-middle" />
           </p>
         </div>
 

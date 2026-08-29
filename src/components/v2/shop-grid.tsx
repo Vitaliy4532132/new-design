@@ -34,7 +34,7 @@ function Pills<T extends string>({
           onClick={() => onChange(o.key)}
           className={`rounded-full border px-4 py-2 text-xs font-medium transition-colors ${
             value === o.key
-              ? "border-accent bg-accent/10 text-accent"
+              ? "border-brand bg-brand/10 text-brand"
               : "border-white/10 text-text-muted hover:border-white/25 hover:text-white"
           }`}
         >
@@ -134,7 +134,7 @@ export function ShopGrid({ locale = "ru" }: { locale?: Locale }) {
                 <Link
                   key={s.href}
                   href={s.href}
-                  className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-surface p-6 transition-colors hover:border-accent/40"
+                  className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-surface p-6 transition-colors hover:border-brand/40"
                 >
                   <div>
                     <div className="mb-5 flex h-12 items-center">
@@ -158,7 +158,7 @@ export function ShopGrid({ locale = "ru" }: { locale?: Locale }) {
 
                   <div className="flex items-center justify-between border-t border-white/10 pt-4">
                     <span className="font-display text-lg font-medium">{s.priceLabel}</span>
-                    <span className="flex items-center gap-1.5 text-sm font-medium text-accent">
+                    <span className="flex items-center gap-1.5 text-sm font-medium text-brand">
                       {services.moreLabel}
                       <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
                     </span>

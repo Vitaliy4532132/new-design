@@ -6,7 +6,7 @@ export function ProductAbout({ paragraphs }: { paragraphs: string[] }) {
   return (
     <section className="border-t border-white/10 px-5 py-20 sm:px-6">
       <div className="mx-auto max-w-5xl">
-        <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">описание</div>
+        <div className="mb-4 font-mono text-xs tracking-widest text-brand uppercase">описание</div>
         <h2 className="mb-8 font-display text-3xl font-medium sm:text-4xl">Что он умеет.</h2>
 
         <div className="flex max-w-2xl flex-col gap-5">
@@ -31,7 +31,7 @@ export function ProductDependencies({
   return (
     <section className="border-t border-white/10 px-5 py-20 sm:px-6">
       <div className="mx-auto max-w-5xl">
-        <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">зависимости</div>
+        <div className="mb-4 font-mono text-xs tracking-widest text-brand uppercase">зависимости</div>
         <h2 className="mb-3 font-display text-3xl font-medium sm:text-4xl">Что нужно на сервере.</h2>
         <p className="mb-10 max-w-2xl text-sm leading-relaxed text-text-muted">
           Обязательные ставятся до установки товара, без них он не запустится. Необязательные

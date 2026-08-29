@@ -72,7 +72,7 @@ export function CraftingTable({ locale = "ru" }: { locale?: Locale }) {
     <section className="relative border-y border-white/10 bg-background px-6 py-24">
       <div ref={ref} className="mx-auto max-w-5xl">
         <div className="mb-10 max-w-lg">
-          <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">{t.eyebrow}</div>
+          <div className="mb-4 font-mono text-xs tracking-widest text-brand uppercase">{t.eyebrow}</div>
           <h2 className="font-display text-4xl font-medium sm:text-[44px]">{t.title}</h2>
         </div>
 
@@ -84,7 +84,7 @@ export function CraftingTable({ locale = "ru" }: { locale?: Locale }) {
               onClick={() => pick(i)}
               className={`rounded-full border px-4 py-2 text-xs font-medium transition-colors ${
                 i === active
-                  ? "border-accent bg-accent/10 text-accent"
+                  ? "border-brand bg-brand/10 text-brand"
                   : "border-white/10 text-text-muted hover:border-white/25 hover:text-white"
               }`}
             >
@@ -150,7 +150,7 @@ export function CraftingTable({ locale = "ru" }: { locale?: Locale }) {
 
             <div className="min-h-[18px] text-center font-mono text-xs">
               {picked ? (
-                <span className="text-accent">
+                <span className="text-brand">
                   {TECH[picked].name} <span className="text-text-dim">· {TECH[picked].tag}</span>
                 </span>
               ) : (
@@ -162,7 +162,7 @@ export function CraftingTable({ locale = "ru" }: { locale?: Locale }) {
           <ArrowRight
             size={26}
             className={`rotate-90 text-text-dim transition-colors duration-500 md:rotate-0 ${
-              crafted ? "text-accent" : ""
+              crafted ? "text-brand" : ""
             }`}
           />
 
@@ -191,7 +191,7 @@ export function CraftingTable({ locale = "ru" }: { locale?: Locale }) {
               style={{ opacity: crafted ? 1 : 0 }}
             >
               <div className="font-display text-lg font-medium">{services.items[recipe.service].title}</div>
-              <div className="font-mono text-xs text-accent">{services.items[recipe.service].priceLabel}</div>
+              <div className="font-mono text-xs text-brand">{services.items[recipe.service].priceLabel}</div>
               <p className="mx-auto mt-3 max-w-[220px] text-xs leading-relaxed text-text-muted">
                 {t.craftedNote}
               </p>

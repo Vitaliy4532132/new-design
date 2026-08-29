@@ -5,13 +5,13 @@ import { Check, ChevronDown } from "lucide-react";
 import { HOURS, POSITIONS } from "@/lib/jobs-copy";
 
 const INPUT =
-  "w-full rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-text-dim focus:border-accent";
+  "w-full rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-text-dim focus:border-brand";
 const LABEL = "mb-2 block font-mono text-[11px] tracking-widest text-text-dim uppercase";
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <div className="mb-5 flex items-center gap-4">
-      <span className="font-mono text-[11px] tracking-widest text-accent uppercase">{children}</span>
+      <span className="font-mono text-[11px] tracking-widest text-brand uppercase">{children}</span>
       <span className="h-px flex-1 bg-white/10" />
     </div>
   );
@@ -32,7 +32,7 @@ function Chip({
       onClick={onClick}
       className={`rounded-full border px-4 py-2 text-xs font-medium transition-colors ${
         active
-          ? "border-accent bg-accent/10 text-accent"
+          ? "border-brand bg-brand/10 text-brand"
           : "border-white/10 text-text-muted hover:border-white/25 hover:text-white"
       }`}
     >
@@ -67,7 +67,7 @@ function PositionSelect({ value, onChange }: { value: string; onChange: (v: stri
         type="button"
         onClick={() => setOpen((v) => !v)}
         className={`flex w-full items-center justify-between rounded-[10px] border bg-white/5 px-4 py-3 text-left text-sm outline-none transition-colors ${
-          open ? "border-accent" : "border-white/10"
+          open ? "border-brand" : "border-white/10"
         } ${value ? "text-white" : "text-text-dim"}`}
       >
         {value || "Выберите должность"}
@@ -85,7 +85,7 @@ function PositionSelect({ value, onChange }: { value: string; onChange: (v: stri
                 setOpen(false);
               }}
               className={`flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-left text-sm transition-colors ${
-                p.title === value ? "bg-white/5 text-accent" : "text-text-muted hover:bg-white/5 hover:text-white"
+                p.title === value ? "bg-white/5 text-brand" : "text-text-muted hover:bg-white/5 hover:text-white"
               }`}
             >
               {p.title}

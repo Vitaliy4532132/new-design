@@ -87,7 +87,7 @@ export function PortfolioGallery() {
               onClick={() => setFilter(f.key)}
               className={`rounded-full border px-4 py-2 text-xs font-medium transition-colors ${
                 filter === f.key
-                  ? "border-accent bg-accent/10 text-accent"
+                  ? "border-brand bg-brand/10 text-brand"
                   : "border-white/10 text-text-muted hover:border-white/25 hover:text-white"
               }`}
             >
@@ -117,7 +117,7 @@ export function PortfolioGallery() {
                       <span className="rounded-full bg-[linear-gradient(180deg,#0A3FFF_0%,#1797FF_100%)] px-3 py-1 font-mono text-[10px] tracking-wide text-white uppercase">
                         {PORTFOLIO_PAGE.featuredLabel}
                       </span>
-                      <span className="font-mono text-[10px] tracking-widest text-accent uppercase">{label}</span>
+                      <span className="font-mono text-[10px] tracking-widest text-brand uppercase">{label}</span>
                     </div>
 
                     <h2 className="mb-2 font-display text-2xl font-medium sm:text-3xl">{title}</h2>
@@ -156,14 +156,14 @@ export function PortfolioGallery() {
                   <Link
                     key={work.slug}
                     href={`/home/portfolio/${work.slug}`}
-                    className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface transition-colors hover:border-accent/40"
+                    className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface transition-colors hover:border-brand/40"
                   >
                     <div className="relative aspect-[16/10] overflow-hidden">
                       <BlockCover src={work.src} alt={portfolioAlt(title, label, LOCALE)} />
                     </div>
 
                     <div className="flex flex-1 flex-col p-5">
-                      <div className="mb-2 font-mono text-[10px] tracking-widest text-accent uppercase">{label}</div>
+                      <div className="mb-2 font-mono text-[10px] tracking-widest text-brand uppercase">{label}</div>
                       <h3 className="mb-2 font-display text-lg font-medium">{title}</h3>
 
                       {detail && (

@@ -46,7 +46,7 @@ export function Cta({ locale = "ru" }: { locale?: Locale }) {
       />
       <div className="relative z-[2] mx-auto max-w-2xl">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5">
-          <Zap size={14} className="fill-accent text-accent" />
+          <Zap size={14} className="fill-brand text-brand" />
           <span className="font-mono text-xs text-text-muted">TheFurryDev</span>
         </div>
         <h2 className="mb-5 font-display text-4xl font-medium sm:text-5xl">

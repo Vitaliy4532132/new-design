@@ -104,7 +104,7 @@ export default function CardsPickerPage() {
 
       <section className="px-5 pt-32 pb-12 sm:px-6 sm:pt-40">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">выбор</div>
+          <div className="mb-4 font-mono text-xs tracking-widest text-brand uppercase">выбор</div>
           <h1 className="mb-5 font-display text-[32px] leading-[1.12] font-medium break-words sm:text-5xl">
             Карточка товара — шесть вариантов.
           </h1>
@@ -120,7 +120,7 @@ export default function CardsPickerPage() {
         <section key={n} className="border-t border-white/10 px-5 py-16 sm:px-6">
           <div className="mx-auto max-w-5xl">
             <div className="mb-8 flex flex-wrap items-baseline gap-x-4 gap-y-2">
-              <span className="font-mono text-sm text-accent">{n}</span>
+              <span className="font-mono text-sm text-brand">{n}</span>
               <h2 className="font-display text-2xl font-medium">{name}</h2>
             </div>
             <p className="mb-8 max-w-2xl text-sm leading-relaxed text-text-muted">{note}</p>

@@ -40,12 +40,12 @@ export default function PlansDraftPage() {
           где сомнение и возникает. */}
       <section className="px-5 pb-20 sm:px-6">
         <div className="mx-auto max-w-5xl">
-          <div className="relative flex flex-col items-start gap-5 overflow-hidden rounded-2xl border border-accent/25 bg-[linear-gradient(180deg,rgba(10,63,255,0.08),transparent)] p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="relative flex flex-col items-start gap-5 overflow-hidden rounded-2xl border border-brand/25 bg-[linear-gradient(180deg,rgba(10,63,255,0.08),transparent)] p-6 sm:flex-row sm:items-center sm:justify-between">
             <Backdrop variant="dots" />
 
             <div className="relative flex items-start gap-3">
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-accent/30 bg-accent/10">
-                <MessageCircle size={16} className="text-accent" />
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-brand/30 bg-brand/10">
+                <MessageCircle size={16} className="text-brand" />
               </span>
               <div>
                 <div className="mb-0.5 font-display text-base font-medium">{PLANS_PAGE.choiceTitle}</div>
@@ -57,7 +57,7 @@ export default function PlansDraftPage() {
               href={TELEGRAM_URL}
               target="_blank"
               rel="noopener"
-              className="relative shrink-0 rounded-[10px] border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-accent/40"
+              className="relative shrink-0 rounded-[10px] border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-brand/40"
             >
               {PLANS_PAGE.choiceButton}
             </a>

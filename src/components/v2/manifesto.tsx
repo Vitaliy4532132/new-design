@@ -41,7 +41,7 @@ export function Manifesto({ locale = "ru" }: { locale?: Locale }) {
       />
 
       <div ref={ref} className="relative mx-auto max-w-4xl">
-        <div className="mb-8 font-mono text-xs tracking-widest text-accent uppercase">{t.eyebrow}</div>
+        <div className="mb-8 font-mono text-xs tracking-widest text-brand uppercase">{t.eyebrow}</div>
         <p className="flex flex-wrap font-display text-xl leading-[1.5] font-normal sm:text-3xl sm:leading-[1.45] lg:text-[38px]">
           {words.map((word, i) => {
             const start = i / words.length;

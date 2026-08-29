@@ -25,7 +25,7 @@ const LINE_DELAY = 280;
 
 const TONE_CLASS: Record<Tone, string> = {
   info: "text-text-muted",
-  plugin: "text-accent",
+  plugin: "text-brand",
   success: "text-green-400",
 };
 
@@ -75,7 +75,7 @@ export function ServerConsole({ locale = "ru" }: { locale?: Locale }) {
             ))}
             {!done && (
               <div className="flex gap-2 py-[3px] font-mono text-[11px] sm:text-xs">
-                <span className="inline-block h-[1em] w-[7px] animate-caret-blink bg-accent" />
+                <span className="inline-block h-[1em] w-[7px] animate-caret-blink bg-brand" />
               </div>
             )}
           </div>
@@ -94,7 +94,7 @@ export function ServerConsole({ locale = "ru" }: { locale?: Locale }) {
 
         {/* Текст + чек-лист */}
         <div>
-          <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">{t.eyebrow}</div>
+          <div className="mb-4 font-mono text-xs tracking-widest text-brand uppercase">{t.eyebrow}</div>
           <h2 className="mb-4 font-display text-3xl font-medium sm:text-4xl">{t.title}</h2>
           <p className="mb-8 text-sm leading-relaxed text-text-muted">{t.lead}</p>
 

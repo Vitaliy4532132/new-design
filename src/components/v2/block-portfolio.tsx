@@ -72,7 +72,7 @@ function BlockRevealCard({
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/0 to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-90" />
       <div className="absolute right-0 bottom-0 left-0 p-5">
-        <div className="mb-1 font-mono text-[10px] tracking-widest text-accent uppercase">{categoryLabel}</div>
+        <div className="mb-1 font-mono text-[10px] tracking-widest text-brand uppercase">{categoryLabel}</div>
         <h3 className="font-display text-base font-medium">{title}</h3>
       </div>
     </div>
@@ -89,7 +89,7 @@ export function BlockPortfolio({ locale = "ru" }: { locale?: Locale }) {
     <section id="portfolio" className="relative bg-background px-6 py-28">
       <div className="mx-auto max-w-5xl">
         <div className="mb-12 max-w-lg">
-          <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">{t.eyebrow}</div>
+          <div className="mb-4 font-mono text-xs tracking-widest text-brand uppercase">{t.eyebrow}</div>
           <h2 className="font-display text-4xl font-medium sm:text-[44px]">{t.title}</h2>
         </div>
 

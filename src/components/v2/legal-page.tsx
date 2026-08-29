@@ -23,7 +23,7 @@ export function Ul({ items }: { items: string[] }) {
     <ul className="mb-4 flex flex-col gap-2.5 last:mb-0">
       {items.map((item, i) => (
         <li key={i} className="flex items-start gap-3 text-sm leading-relaxed text-text-muted">
-          <span className="mt-2 size-1.5 shrink-0 rounded-full bg-accent/60" />
+          <span className="mt-2 size-1.5 shrink-0 rounded-full bg-brand/60" />
           <span className="min-w-0">{item}</span>
         </li>
       ))}
@@ -62,7 +62,7 @@ export function LegalPage({
         <Backdrop variant="glow" className="opacity-25" />
 
         <div className="relative mx-auto max-w-5xl">
-          <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">документы</div>
+          <div className="mb-4 font-mono text-xs tracking-widest text-brand uppercase">документы</div>
           <h1 className="mb-3 font-display text-3xl font-medium break-words sm:text-4xl">
             {title}
             {subtitle && <span className="text-text-muted"> {subtitle}</span>}
@@ -86,7 +86,7 @@ export function LegalPage({
                     onClick={() => setActive(s.id)}
                     className={`flex gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors ${
                       active === s.id
-                        ? "bg-accent/10 text-accent"
+                        ? "bg-brand/10 text-brand"
                         : "text-text-muted hover:bg-white/5 hover:text-white"
                     }`}
                   >
@@ -108,7 +108,7 @@ export function LegalPage({
                 className="scroll-mt-28 rounded-2xl border border-white/10 bg-surface p-6 sm:p-7"
               >
                 <div className="mb-5 flex items-baseline gap-3">
-                  <span className="font-mono text-sm text-accent">{String(s.num).padStart(2, "0")}</span>
+                  <span className="font-mono text-sm text-brand">{String(s.num).padStart(2, "0")}</span>
                   <h2 className="font-display text-lg font-medium sm:text-xl">{s.title}</h2>
                 </div>
                 <div>{s.content}</div>

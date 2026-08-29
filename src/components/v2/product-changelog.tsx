@@ -14,7 +14,7 @@ export function ProductChangelog({ entries }: { entries: ChangelogEntry[] }) {
   return (
     <section className="border-t border-white/10 px-5 py-20 sm:px-6">
       <div className="mx-auto max-w-5xl">
-        <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">обновления</div>
+        <div className="mb-4 font-mono text-xs tracking-widest text-brand uppercase">обновления</div>
         <h2 className="mb-3 font-display text-3xl font-medium sm:text-4xl">История версий.</h2>
         <p className="mb-10 max-w-2xl text-sm leading-relaxed text-text-muted">
           Что менялось от версии к версии. Обновления входят в покупку — платить
@@ -33,7 +33,7 @@ export function ProductChangelog({ entries }: { entries: ChangelogEntry[] }) {
                   onClick={() => setOpen(isOpen ? -1 : i)}
                   className="flex w-full items-center gap-4 px-5 py-5 text-left sm:px-6"
                 >
-                  <span className="font-mono text-sm text-accent">v{e.version}</span>
+                  <span className="font-mono text-sm text-brand">v{e.version}</span>
 
                   {latest && (
                     <span className="rounded-md border border-green-400/40 px-2 py-0.5 font-mono text-[10px] tracking-wide text-green-400 uppercase">
@@ -60,7 +60,7 @@ export function ProductChangelog({ entries }: { entries: ChangelogEntry[] }) {
                     <ul className="flex flex-col gap-2.5 px-5 pb-5 sm:px-6">
                       {e.changes.map((c) => (
                         <li key={c} className="flex items-start gap-3 text-sm text-text-muted">
-                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent" />
+                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand" />
                           {c}
                         </li>
                       ))}

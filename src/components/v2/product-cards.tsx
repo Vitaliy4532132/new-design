@@ -29,7 +29,7 @@ const KIND_COLOR: Record<"plugin" | "build", string> = {
 };
 
 const SHELL =
-  "group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface transition-colors hover:border-accent/40";
+  "group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface transition-colors hover:border-brand/40";
 
 // Карточка может вести и на свою страницу товара, и сразу в магазин,
 // поэтому тип ссылки выбирается по самому href.

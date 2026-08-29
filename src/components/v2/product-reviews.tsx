@@ -19,7 +19,7 @@ export function ProductReviews({
       <div className="mx-auto max-w-5xl">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <div>
-            <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">отзывы</div>
+            <div className="mb-4 font-mono text-xs tracking-widest text-brand uppercase">отзывы</div>
             <h2 className="font-display text-3xl font-medium sm:text-4xl">
               {reviews.length > 0 ? "Что говорят покупатели." : "Отзывов пока нет."}
             </h2>
@@ -29,7 +29,7 @@ export function ProductReviews({
             <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-surface px-5 py-4">
               <span className="font-display text-3xl font-medium">5.0</span>
               <div>
-                <div className="flex gap-0.5 text-accent">
+                <div className="flex gap-0.5 text-brand">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} size={12} className="fill-current" />
                   ))}
@@ -56,7 +56,7 @@ export function ProductReviews({
                       <div className="text-xs text-text-dim">{r.role}</div>
                     </div>
                   </div>
-                  <div className="flex shrink-0 gap-0.5 text-accent">
+                  <div className="flex shrink-0 gap-0.5 text-brand">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star key={i} size={12} className="fill-current" />
                     ))}

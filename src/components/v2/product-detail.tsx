@@ -41,7 +41,7 @@ function Countdown({ until }: { until: string }) {
   }, [until]);
 
   if (!left) return null;
-  return <span className="font-mono text-xs text-accent">{left}</span>;
+  return <span className="font-mono text-xs text-brand">{left}</span>;
 }
 
 function BuyModal({ product, version, onClose }: { product: Product; version: string; onClose: () => void }) {
@@ -80,7 +80,7 @@ function BuyModal({ product, version, onClose }: { product: Product; version: st
           </div>
           <div className="flex justify-between gap-4 border-t border-white/10 pt-2.5">
             <span className="text-text-muted">К оплате</span>
-            <span className="font-display text-lg font-medium text-accent">{product.price}</span>
+            <span className="font-display text-lg font-medium text-brand">{product.price}</span>
           </div>
         </div>
 
@@ -151,7 +151,7 @@ export function ProductDetailView({
                   onClick={() => setImage(i)}
                   aria-label={`Изображение ${i + 1}`}
                   className={`relative aspect-[4/3] w-20 shrink-0 overflow-hidden rounded-lg border transition-colors ${
-                    i === image ? "border-accent" : "border-white/10 hover:border-white/25"
+                    i === image ? "border-brand" : "border-white/10 hover:border-white/25"
                   }`}
                 >
                   <Image
@@ -177,7 +177,7 @@ export function ProductDetailView({
           </h1>
 
           <div className="mb-5 flex items-center gap-2">
-            <div className="flex gap-0.5 text-accent">
+            <div className="flex gap-0.5 text-brand">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} size={13} className="fill-current" />
               ))}
@@ -202,7 +202,7 @@ export function ProductDetailView({
                     onClick={() => setVersion(i)}
                     className={`rounded-full border px-4 py-2 text-xs font-medium transition-colors ${
                       i === version
-                        ? "border-accent bg-accent/10 text-accent"
+                        ? "border-brand bg-brand/10 text-brand"
                         : "border-white/10 text-text-muted hover:border-white/25 hover:text-white"
                     }`}
                   >
@@ -222,7 +222,7 @@ export function ProductDetailView({
               </div>
               {detail.discount && (
                 <div className="text-right">
-                  <div className="font-mono text-xs text-accent">−{detail.discount.percent}%</div>
+                  <div className="font-mono text-xs text-brand">−{detail.discount.percent}%</div>
                   <Countdown until={detail.discount.until} />
                 </div>
               )}
@@ -241,7 +241,7 @@ export function ProductDetailView({
           <ul className="flex flex-col gap-2.5">
             {detail.features.map((f) => (
               <li key={f} className="flex items-start gap-2.5 text-sm text-text-muted">
-                <Check size={14} className="mt-0.5 shrink-0 text-accent" />
+                <Check size={14} className="mt-0.5 shrink-0 text-brand" />
                 {f}
               </li>
             ))}

@@ -42,7 +42,7 @@ function PlanCard({ plan, inView }: { plan: Plan; inView: boolean }) {
     <div
       className={`relative flex flex-col rounded-2xl border p-6 sm:p-7 ${
         plan.popular
-          ? "border-accent/50 bg-[linear-gradient(180deg,rgba(10,63,255,0.16),rgba(12,12,14,0.9))] shadow-[0_0_50px_rgba(23,151,255,0.18)] md:-my-3 md:py-10"
+          ? "border-brand/50 bg-[linear-gradient(180deg,rgba(10,63,255,0.16),rgba(12,12,14,0.9))] shadow-[0_0_50px_rgba(23,151,255,0.18)] md:-my-3 md:py-10"
           : "border-white/10 bg-surface"
       }`}
     >
@@ -92,7 +92,7 @@ function PlanCard({ plan, inView }: { plan: Plan; inView: boolean }) {
       <ul className="flex flex-col gap-2.5 border-t border-white/10 pt-5">
         {visible.map((f) => (
           <li key={f} className="flex items-start gap-2.5 text-sm text-text-muted">
-            <Check size={14} className="mt-0.5 shrink-0 text-accent" />
+            <Check size={14} className="mt-0.5 shrink-0 text-brand" />
             {f}
           </li>
         ))}
@@ -102,7 +102,7 @@ function PlanCard({ plan, inView }: { plan: Plan; inView: boolean }) {
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="mt-4 flex items-center gap-1.5 self-start text-sm font-medium text-accent"
+          className="mt-4 flex items-center gap-1.5 self-start text-sm font-medium text-brand"
         >
           {expanded ? PLANS_PAGE.showLess : `${PLANS_PAGE.showAll} — ещё ${hidden}`}
           <ChevronDown size={14} className={`transition-transform ${expanded ? "rotate-180" : ""}`} />
@@ -120,7 +120,7 @@ export function PricingCards() {
       <div className="mx-auto max-w-5xl">
         <div className="mb-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-text-muted">
           <span className="flex items-center gap-2">
-            <span className="size-1.5 rounded-full bg-accent" />
+            <span className="size-1.5 rounded-full bg-brand" />
             {PLANS_PAGE.hintPrice}
           </span>
           <span className="flex items-center gap-2">

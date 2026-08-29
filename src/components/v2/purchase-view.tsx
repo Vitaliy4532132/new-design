@@ -87,7 +87,7 @@ function LicenseBlock({ license }: { license: DemoLicense }) {
   return (
     <div className={`${CARD} p-6`}>
       <div className="mb-5 flex items-center gap-3">
-        <KeyRound size={17} className="text-accent" />
+        <KeyRound size={17} className="text-brand" />
         <h2 className="font-display text-lg font-medium">Лицензия</h2>
         <span
           className={`ml-auto rounded-md border px-2 py-0.5 font-mono text-[10px] tracking-wide uppercase ${
@@ -142,7 +142,7 @@ function LicenseBlock({ license }: { license: DemoLicense }) {
                   i > 0 ? "border-t border-white/10" : ""
                 }`}
               >
-                <Server size={15} className="shrink-0 text-accent" />
+                <Server size={15} className="shrink-0 text-brand" />
                 <div className="min-w-0">
                   <code className="font-mono text-sm break-all text-white">{s.ip}</code>
                   <div className="font-mono text-[11px] text-text-dim">был на связи {formatDate(s.lastSeen)}</div>
@@ -248,7 +248,7 @@ export function ReviewBlock({ purchase }: { purchase: DemoPurchase }) {
           </span>
           <span className="ml-auto font-mono text-[11px] text-text-dim">{formatDate(existing.date)}</span>
         </div>
-        <div className="mb-3 flex gap-0.5 text-accent">
+        <div className="mb-3 flex gap-0.5 text-brand">
           {Array.from({ length: 5 }).map((_, i) => (
             <Star key={i} size={13} className={i < existing.rating ? "fill-current" : "opacity-25"} />
           ))}
@@ -286,7 +286,7 @@ export function ReviewBlock({ purchase }: { purchase: DemoPurchase }) {
               onMouseEnter={() => setHovered(value)}
               onClick={() => setRating(value)}
               aria-label={`Оценка ${value}`}
-              className="text-accent transition-transform hover:scale-110"
+              className="text-brand transition-transform hover:scale-110"
             >
               <Star size={22} className={lit ? "fill-current" : "opacity-25"} />
             </button>
@@ -299,7 +299,7 @@ export function ReviewBlock({ purchase }: { purchase: DemoPurchase }) {
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Что понравилось, что можно улучшить"
-        className="mb-5 w-full resize-none rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-text-dim focus:border-accent"
+        className="mb-5 w-full resize-none rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-text-dim focus:border-brand"
       />
 
       <button
@@ -345,7 +345,7 @@ export function PurchaseView({ purchase }: { purchase: DemoPurchase }) {
           <div className={`${CARD} p-6`}>
             <h2 className="mb-5 font-display text-lg font-medium">Загрузка</h2>
 
-            <div className="mb-5 flex flex-wrap items-center gap-4 rounded-2xl border border-accent/30 bg-accent/5 px-5 py-4">
+            <div className="mb-5 flex flex-wrap items-center gap-4 rounded-2xl border border-brand/30 bg-brand/5 px-5 py-4">
               <div className="min-w-0">
                 <div className="flex items-center gap-2.5">
                   <span className="font-mono text-sm text-white">v{latest.version}</span>
@@ -386,7 +386,7 @@ export function PurchaseView({ purchase }: { purchase: DemoPurchase }) {
                 {changelog.map((e, i) => (
                   <li key={e.version} className={`px-6 py-5 ${i > 0 ? "border-t border-white/10" : ""}`}>
                     <div className="mb-3 flex flex-wrap items-center gap-3">
-                      <span className="font-mono text-sm text-accent">v{e.version}</span>
+                      <span className="font-mono text-sm text-brand">v{e.version}</span>
                       {i === 0 && (
                         <span className="rounded-md border border-green-400/40 px-2 py-0.5 font-mono text-[10px] tracking-wide text-green-400 uppercase">
                           свежая
@@ -397,7 +397,7 @@ export function PurchaseView({ purchase }: { purchase: DemoPurchase }) {
                     <ul className="flex flex-col gap-2">
                       {e.changes.map((c) => (
                         <li key={c} className="flex items-start gap-3 text-sm text-text-muted">
-                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent" />
+                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand" />
                           {c}
                         </li>
                       ))}

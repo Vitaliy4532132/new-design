@@ -40,7 +40,7 @@ const TABS: { id: TabId; label: string; icon: React.ElementType }[] = [
 
 const CARD = "rounded-2xl border border-white/10 bg-surface";
 const INPUT =
-  "w-full rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-text-dim focus:border-accent";
+  "w-full rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-text-dim focus:border-brand";
 
 function Badge({ label, className }: { label: string; className: string }) {
   return (
@@ -52,7 +52,7 @@ function Badge({ label, className }: { label: string; className: string }) {
 
 function Stars({ rating }: { rating: number }) {
   return (
-    <div className="flex gap-0.5 text-accent">
+    <div className="flex gap-0.5 text-brand">
       {Array.from({ length: 5 }).map((_, i) => (
         <Star key={i} size={12} className={i < rating ? "fill-current" : "opacity-25"} />
       ))}
@@ -92,7 +92,7 @@ function TopupModal({ onClose }: { onClose: () => void }) {
               onClick={() => setAmount(v)}
               className={`rounded-full border px-4 py-2 text-xs font-medium transition-colors ${
                 amount === v
-                  ? "border-accent bg-accent/10 text-accent"
+                  ? "border-brand bg-brand/10 text-brand"
                   : "border-white/10 text-text-muted hover:border-white/25 hover:text-white"
               }`}
             >
@@ -172,7 +172,7 @@ export function ProfileView() {
                   onClick={() => setTab(t.id)}
                   className={`flex shrink-0 items-center gap-2.5 rounded-[10px] px-4 py-2.5 text-sm font-medium transition-colors lg:w-full ${
                     active
-                      ? "bg-accent/10 text-accent"
+                      ? "bg-brand/10 text-brand"
                       : "text-text-muted hover:bg-white/5 hover:text-white"
                   }`}
                 >
@@ -211,7 +211,7 @@ export function ProfileView() {
                         <ul className="flex flex-col gap-3">
                           {o.log.map((l) => (
                             <li key={l.date + l.text} className="flex gap-3 text-sm">
-                              <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent" />
+                              <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand" />
                               <span className="min-w-0 text-text-muted">{l.text}</span>
                               <span className="ml-auto shrink-0 font-mono text-[11px] text-text-dim">
                                 {formatDate(l.date)}
@@ -232,7 +232,7 @@ export function ProfileView() {
                   <Link
                     key={p.slug}
                     href={`/home/profile/purchases/${p.slug}`}
-                    className={`${CARD} group p-6 transition-colors hover:border-accent/40`}
+                    className={`${CARD} group p-6 transition-colors hover:border-brand/40`}
                   >
                     <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
                       <div>
@@ -245,12 +245,12 @@ export function ProfileView() {
                     </div>
 
                     <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-white/10 bg-background/60 px-4 py-3">
-                      <KeyRound size={15} className="shrink-0 text-accent" />
+                      <KeyRound size={15} className="shrink-0 text-brand" />
                       {/* Ключ здесь скрыт: полный показывается на странице покупки */}
                       <code className="min-w-0 font-mono text-xs break-all text-text-muted">
                         {p.licenseKey.slice(0, 4)}-••••-••••-••••
                       </code>
-                      <span className="ml-auto flex shrink-0 items-center gap-1.5 text-xs font-medium text-accent">
+                      <span className="ml-auto flex shrink-0 items-center gap-1.5 text-xs font-medium text-brand">
                         Открыть
                         <ChevronRight size={13} className="transition-transform group-hover:translate-x-0.5" />
                       </span>
@@ -282,7 +282,7 @@ export function ProfileView() {
                       </div>
 
                       <div className="mb-4 flex flex-wrap items-center gap-3 rounded-2xl border border-white/10 bg-background/60 px-4 py-3">
-                        <KeyRound size={15} className="shrink-0 text-accent" />
+                        <KeyRound size={15} className="shrink-0 text-brand" />
                         {/* Полный ключ показывается только на странице покупки */}
                         <code className="min-w-0 font-mono text-xs break-all text-text-muted">
                           {p.license.key.slice(0, 4)}-••••-••••-••••
@@ -307,7 +307,7 @@ export function ProfileView() {
 
                       <Link
                         href={`/home/profile/purchases/${p.slug}`}
-                        className="group flex w-fit items-center gap-1.5 text-sm font-medium text-accent"
+                        className="group flex w-fit items-center gap-1.5 text-sm font-medium text-brand"
                       >
                         Управлять ключом
                         <ChevronRight size={14} className="transition-transform group-hover:translate-x-0.5" />

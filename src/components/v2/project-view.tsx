@@ -69,7 +69,7 @@ function Gallery({ images, alt }: { images: string[]; alt: string }) {
               onClick={() => setIndex(i)}
               aria-label={`Кадр ${i + 1}`}
               className={`relative aspect-[16/10] w-24 shrink-0 overflow-hidden rounded-lg border transition-colors ${
-                i === index ? "border-accent" : "border-white/10 hover:border-white/25"
+                i === index ? "border-brand" : "border-white/10 hover:border-white/25"
               }`}
             >
               <Image
@@ -158,7 +158,7 @@ export function ProjectView({ work, detail }: { work: PortfolioItem; detail: Wor
           Все работы
         </Link>
 
-        <div className="mb-3 font-mono text-[10px] tracking-widest text-accent uppercase">{label}</div>
+        <div className="mb-3 font-mono text-[10px] tracking-widest text-brand uppercase">{label}</div>
         <h1 className="mb-4 font-display text-3xl font-medium break-words sm:text-4xl">{title}</h1>
         <p className="mb-8 max-w-2xl text-sm leading-relaxed text-text-muted sm:text-base">
           {detail.description}
@@ -224,7 +224,7 @@ export function ProjectView({ work, detail }: { work: PortfolioItem; detail: Wor
                 <ul className="flex flex-col gap-2.5">
                   {detail.features.map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-sm text-text-muted">
-                      <Check size={14} className="mt-0.5 shrink-0 text-accent" />
+                      <Check size={14} className="mt-0.5 shrink-0 text-brand" />
                       {f}
                     </li>
                   ))}
@@ -233,12 +233,12 @@ export function ProjectView({ work, detail }: { work: PortfolioItem; detail: Wor
             )}
 
             {detail.results && detail.results.length > 0 && (
-              <div className="rounded-2xl border border-accent/25 bg-[linear-gradient(180deg,rgba(10,63,255,0.08),transparent)] p-6">
+              <div className="rounded-2xl border border-brand/25 bg-[linear-gradient(180deg,rgba(10,63,255,0.08),transparent)] p-6">
                 <h2 className="mb-5 font-display text-lg font-medium">Результат</h2>
                 <ul className="flex flex-col gap-2.5">
                   {detail.results.map((r) => (
                     <li key={r} className="flex items-start gap-2.5 text-sm text-text-muted">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand" />
                       {r}
                     </li>
                   ))}
@@ -269,7 +269,7 @@ export function ProjectView({ work, detail }: { work: PortfolioItem; detail: Wor
                 <Link
                   key={s.slug}
                   href={`/home/portfolio/${s.slug}`}
-                  className="group overflow-hidden rounded-2xl border border-white/10 bg-surface transition-colors hover:border-accent/40"
+                  className="group overflow-hidden rounded-2xl border border-white/10 bg-surface transition-colors hover:border-brand/40"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <Image

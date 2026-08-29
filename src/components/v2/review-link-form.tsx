@@ -40,7 +40,7 @@ function Shell({ children }: { children: React.ReactNode }) {
             className="h-9 w-auto"
           />
           <span>
-            TheFurry<span className="text-accent">Dev</span>
+            TheFurry<span className="text-brand">Dev</span>
           </span>
         </Link>
 
@@ -122,7 +122,7 @@ export function ReviewLinkForm({ token }: { token: string }) {
   return (
     <Shell>
       <form onSubmit={submit} className={`${CARD} p-6 sm:p-8`}>
-        <div className="mb-1 font-mono text-[11px] tracking-widest text-accent uppercase">отзыв</div>
+        <div className="mb-1 font-mono text-[11px] tracking-widest text-brand uppercase">отзыв</div>
         <h1 className="mb-2 font-display text-xl font-medium">{link.productName}</h1>
         <p className="mb-7 text-sm leading-relaxed text-text-muted">{link.description}</p>
 
@@ -141,7 +141,7 @@ export function ReviewLinkForm({ token }: { token: string }) {
                   onMouseEnter={() => setHovered(value)}
                   onClick={() => setRating(value)}
                   aria-label={`Оценка ${value}`}
-                  className="text-accent transition-transform hover:scale-110"
+                  className="text-brand transition-transform hover:scale-110"
                 >
                   <Star size={26} className={lit ? "fill-current" : "opacity-25"} />
                 </button>
@@ -163,7 +163,7 @@ export function ReviewLinkForm({ token }: { token: string }) {
             onChange={(e) => setName(e.target.value)}
             required
             placeholder="Ник или имя"
-            className="w-full rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-text-dim focus:border-accent"
+            className="w-full rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-text-dim focus:border-brand"
           />
         </div>
 
@@ -181,7 +181,7 @@ export function ReviewLinkForm({ token }: { token: string }) {
             onChange={(e) => setText(e.target.value)}
             required
             placeholder="Что понравилось, что можно улучшить"
-            className="w-full resize-none rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-text-dim focus:border-accent"
+            className="w-full resize-none rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-text-dim focus:border-brand"
           />
         </div>
 

@@ -71,7 +71,7 @@ export default async function ProductDraftPage({ params }: { params: Promise<{ s
       {/* Характеристики */}
       <section className="border-t border-white/10 px-5 py-20 sm:px-6">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">характеристики</div>
+          <div className="mb-4 font-mono text-xs tracking-widest text-brand uppercase">характеристики</div>
           <h2 className="mb-10 font-display text-3xl font-medium sm:text-4xl">Что внутри.</h2>
 
           <div className="overflow-hidden rounded-2xl border border-white/10">
@@ -99,7 +99,7 @@ export default async function ProductDraftPage({ params }: { params: Promise<{ s
       {/* Похожие товары */}
       <section className="border-t border-white/10 px-5 py-20 sm:px-6">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-4 font-mono text-xs tracking-widest text-accent uppercase">ещё в магазине</div>
+          <div className="mb-4 font-mono text-xs tracking-widest text-brand uppercase">ещё в магазине</div>
           <h2 className="mb-10 font-display text-3xl font-medium sm:text-4xl">Смотрят вместе с этим.</h2>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -109,7 +109,7 @@ export default async function ProductDraftPage({ params }: { params: Promise<{ s
                 <Link
                   key={p.slug}
                   href={`/home/shop/${p.slug}`}
-                  className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface transition-colors hover:border-accent/40"
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface transition-colors hover:border-brand/40"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <Image
@@ -121,13 +121,13 @@ export default async function ProductDraftPage({ params }: { params: Promise<{ s
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-5">
-                    <div className="mb-2 font-mono text-[10px] tracking-widest text-accent uppercase">
+                    <div className="mb-2 font-mono text-[10px] tracking-widest text-brand uppercase">
                       {products.typeLabels[p.kind]}
                     </div>
                     <h3 className="mb-2 font-display text-base font-medium">{p.title}</h3>
                     <div className="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                       <span className="font-display text-base font-medium">{p.price}</span>
-                      <span className="flex items-center gap-1.5 text-sm font-medium text-accent">
+                      <span className="flex items-center gap-1.5 text-sm font-medium text-brand">
                         <ShoppingBag size={14} />
                         {products.buyLabel}
                       </span>
@@ -141,7 +141,7 @@ export default async function ProductDraftPage({ params }: { params: Promise<{ s
           <div className="mt-8">
             <Link
               href="/home/shop"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-accent"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-brand"
             >
               Весь магазин
               <ChevronRight size={15} />
