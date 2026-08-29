@@ -1,12 +1,12 @@
 import { buildMetadata } from "@/lib/seo";
-import { SiteNav } from "@/components/site-nav";
+import { Nav } from "@/components/v2/nav";
 import { PageHero } from "@/components/page-hero";
 import { ComparisonTable } from "@/components/comparison-table";
 import { InfoGrid } from "@/components/info-grid";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { FaqJsonLd } from "@/components/faq-jsonld";
-import { CtaSection } from "@/components/cta-section";
-import { SiteFooter } from "@/components/site-footer";
+import { Cta } from "@/components/v2/cta";
+import { Footer } from "@/components/v2/footer";
 import { SERVER_SETUP_FAQ } from "@/lib/faq-data";
 import { TELEGRAM_URL } from "@/lib/links";
 
@@ -49,7 +49,7 @@ export default function ServerSetupPage() {
   return (
     <main>
       <FaqJsonLd items={SERVER_SETUP_FAQ} />
-      <SiteNav />
+      <Nav />
       <PageHero
         eyebrow="Услуги / Сервер с нуля"
         title="Сервер с нуля и оптимизация"
@@ -132,8 +132,8 @@ export default function ServerSetupPage() {
         eyebrow="faq"
         title="Вопросы про настройку."
       />
-      <CtaSection />
-      <SiteFooter />
+      <Cta />
+      <Footer />
     </main>
   );
 }

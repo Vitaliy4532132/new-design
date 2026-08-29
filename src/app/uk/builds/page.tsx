@@ -1,12 +1,12 @@
 import { buildMetadata } from "@/lib/seo";
-import { SiteNav } from "@/components/site-nav";
+import { Nav } from "@/components/v2/nav";
 import { PageHero } from "@/components/page-hero";
 import { InfoGrid } from "@/components/info-grid";
 import { PortfolioCarousel } from "@/components/portfolio-carousel";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { FaqJsonLd } from "@/components/faq-jsonld";
-import { CtaSection } from "@/components/cta-section";
-import { SiteFooter } from "@/components/site-footer";
+import { Cta } from "@/components/v2/cta";
+import { Footer } from "@/components/v2/footer";
 import { SetHtmlLang } from "@/components/set-html-lang";
 import { BUILDS_FAQ_UK } from "@/lib/faq-data-uk";
 
@@ -45,7 +45,7 @@ export default function BuildsPageUk() {
     <main>
       <SetHtmlLang locale="uk" />
       <FaqJsonLd items={BUILDS_FAQ_UK} />
-      <SiteNav locale="uk" />
+      <Nav locale="uk" />
       <PageHero
         eyebrow="Послуги / Збірки"
         title="Круті збірки"
@@ -66,8 +66,8 @@ export default function BuildsPageUk() {
       />
       <PortfolioCarousel locale="uk" />
       <FaqAccordion items={BUILDS_FAQ_UK} eyebrow="faq" title="Питання про збірки." />
-      <CtaSection locale="uk" />
-      <SiteFooter locale="uk" />
+      <Cta locale="uk" />
+      <Footer locale="uk" />
     </main>
   );
 }

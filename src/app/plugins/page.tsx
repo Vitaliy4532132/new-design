@@ -1,12 +1,12 @@
 import { buildMetadata } from "@/lib/seo";
-import { SiteNav } from "@/components/site-nav";
+import { Nav } from "@/components/v2/nav";
 import { PageHero } from "@/components/page-hero";
 import { InfoGrid } from "@/components/info-grid";
 import { ProductsShelf } from "@/components/products-shelf";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { FaqJsonLd } from "@/components/faq-jsonld";
-import { CtaSection } from "@/components/cta-section";
-import { SiteFooter } from "@/components/site-footer";
+import { Cta } from "@/components/v2/cta";
+import { Footer } from "@/components/v2/footer";
 import { PLUGINS_FAQ } from "@/lib/faq-data";
 
 export const metadata = buildMetadata({
@@ -30,7 +30,7 @@ export default function PluginsPage() {
   return (
     <main>
       <FaqJsonLd items={PLUGINS_FAQ} />
-      <SiteNav />
+      <Nav />
       <PageHero
         eyebrow="Услуги / Плагины"
         title="Плагины на заказ для"
@@ -52,8 +52,8 @@ export default function PluginsPage() {
         title="Готовые плагины — без ожидания разработки."
       />
       <FaqAccordion items={PLUGINS_FAQ} eyebrow="faq" title="Вопросы про плагины." />
-      <CtaSection />
-      <SiteFooter />
+      <Cta />
+      <Footer />
     </main>
   );
 }

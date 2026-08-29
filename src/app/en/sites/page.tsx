@@ -1,12 +1,12 @@
 import { buildMetadata } from "@/lib/seo";
-import { SiteNav } from "@/components/site-nav";
+import { Nav } from "@/components/v2/nav";
 import { PageHero } from "@/components/page-hero";
 import { InfoGrid } from "@/components/info-grid";
 import { ComparisonTable } from "@/components/comparison-table";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { FaqJsonLd } from "@/components/faq-jsonld";
-import { CtaSection } from "@/components/cta-section";
-import { SiteFooter } from "@/components/site-footer";
+import { Cta } from "@/components/v2/cta";
+import { Footer } from "@/components/v2/footer";
 import { SetHtmlLang } from "@/components/set-html-lang";
 import { SITES_FAQ_EN } from "@/lib/faq-data-en";
 
@@ -43,7 +43,7 @@ export default function SitesPageEn() {
     <main>
       <SetHtmlLang locale="en" />
       <FaqJsonLd items={SITES_FAQ_EN} />
-      <SiteNav locale="en" />
+      <Nav locale="en" />
       <PageHero
         eyebrow="Services / Websites"
         title="A website for"
@@ -77,8 +77,8 @@ export default function SitesPageEn() {
         ]}
       />
       <FaqAccordion items={SITES_FAQ_EN} eyebrow="faq" title="Questions about websites." />
-      <CtaSection locale="en" />
-      <SiteFooter locale="en" />
+      <Cta locale="en" />
+      <Footer locale="en" />
     </main>
   );
 }

@@ -1,12 +1,12 @@
 import { buildMetadata } from "@/lib/seo";
-import { SiteNav } from "@/components/site-nav";
+import { Nav } from "@/components/v2/nav";
 import { PageHero } from "@/components/page-hero";
 import { InfoGrid } from "@/components/info-grid";
 import { ComparisonTable } from "@/components/comparison-table";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { FaqJsonLd } from "@/components/faq-jsonld";
-import { CtaSection } from "@/components/cta-section";
-import { SiteFooter } from "@/components/site-footer";
+import { Cta } from "@/components/v2/cta";
+import { Footer } from "@/components/v2/footer";
 import { SetHtmlLang } from "@/components/set-html-lang";
 import { SITES_FAQ_UK } from "@/lib/faq-data-uk";
 
@@ -43,7 +43,7 @@ export default function SitesPageUk() {
     <main>
       <SetHtmlLang locale="uk" />
       <FaqJsonLd items={SITES_FAQ_UK} />
-      <SiteNav locale="uk" />
+      <Nav locale="uk" />
       <PageHero
         eyebrow="Послуги / Сайти"
         title="Сайт для"
@@ -77,8 +77,8 @@ export default function SitesPageUk() {
         ]}
       />
       <FaqAccordion items={SITES_FAQ_UK} eyebrow="faq" title="Питання про сайти." />
-      <CtaSection locale="uk" />
-      <SiteFooter locale="uk" />
+      <Cta locale="uk" />
+      <Footer locale="uk" />
     </main>
   );
 }

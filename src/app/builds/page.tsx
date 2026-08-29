@@ -1,12 +1,12 @@
 import { buildMetadata } from "@/lib/seo";
-import { SiteNav } from "@/components/site-nav";
+import { Nav } from "@/components/v2/nav";
 import { PageHero } from "@/components/page-hero";
 import { InfoGrid } from "@/components/info-grid";
 import { PortfolioCarousel } from "@/components/portfolio-carousel";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { FaqJsonLd } from "@/components/faq-jsonld";
-import { CtaSection } from "@/components/cta-section";
-import { SiteFooter } from "@/components/site-footer";
+import { Cta } from "@/components/v2/cta";
+import { Footer } from "@/components/v2/footer";
 import { BUILDS_FAQ } from "@/lib/faq-data";
 
 export const metadata = buildMetadata({
@@ -42,7 +42,7 @@ export default function BuildsPage() {
   return (
     <main>
       <FaqJsonLd items={BUILDS_FAQ} />
-      <SiteNav />
+      <Nav />
       <PageHero
         eyebrow="Услуги / Сборки"
         title="Крутые сборки"
@@ -63,8 +63,8 @@ export default function BuildsPage() {
       />
       <PortfolioCarousel />
       <FaqAccordion items={BUILDS_FAQ} eyebrow="faq" title="Вопросы про сборки." />
-      <CtaSection />
-      <SiteFooter />
+      <Cta />
+      <Footer />
     </main>
   );
 }

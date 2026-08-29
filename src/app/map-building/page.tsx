@@ -1,12 +1,12 @@
 import { buildMetadata } from "@/lib/seo";
-import { SiteNav } from "@/components/site-nav";
+import { Nav } from "@/components/v2/nav";
 import { PageHero } from "@/components/page-hero";
 import { InfoGrid } from "@/components/info-grid";
 import { PortfolioCarousel } from "@/components/portfolio-carousel";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { FaqJsonLd } from "@/components/faq-jsonld";
-import { CtaSection } from "@/components/cta-section";
-import { SiteFooter } from "@/components/site-footer";
+import { Cta } from "@/components/v2/cta";
+import { Footer } from "@/components/v2/footer";
 import { MAP_BUILDING_FAQ } from "@/lib/faq-data";
 
 export const metadata = buildMetadata({
@@ -28,7 +28,7 @@ export default function MapBuildingPage() {
   return (
     <main>
       <FaqJsonLd items={MAP_BUILDING_FAQ} />
-      <SiteNav />
+      <Nav />
       <PageHero
         eyebrow="Услуги / Построение карты"
         title="Постройка карты для вашего"
@@ -52,8 +52,8 @@ export default function MapBuildingPage() {
         eyebrow="faq"
         title="Вопросы про постройки."
       />
-      <CtaSection />
-      <SiteFooter />
+      <Cta />
+      <Footer />
     </main>
   );
 }

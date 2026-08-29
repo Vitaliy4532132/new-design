@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { SiteNav } from "@/components/site-nav";
-import { CtaSection } from "@/components/cta-section";
-import { SiteFooter } from "@/components/site-footer";
+import { Nav } from "@/components/v2/nav";
+import { Cta } from "@/components/v2/cta";
+import { Footer } from "@/components/v2/footer";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Reveal } from "@/components/reveal";
 import { BlogGrid } from "@/components/blog-grid";
@@ -40,7 +40,7 @@ export function BlogIndexView({
       <BreadcrumbJsonLd
         items={[{ label: homeLabel, href: homeHref }, { label: blogLabel, href: blogBasePath }]}
       />
-      <SiteNav locale={locale} />
+      <Nav locale={locale} />
       <section className="relative overflow-hidden px-6 pt-44 pb-16 text-center">
         <div
           className="pointer-events-none absolute top-0 left-1/2 h-[420px] w-[760px] -translate-x-1/2 opacity-30 blur-[110px]"
@@ -106,8 +106,8 @@ export function BlogIndexView({
         </div>
       </section>
 
-      <CtaSection locale={locale} />
-      <SiteFooter locale={locale} />
+      <Cta locale={locale} />
+      <Footer locale={locale} />
     </main>
   );
 }

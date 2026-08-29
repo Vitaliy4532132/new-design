@@ -1,12 +1,12 @@
 import { buildMetadata } from "@/lib/seo";
-import { SiteNav } from "@/components/site-nav";
+import { Nav } from "@/components/v2/nav";
 import { PageHero } from "@/components/page-hero";
 import { InfoGrid } from "@/components/info-grid";
 import { ComparisonTable } from "@/components/comparison-table";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { FaqJsonLd } from "@/components/faq-jsonld";
-import { CtaSection } from "@/components/cta-section";
-import { SiteFooter } from "@/components/site-footer";
+import { Cta } from "@/components/v2/cta";
+import { Footer } from "@/components/v2/footer";
 import { SITES_FAQ } from "@/lib/faq-data";
 
 export const metadata = buildMetadata({
@@ -40,7 +40,7 @@ export default function SitesPage() {
   return (
     <main>
       <FaqJsonLd items={SITES_FAQ} />
-      <SiteNav />
+      <Nav />
       <PageHero
         eyebrow="Услуги / Сайты"
         title="Сайт для"
@@ -74,8 +74,8 @@ export default function SitesPage() {
         ]}
       />
       <FaqAccordion items={SITES_FAQ} eyebrow="faq" title="Вопросы про сайты." />
-      <CtaSection />
-      <SiteFooter />
+      <Cta />
+      <Footer />
     </main>
   );
 }

@@ -1,12 +1,12 @@
 import { buildMetadata } from "@/lib/seo";
-import { SiteNav } from "@/components/site-nav";
+import { Nav } from "@/components/v2/nav";
 import { PageHero } from "@/components/page-hero";
 import { InfoGrid } from "@/components/info-grid";
 import { ProductsShelf } from "@/components/products-shelf";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { FaqJsonLd } from "@/components/faq-jsonld";
-import { CtaSection } from "@/components/cta-section";
-import { SiteFooter } from "@/components/site-footer";
+import { Cta } from "@/components/v2/cta";
+import { Footer } from "@/components/v2/footer";
 import { SetHtmlLang } from "@/components/set-html-lang";
 import { PLUGINS_FAQ_UK } from "@/lib/faq-data-uk";
 
@@ -33,7 +33,7 @@ export default function PluginsPageUk() {
     <main>
       <SetHtmlLang locale="uk" />
       <FaqJsonLd items={PLUGINS_FAQ_UK} />
-      <SiteNav locale="uk" />
+      <Nav locale="uk" />
       <PageHero
         eyebrow="Послуги / Плагіни"
         title="Плагіни на замовлення для"
@@ -56,8 +56,8 @@ export default function PluginsPageUk() {
         title="Готові плагіни — без очікування розробки."
       />
       <FaqAccordion items={PLUGINS_FAQ_UK} eyebrow="faq" title="Питання про плагіни." />
-      <CtaSection locale="uk" />
-      <SiteFooter locale="uk" />
+      <Cta locale="uk" />
+      <Footer locale="uk" />
     </main>
   );
 }

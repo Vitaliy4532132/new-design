@@ -1,12 +1,12 @@
 import { buildMetadata } from "@/lib/seo";
-import { SiteNav } from "@/components/site-nav";
+import { Nav } from "@/components/v2/nav";
 import { PageHero } from "@/components/page-hero";
 import { InfoGrid } from "@/components/info-grid";
 import { ProductsShelf } from "@/components/products-shelf";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { FaqJsonLd } from "@/components/faq-jsonld";
-import { CtaSection } from "@/components/cta-section";
-import { SiteFooter } from "@/components/site-footer";
+import { Cta } from "@/components/v2/cta";
+import { Footer } from "@/components/v2/footer";
 import { SetHtmlLang } from "@/components/set-html-lang";
 import { PLUGINS_FAQ_EN } from "@/lib/faq-data-en";
 
@@ -33,7 +33,7 @@ export default function PluginsPageEn() {
     <main>
       <SetHtmlLang locale="en" />
       <FaqJsonLd items={PLUGINS_FAQ_EN} />
-      <SiteNav locale="en" />
+      <Nav locale="en" />
       <PageHero
         eyebrow="Services / Plugins"
         title="Custom plugins for your"
@@ -56,8 +56,8 @@ export default function PluginsPageEn() {
         title="Ready-made plugins — no waiting on custom development."
       />
       <FaqAccordion items={PLUGINS_FAQ_EN} eyebrow="faq" title="Questions about plugins." />
-      <CtaSection locale="en" />
-      <SiteFooter locale="en" />
+      <Cta locale="en" />
+      <Footer locale="en" />
     </main>
   );
 }

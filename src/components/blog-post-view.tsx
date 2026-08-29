@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { SiteNav } from "@/components/site-nav";
-import { CtaSection } from "@/components/cta-section";
-import { SiteFooter } from "@/components/site-footer";
+import { Nav } from "@/components/v2/nav";
+import { Cta } from "@/components/v2/cta";
+import { Footer } from "@/components/v2/footer";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { BLOG_UI, type Locale } from "@/lib/i18n";
 import type { BlogBlock, BlogPost } from "@/lib/blog-types";
@@ -128,7 +128,7 @@ export function BlogPostView({
           { label: post.title, href: `${blogBasePath}/${post.slug}` },
         ]}
       />
-      <SiteNav locale={locale} />
+      <Nav locale={locale} />
       <article className="relative px-6 pt-36 pb-20">
         <div className="mx-auto max-w-2xl">
           <Breadcrumbs
@@ -159,8 +159,8 @@ export function BlogPostView({
           </div>
         </div>
       </article>
-      <CtaSection locale={locale} />
-      <SiteFooter locale={locale} />
+      <Cta locale={locale} />
+      <Footer locale={locale} />
     </main>
   );
 }
